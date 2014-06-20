@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<otrs_config version="1.0" init="Application">    
+     
+   <ConfigItem Name="Frontend::Module###Inventory" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for  Inventory module.</Description>
+        <Group>Framework</Group>
+        <SubGroup>Frontend::Agent::ModuleRegistration</SubGroup>
+        <Setting>      
+            <FrontendModuleReg>
+                <Group>admin</Group>
+                <Description>Inventory</Description>
+                <Title Translatable="1">Inventory</Title>
+                <NavBarName>Inventory</NavBarName>
+                <NavBar>
+                    <Name Translatable="1">Inventory</Name>
+                    <Description Translatable="1">Manage Inventory Items via Web Interface.</Description>
+                    <Link>Action=Inventory</Link>
+                    <NavBar>Inventory</NavBar>
+                    <Type>Menu</Type>
+                    <Prio>9000</Prio>
+                    <Block>ItemArea</Block>
+                </NavBar>
+                <Loader>
+                    <CSS>Core.Inventory.css</CSS>
+                </Loader>
+            </FrontendModuleReg>
+        </Setting>
+    </ConfigItem>      	
+</otrs_config>

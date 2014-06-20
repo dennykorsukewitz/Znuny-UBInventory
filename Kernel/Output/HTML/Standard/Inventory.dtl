@@ -1,0 +1,317 @@
+# --
+# Kernel/Output/HTML/Standard/Inventory.pm - HTML output for Inventory frontend module
+# Copyright (C) (2014) (Denny Bresch) (dennybresch@gmail.com) (https://github.com/dennybresch)
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst Inventory">
+    <h1>$Text{"Manage Title for Inventory via Webinterface"}</h1>
+    
+#####################
+# SidebarColumnLeft #
+#####################
+    <div class="SidebarColumn">
+    
+#####################
+#      Filter       #
+#####################   
+<!-- dtl:block:UserFilter -->
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterUser">$Text{"Filter for Agents"}</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterUser" class="W95pc" name="FilterUser" value="" title="$Text{"Filter for Agents"}" />
+            </div>
+        </div>
+<!-- dtl:block:UserFilter -->       
+#####################
+#      Filter       #
+##################### 
+#####################
+#    ActionList     #
+#####################
+<!-- dtl:block:ActionList -->       
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>$Text{"Actions"}</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                	<li>
+				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview" class="CallForAction Fullsize Center"><span>$Text{"Overview"}</span></a>
+                    </li>                    
+					<li>
+				 		<a class="CallForAction Fullsize Center Plus" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
+                            <span>$Text{"Add Notification"}</span>
+                        </a>
+				    </li>
+				    <li>
+				 		<a class="CallForAction Fullsize Center Refresh" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
+                            <span>$Text{"Synchronize all Title"}</span>
+                        </a>
+				    </li>					    			    
+                    <li>
+                        <a href="$Env{"Baselink"}$Env{"LastStatsView"}" class="CallForAction Fullsize Center"><span>$Text{"Go to overview"}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!-- dtl:block:ActionList -->
+#####################
+#    ActionList     #
+#####################
+#####################
+#       Hints       #
+#####################
+<!-- dtl:block:Hint -->
+		<div class="WidgetSimple">
+            <div class="Header">
+                <h2>$Text{"Hint"}</h2>
+            </div>
+            <div class="Content ">
+                <p class="FieldExplanation">
+                    $Text{"Create notifications for your agents and get an overview of all seen notifications."}
+                </p>   
+        	</div>
+        </div>            
+<!-- dtl:block:Hint -->    
+#####################
+#       Hints       #
+#####################
+#####################
+# SidebarColumnLeft #
+##################### 
+#####################
+# SidebarColumnRight#
+#####################  
+    </div>   
+	<div class="LayoutFixedSidebar SidebarLast">
+<!-- dtl:block:AdditionalInformation -->	
+		<div class="SidebarColumn">
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>$Text{"Additional Information"}</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike FixedLabelSmall Narrow">
+                    
+                        <label>$Text{"change by"}:</label>
+                        <p class="Value" title="$Text{"$Data{"change_by"}"}">$Text{"$Data{"ChangeBy"}"}</p>
+                        <div class="Clear"></div>
+
+                        <label>$Text{"change time"}:</label>
+                        <p class="Value" title="$Text{"$Data{"change_time"}"}">$TimeShort{"$QData{"ChangeTime"}"}</p>
+                        <div class="Clear"></div>
+
+                        <label>$Text{"created by"}:</label>
+                        <p class="Value" title="$Text{"$Data{"create_by"}"}">$Text{"$Data{"CreateBy"}"}</p>
+                        <div class="Clear"></div>
+
+                        <label>$Text{"create time"}:</label>
+                        <p class="Value" title="$QData{"create_time"}">$TimeShort{"$QData{"CreateTime"}"}</p>
+                        <div class="Clear"></div>
+                    </fieldset>                  
+                </div>
+            </div>
+        </div>
+<!-- dtl:block:AdditionalInformation -->
+	</div>
+    
+#####################
+# SidebarColumnRight#
+#####################    
+#####################  
+#      CONTENT      #
+#####################  
+    <div class="ContentColumn">     
+##################### 
+#     Overview      #
+##################### 
+
+<!-- dtl:block:Overview -->
+		 <div id="Row1" class="LayoutGrid ColumnsWithSpacing">
+	        <div class="Size1of3">
+	            <div class="WidgetSimple">
+	                <div class="Header">
+	                    <h2>UB - Title</h2>
+	                </div>
+	                	<div class="Content">	
+	                        <ul class="LayoutGrid ColumnsWithSpacing">	
+	                            <li class="Size1of2">
+	                            	<h4><span>Add Title</span>
+	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
+	                               	</h4>   
+	                            	<p class="FieldExplanation">Add Title</p>
+		                        </li>
+		
+		                        <li class="Size1of2">
+		                            <h4><span>Edit Title</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                            <p class="FieldExplanation">Edit Title</p>
+		                        </li>
+		
+		                        <li class="Clear"></li>	
+		                        <li class="Size1of1 SpacingTop">
+		                            <h4><span>Statistik</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                            <table class="DataTable" id="Statistik">
+							            <thead>
+							                <tr>
+												<th>$Text{"Name"}</th>
+												<th>$Text{"Value"}</th>
+											</tr>
+							            </thead>
+									    <tbody>
+									    	<td>
+									        		$QData{"Name"}Title
+									        	</td>					
+												<td>
+							                    	$QData{"Value"}23071988
+							                 	</td>	
+									    	<tr>
+									        	<td>
+									        		test
+									        	</td>
+					
+												<td>
+							                    	test
+							                 	</td>		
+									    	</tr>
+										</tbody>
+									</table>		                            
+		                        </li>
+		                        <li class="Clear"></li>	
+	                        </ul>	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="Size1of3">
+	                <div class="WidgetSimple">
+	                    <div class="Header">
+	                        <h2>SFX - Title</h2>
+	                    </div>
+	                    <div class="Content">	
+	                        <ul class="LayoutGrid ColumnsWithSpacing">	
+	                            <li class="Size1of2">
+	                            	<h4><span>Add Title</span>
+	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
+	                               	</h4>   
+	                            	<p class="FieldExplanation">Add Title</p>
+		                        </li>
+		
+		                        <li class="Size1of2">
+		                            <h4><span>Edit Title</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                            <p class="FieldExplanation">Edit Title</p>
+		                        </li>
+		
+		                        <li class="Clear"></li>	
+		                        <li class="Size1of1 SpacingTop">
+		                            <h4><span>Statistik</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                           	<table class="DataTable" id="Statistik">
+							            <thead>
+							                <tr>
+												<th>$Text{"Name"}</th>
+												<th>$Text{"Value"}</th>
+											</tr>
+							            </thead>
+									    <tbody>
+									    	<tr>
+									        	<td>
+									        		test
+									        	</td>
+					
+												<td>
+							                    	test
+							                 	</td>		
+									    	</tr>
+									    	<tr>
+									        	<td>
+									        		test
+									        	</td>
+					
+												<td>
+							                    	test
+							                 	</td>		
+									    	</tr>
+										</tbody>
+									</table>
+		                        </li>
+		                        <li class="Clear"></li>	
+	                        </ul>	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="Size1of3">
+	                <div class="WidgetSimple">
+	                    <div class="Header">
+	                        <h2>Metalib - Title</h2>
+	                    </div>
+	                    <div class="Content">	
+	                        <ul class="LayoutGrid ColumnsWithSpacing">	
+	                            <li class="Size1of2">
+	                            	<h4><span>Add Title</span>
+	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
+	                               	</h4>   
+	                            	<p class="FieldExplanation">Add Title</p>
+		                        </li>
+		
+		                        <li class="Size1of2">
+		                            <h4><span>Edit Title</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                            <p class="FieldExplanation">Edit Title</p>
+		                        </li>
+		
+		                        <li class="Clear"></li>	
+		                        <li class="Size1of1 SpacingTop">
+		                            <h4><span>Statistik</span>
+		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
+		                            </h4>
+		                           	<table class="DataTable" id="Statistik">
+							            <thead>
+							                <tr>
+												<th>$Text{"Name"}</th>
+												<th>$Text{"Value"}</th>
+											</tr>
+							            </thead>
+									    <tbody>
+									    	<tr>
+									        	<td>
+									        		$QData{"Name"}Title
+									        	</td>					
+												<td>
+							                    	$QData{"Value"}23071988
+							                 	</td>		
+									    	</tr>									    	
+										</tbody>
+									</table>
+		                        </li>
+		                        <li class="Clear"></li>	
+	                        </ul>	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="Clear"></div>
+	        </div>
+		</div>
+	
+<!-- dtl:block:Overview -->
+##################### 
+#     Overview      #
+##################### 
+#####################  
+#      CONTENT      #
+#####################   
+    </div>
+	<div class="Clear"></div>
+</div>
