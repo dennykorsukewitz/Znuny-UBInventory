@@ -32,5 +32,63 @@ sub new {
 }
 
 
+sub GetInventoryList {
+    my ( $Self, %Param ) = @_;
+
+	my $SQL = "SELECT id  FROM inventory";
+
+	
+	if($Param{Limit}){
+		$SQL .= " ORDER BY `id` DESC LIMIT $Param{Limit}";
+	}
+	
+	# sql
+    return if !$Self->{DBObject}->Prepare(
+        SQL  => $SQL,        
+    );
+    
+    my %InventoryList;
+    while ( my @Row  = $Self->{DBObject}->FetchrowArray() ) {
+        $InventoryList{ $Row[0] } = $Row[0];	            
+    }
+    return %InventoryList;
+}
+
+sub GetInventoryData {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    if ( !$Param{ItemID} ) {
+        $Self->{LogObject}->Log( Priority => 'error', Message => 'Need ItemID for GetInventoryData function.' );
+        return;
+    }
+
+    # sql
+    return if !$Self->{DBObject}->Prepare(
+        SQL => 'SELECT * '
+            . 'FROM inventory WHERE id = ?',
+        Bind => [ \$Param{ItemID} ],
+    );
+    
+    my %InventoryData;
+    while ( my @Row = $Self->{DBObject}->FetchrowArray() ) {
+        %InventoryData = (
+            ID         		=> $Param{ItemID},
+            Typ       		=> $Row[1],
+            Model      		=> $Row[2],
+            Manufacturer	=> $Row[3],
+            Serialnumber   	=> $Row[4],
+            PurchaseTime	=> $Row[5],
+            Comment    		=> $Row[6],            
+            CreateTime 		=> $Row[7],
+            CreateBy   		=> $Row[8],
+            ChangeTime 		=> $Row[9],
+            ChangeBy   		=> $Row[10],
+            
+        );
+    }
+    return %InventoryData;
+}
+
 
 1;

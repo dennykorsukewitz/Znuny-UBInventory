@@ -7,7 +7,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Modules::Inventory;
+package Kernel::Modules::AgentInventory;
 
 use strict;
 use warnings;
@@ -115,6 +115,8 @@ sub Run {
     # ------------------------------------------------------------ #
     # default view: _Overview - if no subaction is selected        #
     # ------------------------------------------------------------ #
+    
+    
     $Output .= $Self->_Overview();
     $Output .= $Self->{LayoutObject}->Output(
        TemplateFile => 'Inventory',
@@ -129,12 +131,26 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
     
     # blocks
+    $Self->{LayoutObject}->Block( Name => 'FilterItem' );
 	$Self->{LayoutObject}->Block( Name => 'ActionList' );
     $Self->{LayoutObject}->Block( Name => 'Hint' );
     
-    # content
     $Self->{LayoutObject}->Block( Name => 'Overview' );
     
+    # get GetInventoryList
+	my %InventoryList = $Self->{InventoryObject}->GetInventoryList( Limit => '30');
+	for my $InventoryID ( sort { uc( $InventoryList{$a} ) cmp uc( $InventoryList{$b} ) } keys %InventoryList ) {
+		
+	    # get GetInventoryData       
+		my %InventoryData = $Self->{InventoryObject}->GetInventoryData( ItemID => $InventoryID );	
+    	$Self->{LayoutObject}->Block(
+            Name => 'InventoryList',
+            Data => {            	
+            	%InventoryData,
+            	ID => $InventoryID,
+            },
+        );
+	}     
     return;
 }  	
 

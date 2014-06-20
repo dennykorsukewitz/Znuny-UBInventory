@@ -8,7 +8,7 @@
 # --
 
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst Inventory">
-    <h1>$Text{"Manage Title for Inventory via Webinterface"}</h1>
+    <h1>$Text{"Manage Inventory"}</h1>
     
 #####################
 # SidebarColumnLeft #
@@ -18,16 +18,16 @@
 #####################
 #      Filter       #
 #####################   
-<!-- dtl:block:UserFilter -->
+<!-- dtl:block:FilterItem -->
         <div class="WidgetSimple">
             <div class="Header">
-                <h2><label for="FilterUser">$Text{"Filter for Agents"}</label></h2>
+                <h2><label for="FilterItem">$Text{"Filter for Item"}</label></h2>
             </div>
             <div class="Content">
-                <input type="text" id="FilterUser" class="W95pc" name="FilterUser" value="" title="$Text{"Filter for Agents"}" />
+                <input type="text" id="FilterItem" class="W95pc" name="FilterItem" value="" title="$Text{"Filter for Item"}" />
             </div>
         </div>
-<!-- dtl:block:UserFilter -->       
+<!-- dtl:block:FilterItem -->       
 #####################
 #      Filter       #
 ##################### 
@@ -46,14 +46,9 @@
                     </li>                    
 					<li>
 				 		<a class="CallForAction Fullsize Center Plus" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
-                            <span>$Text{"Add Notification"}</span>
+                            <span>$Text{"Add Item"}</span>
                         </a>
-				    </li>
-				    <li>
-				 		<a class="CallForAction Fullsize Center Refresh" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
-                            <span>$Text{"Synchronize all Title"}</span>
-                        </a>
-				    </li>					    			    
+				    </li>				    			    
                     <li>
                         <a href="$Env{"Baselink"}$Env{"LastStatsView"}" class="CallForAction Fullsize Center"><span>$Text{"Go to overview"}</span></a>
                     </li>
@@ -132,178 +127,62 @@
 #     Overview      #
 ##################### 
 
-<!-- dtl:block:Overview -->
-		 <div id="Row1" class="LayoutGrid ColumnsWithSpacing">
-	        <div class="Size1of3">
-	            <div class="WidgetSimple">
-	                <div class="Header">
-	                    <h2>UB - Title</h2>
-	                </div>
-	                	<div class="Content">	
-	                        <ul class="LayoutGrid ColumnsWithSpacing">	
-	                            <li class="Size1of2">
-	                            	<h4><span>Add Title</span>
-	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
-	                               	</h4>   
-	                            	<p class="FieldExplanation">Add Title</p>
-		                        </li>
-		
-		                        <li class="Size1of2">
-		                            <h4><span>Edit Title</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                            <p class="FieldExplanation">Edit Title</p>
-		                        </li>
-		
-		                        <li class="Clear"></li>	
-		                        <li class="Size1of1 SpacingTop">
-		                            <h4><span>Statistik</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                            <table class="DataTable" id="Statistik">
-							            <thead>
-							                <tr>
-												<th>$Text{"Name"}</th>
-												<th>$Text{"Value"}</th>
-											</tr>
-							            </thead>
-									    <tbody>
-									    	<td>
-									        		$QData{"Name"}Title
-									        	</td>					
-												<td>
-							                    	$QData{"Value"}23071988
-							                 	</td>	
-									    	<tr>
-									        	<td>
-									        		test
-									        	</td>
-					
-												<td>
-							                    	test
-							                 	</td>		
-									    	</tr>
-										</tbody>
-									</table>		                            
-		                        </li>
-		                        <li class="Clear"></li>	
-	                        </ul>	
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="Size1of3">
-	                <div class="WidgetSimple">
-	                    <div class="Header">
-	                        <h2>SFX - Title</h2>
-	                    </div>
-	                    <div class="Content">	
-	                        <ul class="LayoutGrid ColumnsWithSpacing">	
-	                            <li class="Size1of2">
-	                            	<h4><span>Add Title</span>
-	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
-	                               	</h4>   
-	                            	<p class="FieldExplanation">Add Title</p>
-		                        </li>
-		
-		                        <li class="Size1of2">
-		                            <h4><span>Edit Title</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                            <p class="FieldExplanation">Edit Title</p>
-		                        </li>
-		
-		                        <li class="Clear"></li>	
-		                        <li class="Size1of1 SpacingTop">
-		                            <h4><span>Statistik</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                           	<table class="DataTable" id="Statistik">
-							            <thead>
-							                <tr>
-												<th>$Text{"Name"}</th>
-												<th>$Text{"Value"}</th>
-											</tr>
-							            </thead>
-									    <tbody>
-									    	<tr>
-									        	<td>
-									        		test
-									        	</td>
-					
-												<td>
-							                    	test
-							                 	</td>		
-									    	</tr>
-									    	<tr>
-									        	<td>
-									        		test
-									        	</td>
-					
-												<td>
-							                    	test
-							                 	</td>		
-									    	</tr>
-										</tbody>
-									</table>
-		                        </li>
-		                        <li class="Clear"></li>	
-	                        </ul>	
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="Size1of3">
-	                <div class="WidgetSimple">
-	                    <div class="Header">
-	                        <h2>Metalib - Title</h2>
-	                    </div>
-	                    <div class="Content">	
-	                        <ul class="LayoutGrid ColumnsWithSpacing">	
-	                            <li class="Size1of2">
-	                            	<h4><span>Add Title</span>
-	                               	 	<a class="AsBlock" href="/otrs/index.pl?Action=???">Add Title</a>
-	                               	</h4>   
-	                            	<p class="FieldExplanation">Add Title</p>
-		                        </li>
-		
-		                        <li class="Size1of2">
-		                            <h4><span>Edit Title</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                            <p class="FieldExplanation">Edit Title</p>
-		                        </li>
-		
-		                        <li class="Clear"></li>	
-		                        <li class="Size1of1 SpacingTop">
-		                            <h4><span>Statistik</span>
-		                                <a class="AsBlock" href="/otrs/index.pl?Action=???"></a>
-		                            </h4>
-		                           	<table class="DataTable" id="Statistik">
-							            <thead>
-							                <tr>
-												<th>$Text{"Name"}</th>
-												<th>$Text{"Value"}</th>
-											</tr>
-							            </thead>
-									    <tbody>
-									    	<tr>
-									        	<td>
-									        		$QData{"Name"}Title
-									        	</td>					
-												<td>
-							                    	$QData{"Value"}23071988
-							                 	</td>		
-									    	</tr>									    	
-										</tbody>
-									</table>
-		                        </li>
-		                        <li class="Clear"></li>	
-	                        </ul>	
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="Clear"></div>
-	        </div>
-		</div>
+<!-- dtl:block:Overview -->	
+		<div class="WidgetSimple">
+				<div class="Header">				
+					<h2>$Text{"Inventory"}</h2>							
+				</div>				
+		        <div class="Content LayoutGrid ">	        	
+			            <table class="DataTable" id="Item" >
+			            	<thead>
+			                	<tr>
+			                        <th>$Text{"ID"}</th>
+			                        <th>$Text{"Typ"}</th>
+			                        <th>$Text{"Model"}</th>	
+			                        <th>$Text{"Manufacturer"}</th>	
+			                        <th>$Text{"Serialnumber"}</th>	
+			                        <th>$Text{"PurchaseTime"}</th>
+			                        <th>$Text{"Comment"}</th>
+			                		<th>$Text{"CreateTime"}</th>	
+			                		<th>$Text{"CreateBy"}</th>
+			                		<th>$Text{"ChangeTime"}</th>
+			                		<th>$Text{"ChangeBy"}</th>				                		
+			                		<th>$Text{"Edit"}</th> 			             
+			                    	<th>$Text{"Delete"}</th>
+			                	</tr>
+			             	</thead>
+				        	<tbody >
+<!-- dtl:block:InventoryList -->			
+				            	<tr>
+				                	<td><a class="AsBlock" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Item;ID=$LQData{"ID"}">$QData{"ID"}</a></td>
+				                	<td>$Text{"$QData{"Typ","20"}"}</td>
+				               	 	<td>$Text{"$QData{"Model","35"}"}</td> 
+				               	 	<td>$Text{"$QData{"Manufacturer","20"}"}</td>
+				               	 	<td>$Text{"$QData{"Serialnumber","20"}"}</td>
+				               	 	<td>$TimeShort{"$QData{"PurchaseTime","20"}"}</td>
+				               	 	<td title="$QData{"Comment"}">$QData{"Comment","35"}</td>         			  
+				          			<td>$TimeShort{"$QData{"CreateTime"}"}</td>	
+				          			<td>$TimeShort{"$QData{"CreateBy"}"}</td>
+				          			<td>$TimeShort{"$QData{"ChangeTime"}"}</td>
+				          			<td>$TimeShort{"$QData{"ChangeBy"}"}</td>
+				           			<td>
+		                        		<a class="CallForAction Fullsize Center Edit" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Edit;ID=$LQData{"ID"}"><span>$Text{"Edit"}</span></a> 
+		                        	</td>		                        	
+		                        	<td>
+		                        		<a class="CallForAction Fullsize Center Delete" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Delete;ID=$LQData{"ID"}"><span>$Text{"Delete"}</span></a>
+		                        	</td>
+				    			</tr>
+<!-- dtl:block:InventoryList -->
+							</tbody>
+				     	</table>                        
+				</div>	           	
+	      	</div>
+<!-- dtl:js_on_document_complete -->
+	<script type="text/javascript">//<![CDATA[
+	    Core.UI.Table.InitTableFilter($('#FilterItem'), $('#Item'));
+	//]]></script>
+<!-- dtl:js_on_document_complete -->
+
 	
 <!-- dtl:block:Overview -->
 ##################### 
