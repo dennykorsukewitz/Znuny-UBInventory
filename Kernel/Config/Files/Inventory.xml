@@ -25,5 +25,17 @@
                 </Loader>
             </FrontendModuleReg>
         </Setting>
-    </ConfigItem>      	
+    </ConfigItem> 
+    <ConfigItem Name="Inventory###Additional" Required="1" Valid="1" ConfigLevel="100">
+        <Description Translatable="1">Defines some addtionals.</Description>
+        <Group>Framework</Group>
+        <SubGroup>Frontend::Agent::Inventory</SubGroup>
+         <Setting>
+            <Array>
+                <Item>employee</Item>
+                <Item>room</Item>
+                <Item>phone</Item>
+            </Array>
+        </Setting>
+    </ConfigItem>       	
 </otrs_config>

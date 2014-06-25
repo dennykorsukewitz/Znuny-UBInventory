@@ -17,11 +17,28 @@ sub Data {
     my $Self = shift;
 
 # Configuration
-	$Self->{Translation}->{''} = '';
+    $Self->{Translation}->{''} = '';
+
+
+	
+	
 
 # Inventory
+	$Self->{Translation}->{'Filter for Object'} = 'Filter nach Objekt';
+	$Self->{Translation}->{'Type'} = 'Typ';
+	$Self->{Translation}->{'Model'} = 'Modell';
+	$Self->{Translation}->{'Manufacturer'} = 'Hersteller';
+	$Self->{Translation}->{'Serialnumber'} = 'Seriennummer';
+	$Self->{Translation}->{'Purchase Time'} = 'Anschaffung';
+	$Self->{Translation}->{'create time'} = 'Erstelldatum';
+	$Self->{Translation}->{'created by'} = 'erstellt durch';
+	$Self->{Translation}->{'change time'} = 'Änderungsdatum';
+	$Self->{Translation}->{'change by'} = 'geändert durch';
+	$Self->{Translation}->{'Add Object'} = 'Objekt hinzufügen';
+    $Self->{Translation}->{'additional values'} = 'weitere Werte';
     $Self->{Translation}->{''} = '';
-    
+
+
     return 1;
 }
 1;
