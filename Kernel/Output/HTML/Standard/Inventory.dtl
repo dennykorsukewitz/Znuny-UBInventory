@@ -332,8 +332,7 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 #       Form        #
 ##################### 
 <!-- dtl:block:Form -->
-	<div id="Row1" class="LayoutGrid ColumnsWithSpacing">
-		<div class="Size1of2">
+	
 			<div class="WidgetSimple">
 		            <div class="Header">
 		<!-- dtl:block:HeaderAdd -->
@@ -343,8 +342,10 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                <h2>$Text{"Edit Object"}</h2>
 		<!-- dtl:block:HeaderEdit --> 
 		            </div>
-		            <div class="Content LayoutGrid ColumnsWithSpacing">
-		                <form action="$Env{"CGIHandle"}" method="post" name="compose" class="Validate">
+		            <form action="$Env{"CGIHandle"}" method="post" name="compose" class="Validate">
+		            <ul class="Content LayoutGrid ColumnsWithSpacing">
+	               	<li class="Size1of2 SpacingTop">
+		                
 		                    <input type="hidden" name="Action" value="$Env{"Action"}"/>
 		                    <input type="hidden" name="ID" value="$QData{"ID"}"/>
 		                    <input type="hidden" name="Subaction" value="$QData{"Action"}Action"/>                    
@@ -359,7 +360,6 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                        </div>
 		                        <div class="Clear"></div>
 		<!-- dtl:block:FormObjectID --> 
-		
 								
 								<label class="Mandatory" for="Type"><span class="Marker">*</span> $Text{"Type"}:</label>
 		                        <div class="Field">
@@ -402,263 +402,95 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
 		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
 		                        </div>
-		                        <div class="Clear"></div>                        
-		                                         
+		                        <div class="Clear"></div>   
+		                        
 		                        <label for="Comment">$Text{"Comment"}:</label>
 		                        <div class="Field">
 		                            <input type="text" name="Comment" id="Comment" value="$QData{"Comment"}" class="W50pc" maxlength="50"/>
 		                        </div>
 		                        <div class="Clear"></div>
-		                        </hr>
-		                        
-		                        
-		                      
-		                      
-		                      
-		                      
-		                      
-		<!--
-		########################################################################################################################                  
-								<label>$Text{"additional values"}:</label>
-		                        <div class="Field ValueInsert">
-		                            <input type="hidden" name="ValueCounter" value="$QData{"ValueCounter"}" id="ValueCounter" class="ValueCounter" />
-		<!-- dtl:block:ValueRow -->
-		                            <div class="ValueRow">
-		                                <label class="Mandatory" for="Key_$QData{"ValueCounter"}"><span class="Marker">*</span>$Text{"Key"}:</label>
-		                                <input name="Key_$QData{"ValueCounter"}" id="Key_$QData{"ValueCounter"}" class="DefaultValueKeyItem Validate_Required W20pc $QData{"KeyError"}" type="text" maxlength="100" value="$QData{"Key"}"/>
-		                                <div id="Key_$QData{"ValueCounter"}Error" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="Key_$QData{"ValueCounter"}ServerError" class="TooltipErrorMessage"><p>$Text{"$Data{"KeyErrorStrg"}"}</p></div>
-		
-		                                <label class="Mandatory" for="Value_$QData{"ValueCounter"}"><span class="Marker">*</span>$Text{"Value"}:</label>
-		                                <input name="Value_$QData{"ValueCounter"}" id="Value_$QData{"ValueCounter"}" class="DefaultValueItem Validate_Required W20pc $QData{"ValueError"}" type="text" maxlength="100" value="$QData{"Value"}"/>
-		                                <div id="Value_$QData{"ValueCounter"}Error" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="Value_$QData{"ValueCounter"}ServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		
-		                                <button type="button" id="RemoveValue_$QData{"ValueCounter"}" class="Remove ValueRemove" value="Remove value">$Text{"Remove value"}</button>
-		                                <div class="SpacingTopMini" ></div>
-		                            </div>
-		<!-- dtl:block:ValueRow -->
-		<!-- dtl:block:ValueTemplate -->
-		                            <div class="ValueTemplate Hidden">
-		                                <label class="Mandatory" for="Key"><span class="Marker">*</span>$Text{"Key"}:</label>
-		                                <input name="Key_$QData{"ValueCounter"}" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="100" value="$QData{"Key"}"/>
-		                                <div id="KeyError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="KeyServerError" class="TooltipErrorMessage"><p>$Text{"$Data{"KeyErrorStrg"}"}</p></div>
-		
-		                                <label class="Mandatory" for="Value"><span class="Marker">*</span>$Text{"Value"}:</label>
-		                                <input name="Value_$QData{"ValueCounter"}" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="100" value="$QData{"Value"}"/>
-		                                <div id="ValueError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="ValueServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		
-		                                <button type="button" id="RemoveValue_$QData{"ValueCounter"}" class="Remove ValueRemove" value="Remove value">$Text{"Remove value"}</button>
-		                                <div class="SpacingTopMini" ></div>
-		                            </div>
-		<!-- dtl:block:ValueTemplate -->
-		                            <input type="hidden" name="DeletedValue" value="$QData{"DeletedString"}" id="DeletedValue" class="DeletedValue" />
-		                        </div>
-		                        <div class="Clear"></div>
-		
-		                        <label for="AddValue">$Text{"Add value"}:</label>
-		                        <div class="Field">
-		                            <button id="AddValue" class="Add" type="button" value="Add Value">$Text{"Add Value"}</button>
-		                        </div>
-		                        <div class="Clear"></div>
-		########################################################################################################################
-		-->           
-		                        
-		                        
-		                        
-		                        
-		                        
-		
+
 		                        <div class="Field SpacingTop">
 		                            <button class="Primary" type="submit" value="$Text{"Submit"}">$Text{"Submit"}</button>
 		                            $Text{"or"}
 		                            <a href="$Env{"Baselink"}Action=$Env{"Action"}">$Text{"Cancel"}</a>
 		                        </div>
-		                        <div class="Clear"></div>
-		      
-		        
-		                        
-		                    </fieldset>
-		                </form>
-		            </div>
-				</div>
-			</div>	
-		<div class="Size1of2">
-			<div class="WidgetSimple">
-		            <div class="Header">
-		<!-- dtl:block:HeaderAdd -->
-		                <h2>$Text{"Add Object"}</h2>
-		<!-- dtl:block:HeaderAdd -->
-		<!-- dtl:block:HeaderEdit -->
-		                <h2>$Text{"Edit Object"}</h2>
-		<!-- dtl:block:HeaderEdit --> 
-		            </div>
-		            <div class="Content LayoutGrid ColumnsWithSpacing">
-		                <form action="$Env{"CGIHandle"}" method="post" name="compose" class="Validate">
-		                    <input type="hidden" name="Action" value="$Env{"Action"}"/>
-		                    <input type="hidden" name="ID" value="$QData{"ID"}"/>
-		                    <input type="hidden" name="Subaction" value="$QData{"Action"}Action"/>                    
+		                        <div class="Clear SpacingTop"></div>
+		                    </fieldset>       
+		                   	</li>
+		                    <li class="Size1of2 SpacingTop">    
 		                    <fieldset class="TableLike">
-		
-		<!-- dtl:block:FormObjectID --> 
-								<label class="Mandatory" for="ObjectID"><span class="Marker">*</span> $Text{"ID"}:</label>
+		                        <label class="" for="employee">$Text{"Employee"}:</label>
 		                        <div class="Field">
-		                            <input type="text" name="ObjectID" id="ObjectID" value="$QData{"ObjectID"}" class="W50pc Validate_Required $QData{"ObjectIDInvalid"}" maxlength="100"/>
-		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                        </div>
-		                        <div class="Clear"></div>
-		<!-- dtl:block:FormObjectID --> 
-		
-								
-								<label class="Mandatory" for="Type"><span class="Marker">*</span> $Text{"Type"}:</label>
-		                        <div class="Field">
-		                            <input type="text" name="Type" id="Type" value="$QData{"Type"}" class="W50pc Validate_Required $QData{"TypeInvalid"}" maxlength="100"/>
-		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
+		                            <input type="text" name="Employee" id="Employee" value="$QData{"Employee"}" class="W50pc  $QData{"EmployeeInvalid"}" maxlength="100"/>
 		                        </div>
 		                        <div class="Clear"></div>
 								
-		                        <label class="Mandatory" for="Model"><span class="Marker">*</span>$Text{"Model"}:</label>
+		                        <label class="" for="room">$Text{"Room"}:</label>
 		                        <div class="Field">
-		                            <input type="text" name="Model" id="Model" value="$QData{"Model"}" class="W50pc Validate_Required $QData{"ModelInvalid"}" maxlength="50"/>
-		                            <div id="InfoTitleError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="InfoTitleError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
+		                            <input type="text" name="Room" id="Room" value="$QData{"Room"}" class="W50pc  $QData{"roomInvalid"}" maxlength="50"/>
+		                        </div>
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="phone">$Text{"Phone"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="Phone" id="Phone" value="$QData{"Phone"}" class="W50pc  $QData{"phoneInvalid"}" maxlength="50"/>
 		                        </div>
 		                        <div class="Clear"></div>     
-		     			
-								<label class="Mandatory" for="Manufacturer"><span class="Marker">*</span> $Text{"Manufacturer"}:</label>
-		                        <div class="Field">
-		                            <input type="text" name="Manufacturer" id="Manufacturer" value="$QData{"Manufacturer"}" class="W50pc Validate_Required $QData{"ManufacturerInvalid"}" maxlength="100"/>
-		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                        </div>
-		                        <div class="Clear"></div>
-								
-		                        <label class="Mandatory" for="Serialnumber"><span class="Marker">*</span>$Text{"Serialnumber"}:</label>
-		                        <div class="Field">
-		                            <input type="text" name="Serialnumber" id="Serialnumber" value="$QData{"Serialnumber"}" class="W50pc Validate_Required $QData{"SerialnumberInvalid"}" maxlength="50"/>
-		                            <div id="InfoTitleError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="InfoTitleError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                        </div>
-		                        <div class="Clear"></div>   
-		          
 		                        
-								<label class="Mandatory" for="Purchase Time"><span class="Marker">*</span> $Text{"Purchase Time"}:</label>
+		                        <label class="" for="SAP">$Text{"SAP"}:</label>
 		                        <div class="Field">
-		                        	<div class="Field">
-		                                $Data{"PurchaseTime"}
-		                            </div>
-		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
+		                            <input type="text" name="SAP" id="SAP" value="$QData{"SAP"}" class="W50pc  $QData{"sapInvalid"}" maxlength="50"/>
 		                        </div>
-		                        <div class="Clear"></div>                        
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="IP">$Text{"IP"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="IP" id="IP" value="$QData{"IP"}" class="W50pc  $QData{"ipInvalid"}" maxlength="50"/>
+		                        </div>
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="MAC">$Text{"MAC"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="MAC" id="MAC" value="$QData{"MAC"}" class="W50pc  $QData{"macInvalid"}" maxlength="50"/>
+		                        </div>
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="Socket">$Text{"Socket"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="Socket" id="Socket" value="$QData{"Socket"}" class="W50pc  $QData{"SocketInvalid"}" maxlength="50"/>
+		                        </div>
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="DistributionCabinet">$Text{"Distribution Cabinet"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="DistributionCabinet" id="DistributionCabinet" value="$QData{"DistributionCabinet"}" class="W50pc  $QData{"DistributionCabinetInvalid"}" maxlength="50"/>
+		                        </div>
+		                        <div class="Clear"></div> 
+		                        
+		                        <label class="" for="KeyNr">$Text{"KeyNr"}:</label>
+		                        <div class="Field">
+		                            <input type="text" name="KeyNr" id="Key" value="$QData{"KeyNr"}" class="W50pc  $QData{"KeyNrInvalid"}" maxlength="50"/>
+		                   		</div>
+		                        <div class="Clear"></div>		                        
+		                        		                     
+		                        <div class="Clear"></div>    
 		                                         
-		                        <label for="Comment">$Text{"Comment"}:</label>
-		                        <div class="Field">
-		                            <input type="text" name="Comment" id="Comment" value="$QData{"Comment"}" class="W50pc" maxlength="50"/>
-		                        </div>
-		                        <div class="Clear"></div>
-		                        </hr>
+		                                         
 		                        
-		                        
-		                      
-		                      
-		                      
-		                      
-		                      
-		<!--
-		########################################################################################################################                  
-								<label>$Text{"additional values"}:</label>
-		                        <div class="Field ValueInsert">
-		                            <input type="hidden" name="ValueCounter" value="$QData{"ValueCounter"}" id="ValueCounter" class="ValueCounter" />
-		<!-- dtl:block:ValueRow -->
-		                            <div class="ValueRow">
-		                                <label class="Mandatory" for="Key_$QData{"ValueCounter"}"><span class="Marker">*</span>$Text{"Key"}:</label>
-		                                <input name="Key_$QData{"ValueCounter"}" id="Key_$QData{"ValueCounter"}" class="DefaultValueKeyItem Validate_Required W20pc $QData{"KeyError"}" type="text" maxlength="100" value="$QData{"Key"}"/>
-		                                <div id="Key_$QData{"ValueCounter"}Error" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="Key_$QData{"ValueCounter"}ServerError" class="TooltipErrorMessage"><p>$Text{"$Data{"KeyErrorStrg"}"}</p></div>
-		
-		                                <label class="Mandatory" for="Value_$QData{"ValueCounter"}"><span class="Marker">*</span>$Text{"Value"}:</label>
-		                                <input name="Value_$QData{"ValueCounter"}" id="Value_$QData{"ValueCounter"}" class="DefaultValueItem Validate_Required W20pc $QData{"ValueError"}" type="text" maxlength="100" value="$QData{"Value"}"/>
-		                                <div id="Value_$QData{"ValueCounter"}Error" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="Value_$QData{"ValueCounter"}ServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		
-		                                <button type="button" id="RemoveValue_$QData{"ValueCounter"}" class="Remove ValueRemove" value="Remove value">$Text{"Remove value"}</button>
-		                                <div class="SpacingTopMini" ></div>
-		                            </div>
-		<!-- dtl:block:ValueRow -->
-		<!-- dtl:block:ValueTemplate -->
-		                            <div class="ValueTemplate Hidden">
-		                                <label class="Mandatory" for="Key"><span class="Marker">*</span>$Text{"Key"}:</label>
-		                                <input name="Key_$QData{"ValueCounter"}" id="Key" class="DefaultValueKeyItem W20pc" type="text" maxlength="100" value="$QData{"Key"}"/>
-		                                <div id="KeyError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="KeyServerError" class="TooltipErrorMessage"><p>$Text{"$Data{"KeyErrorStrg"}"}</p></div>
-		
-		                                <label class="Mandatory" for="Value"><span class="Marker">*</span>$Text{"Value"}:</label>
-		                                <input name="Value_$QData{"ValueCounter"}" id="Value" class="DefaultValueItem W20pc" type="text" maxlength="100" value="$QData{"Value"}"/>
-		                                <div id="ValueError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		                                <div id="ValueServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
-		
-		                                <button type="button" id="RemoveValue_$QData{"ValueCounter"}" class="Remove ValueRemove" value="Remove value">$Text{"Remove value"}</button>
-		                                <div class="SpacingTopMini" ></div>
-		                            </div>
-		<!-- dtl:block:ValueTemplate -->
-		                            <input type="hidden" name="DeletedValue" value="$QData{"DeletedString"}" id="DeletedValue" class="DeletedValue" />
-		                        </div>
-		                        <div class="Clear"></div>
-		
-		                        <label for="AddValue">$Text{"Add value"}:</label>
-		                        <div class="Field">
-		                            <button id="AddValue" class="Add" type="button" value="Add Value">$Text{"Add Value"}</button>
-		                        </div>
-		                        <div class="Clear"></div>
-		########################################################################################################################
-		-->           
-		                        
-		                        
-		                        
-		                        
-		                        
-		
-		                        <div class="Field SpacingTop">
-		                            <button class="Primary" type="submit" value="$Text{"Submit"}">$Text{"Submit"}</button>
-		                            $Text{"or"}
-		                            <a href="$Env{"Baselink"}Action=$Env{"Action"}">$Text{"Cancel"}</a>
-		                        </div>
-		                        <div class="Clear"></div>
 		      
 		        
 		                        
 		                    </fieldset>
-		                </form>
-		            </div>
+		                
+		                </li>
+		            	<li class="Clear"></li>
+		            </ul>
+		            </form>
 				</div>
-			</div>
-		</div>	
-				
-				
-<!--dtl:js_on_document_complete-->
-<script type="text/javascript">//<![CDATA[
+			</div>			
+		</div>					
 
-//bind click function to add button
-$('#AddValue').bind('click', function () {
-    Core.Agent.Admin.DynamicFieldMultiselect.AddValue(
-        $(this).closest('fieldset').find('.ValueInsert')
-    );
-    return false;
-});
-
-//bind click function to remove button
-$('.ValueRemove').bind('click', function () {
-    Core.Agent.Admin.DynamicFieldMultiselect.RemoveValue($(this).attr('id'));
-    return false;
-});
-
-//]]></script>
-<!--dtl:js_on_document_complete-->
 	
 <!-- dtl:block:Form -->
 

@@ -84,6 +84,17 @@ sub GetObjectData {
             CreateBy   		=> $Row[8],
             ChangeTime 		=> $Row[9],
             ChangeBy   		=> $Row[10],
+            Employee 		=> $Row[11],
+            Room 			=> $Row[12],
+            Phone 			=> $Row[13],
+            SAP 			=> $Row[14],
+            IP 				=> $Row[15],
+            MAC 			=> $Row[16],
+            Socket 			=> $Row[17],
+            DistributionCabinet => $Row[18],
+            KeyNr				=> $Row[19],
+            Segregation		=> $Row[20],
+            
             
         );
     }
@@ -102,15 +113,18 @@ sub AddObject {
             return;
         }
     }
-    
-    # insert new info
+# id type	model	manufacturer	serialnumber	purchase_time	comment	create_time	create_by	change_time	change_by	employee	room	phone	sap	ip	mac	socket	distribution_cabinet	key	segregation
+# ID Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet Key
     return if !$Self->{DBObject}->Do(
         SQL => 'INSERT INTO inventory (type, model, manufacturer, serialnumber, purchase_time, comment, '
-            . ' create_time, create_by, change_time, change_by)'
-            . ' VALUES (?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
+            . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr)'
+            . ' VALUES (?, ?, ?, ?, ?, ?,current_timestamp, ?, current_timestamp, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         Bind => [
             \$Param{Type}, \$Param{Model}, \$Param{Manufacturer}, \$Param{Serialnumber},
-             \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, \$Param{UserID},
+            \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, \$Param{UserID},
+            \$Param{Employee}, \$Param{Room},  \$Param{Phone}, \$Param{SAP}, 
+            \$Param{IP}, \$Param{MAC},  \$Param{Socket}, \$Param{DistributionCabinet}, 
+            \$Param{KeyNr}, 
         ],
     );
     
@@ -183,17 +197,21 @@ sub UpdateObject {
     # sql
     my $UpdateObject = $Self->{DBObject}->Do(
         SQL => 'UPDATE inventory SET type = ?, model = ?, manufacturer = ?, serialnumber = ?, purchase_time = ?, comment = ?, '
-            . ' change_time = current_timestamp, change_by = ? WHERE id = ?',
+            . ' change_time = current_timestamp, change_by = ?, employee = ?, room = ?, phone = ?, sap = ?, ip = ?, mac = ?, socket = ?, distribution_cabinet = ?, keynr = ? WHERE id = ?',
         Bind => [
              \$Param{Type}, \$Param{Model}, \$Param{Manufacturer}, \$Param{Serialnumber},
-             \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, \$Param{ObjectID},
+             \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, 
+             \$Param{Employee}, \$Param{Room},  \$Param{Phone}, \$Param{SAP}, 
+            \$Param{IP}, \$Param{MAC},  \$Param{Socket}, \$Param{DistributionCabinet}, 
+            \$Param{KeyNr}, \$Param{ObjectID},
         ],
     );  	
+ 		 
  	
  	if (!$UpdateObject){
  		$Self->{LogObject}->Log(
  			Priority => 'error',
- 			Message  => "Error: Info '$Param{Name}' could not be updated!"
+ 			Message  => "Error: Info '$Param{ObjectID}' could not be updated!"
  		);
  		return;
  	}

@@ -74,7 +74,7 @@ sub Run {
     	 	
 		# get all parameter from the form       
 		my ( %GetParam, %Errors );
-		for my $Parameter (qw(Type Model Manufacturer Serialnumber Year Month Day Comment)) {
+		for my $Parameter (qw(Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet KeyNr)) {
 	       	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
 		} 
 		$GetParam{PurchaseTime} =  $Self->{TimeObject}->Date2SystemTime(
@@ -155,6 +155,10 @@ sub Run {
 	    ($ObjectData{Sec}, $ObjectData{Min}, $ObjectData{Hour}, $ObjectData{Day}, $ObjectData{Month}, $ObjectData{Year}, $ObjectData{WeekDay}) = $Self->{TimeObject}->SystemTime2Date(
 	        SystemTime => $ObjectData{PurchaseTime},
 	    );
+	    
+	    
+	    
+	    
 
 
 		$Output .= $Self->_Form(
@@ -176,7 +180,7 @@ sub Run {
 	
 		# get all parameter from the form       
 		my ( %GetParam, %Errors );
-		for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Year Month Day Comment)) {
+		for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet KeyNr)) {
 	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
 		}	
 		$GetParam{PurchaseTime} =  $Self->{TimeObject}->Date2SystemTime(
@@ -359,6 +363,13 @@ sub _Form {
         
         
     $Param{PurchaseTime} = $Self->{LayoutObject}->BuildDateSelection(
+    	Year			=>	$Param{Year},
+    	Month			=>	$Param{Month},
+    	Day				=>	$Param{Day},
+    	Format          => 'DateInputFormat',    	
+	);
+   	
+   	$Param{Segregation} = $Self->{LayoutObject}->BuildDateSelection(
     	Year			=>	$Param{Year},
     	Month			=>	$Param{Month},
     	Day				=>	$Param{Day},
