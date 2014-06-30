@@ -48,11 +48,34 @@ sub Run {
  	     
     my $Output = $Self->{LayoutObject}->Header();
     $Output .= $Self->{LayoutObject}->NavigationBar();    
-    
+    # ------------------------------------------------------------ #
+    # UpdateSettings: update Overview Settings
+    # ------------------------------------------------------------ #
+
 	# ------------------------------------------------------------ #
     # Add: to add a Notification
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'Add' ) {
+    if ( $Self->{Subaction} eq 'Select' ) {
+    	
+		# get all parameter from the form       
+		my ( %GetParam, %Errors );
+		for my $Parameter (qw(Key Value)) {
+	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
+		}
+	
+
+		$Output .= $Self->_Overview( Action => 'Select',  Key => $GetParam{Key} , Value => $GetParam{Value} );
+	    $Output .= $Self->{LayoutObject}->Output(
+	       TemplateFile => 'Inventory',
+	        Data         => \%Param,
+	    );
+	    $Output .= $Self->{LayoutObject}->Footer();
+	    return $Output;
+	} 
+	# ------------------------------------------------------------ #
+    # Add: to add a Notification
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'Add' ) {
 		
 		
 		
@@ -65,8 +88,7 @@ sub Run {
 		);
 	    $Output .= $Self->{LayoutObject}->Footer();
 	    return $Output;
-	}    
-	
+	} 
 	# ------------------------------------------------------------ #
     # AddAction
     # ------------------------------------------------------------ #	
@@ -240,9 +262,7 @@ sub Run {
 		    	%GetParam,
 		    );
         } 
-	
-	
-	
+        	
 	    $Output .= $Self->{LayoutObject}->Output(
 	    	TemplateFile => 'Inventory',
             Data         => \%Param,
@@ -335,12 +355,36 @@ sub _Overview {
     
     $Self->{LayoutObject}->Block( Name => 'Overview' );
     
-    # get GetObjectList
-	my %ObjectList = $Self->{InventoryObject}->GetObjectList( Limit => '30');
+#    $Param->{Option} = $Self->{LayoutObject}->BuildSelection(
+#    	Data        => $Param->{Data},
+#		Name        => $Param->{Name},
+#		SelectedID  => $Param->{SelectedID},
+#		Translation => $Param->{Translation},
+#   	);
+
+	my %ObjectList;
+    
+    if($Param{Action} eq 'Select'){
+    	
+    	# get GetObjectList
+		%ObjectList = $Self->{InventoryObject}->GetObjectList( Key => $Param{Key}, Value => $Param{Value} );
+    	
+    }
+    else{
+    	
+    	# get GetObjectList
+		%ObjectList = $Self->{InventoryObject}->GetObjectList( Limit => '30');
+    	
+    }    
+    
 	for my $ObjectID ( sort { uc( $ObjectList{$a} ) cmp uc( $ObjectList{$b} ) } keys %ObjectList ) {
 		
 	    # get GetInventoryData       
 		my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => $ObjectID );	
+		$ObjectData{ChangeByID} = $ObjectData{ChangeBy};
+		$ObjectData{CreateByID} = $ObjectData{CreateBy};
+		
+					
 		$ObjectData{ChangeBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{ChangeBy} );
 		$ObjectData{CreateBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{CreateBy} );
 		

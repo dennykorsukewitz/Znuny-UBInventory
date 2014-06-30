@@ -230,7 +230,10 @@
 
 <!-- dtl:block:Overview -->	
 		<div class="WidgetSimple">
-				<div class="Header">				
+				<div class="Header">	
+				
+				
+							
 					<div class="ActionMenu">	
 		                <div class="WidgetAction Settings">
 		                    <a href="#" id="Overview-Toggle" title="$Text{"Settings"}">
@@ -250,9 +253,15 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Toggle'), $('#Overview-Setting')
 					<div id="Overview-Setting" class="Hidden">
 		                <form action="$Env{"CGIHandle"}" method="post" enctype="multipart/form-data" name="Overview-Setting-Form" id="Inventory$QData{"NameForm"}_setting_form" class="WidgetSettingsForm">
 		                    <input type="hidden" name="Action" value="$Env{"Action"}"/>
-		                    <input type="hidden" name="Subaction" value="UpdatePreferences"/>
-		                    <input type="hidden" name="Name" value="$QData{"Name"}"/>
+		                    <input type="hidden" name="Subaction" value="UpdateSettings"/>	
+		                    <input type="hidden" name="Name" value="OverviewSettings"/>	                    
 		                    <fieldset class="TableLike FixedLabelSmall DontPrint">
+		                   		<label for="$QData{"NamePref"}">$Text{"$Data{"Desc"}"}:</label>
+		                        <div class="Field DontPrint">
+		                            $Data{"Option"}
+		                        </div>
+		                        <div class="Clear"></div>
+		                   
 		                   
 			                   	<div class="Buttons">
 		                            <button id="Overview-Submit" class="CallForAction DontPrint" type="submit" value="$Text{"Submit"}"><span>$Text{"Save Changes"}</span></button>
@@ -268,7 +277,6 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
                     		</fieldset>		                   
 		               </form>    
 		                   
-		                    
 		            </div>
 					<div id="Overview">
 			            <table class="DataTable" id="Object" >
@@ -292,17 +300,17 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 				        	<tbody >
 <!-- dtl:block:ObjectList -->			
 				            	<tr>
-				                	<td><a class="AsBlock" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Object;ID=$LQData{"ID"}">$QData{"ID"}</a></td>
-				                	<td>$Text{"$QData{"Type","20"}"}</td>
-				               	 	<td>$Text{"$QData{"Model","35"}"}</td> 
-				               	 	<td>$Text{"$QData{"Manufacturer","20"}"}</td>
+				                	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Object;ID=$LQData{"ID"}">$QData{"ID"}</a></td>
+				                	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=type;Value=$LQData{"Type"}">$Text{"$QData{"Type","20"}"}</a></td>
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=model;Value=$LQData{"Model"}">$Text{"$QData{"Model","35"}"}</a></td> 
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=manufacturer;Value=$LQData{"Manufacturer"}">$Text{"$QData{"Manufacturer","20"}"}</a></td>
 				               	 	<td>$Text{"$QData{"Serialnumber","20"}"}</td>
-				               	 	<td>$Date{"$QData{"PurchaseTime"}"}</td>
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=purchase_time;Value=$QData{"PurchaseTime"}">$Date{"$QData{"PurchaseTime"}"}</a></td>
 				               	 	<td title="$QData{"Comment"}">$QData{"Comment","35"}</td>         			  
-				          			<td>$Date{"$QData{"CreateTime"}"}</td>	
-				          			<td>$Text{"$QData{"CreateBy"}"}</td>
-				          			<td>$Date{"$QData{"ChangeTime"}"}</td>
-				          			<td>$Text{"$QData{"ChangeBy"}"}</td>
+				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_time;Value=$QData{"CreateTime"}">$Date{"$QData{"CreateTime"}"}</a></td>	
+				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_by;Value=$LQData{"CreateByID"}">$Text{"$QData{"CreateBy"}"}</a></td>
+				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_time;Value=$QData{"ChangeTime"}">$Date{"$QData{"ChangeTime"}"}</a></td>
+				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_by;Value=$LQData{"ChangeByID"}">$Text{"$QData{"ChangeBy"}"}</a></td>
 				           			<td>
 		                        		<a class="CallForAction Fullsize Center Edit" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Edit;ID=$LQData{"ID"}"><span>$Text{"Edit"}</span></a> 
 		                        	</td>		                        	
@@ -474,12 +482,7 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                   		</div>
 		                        <div class="Clear"></div>		                        
 		                        		                     
-		                        <div class="Clear"></div>    
-		                                         
-		                                         
-		                        
-		      
-		        
+		                        <div class="Clear"></div>    		        
 		                        
 		                    </fieldset>
 		                

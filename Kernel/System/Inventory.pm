@@ -12,6 +12,7 @@ package Kernel::System::Inventory;
 use strict;
 use warnings;
 
+use Kernel::System::Time;
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -26,8 +27,9 @@ sub new {
             $Self->{$_} = $Param{$_} || die "Got no $_!";
         }
     }   
-
-
+	
+	$Self->{TimeObject} = Kernel::System::Time->new(%Param);	
+	
     return $Self;
 }
 
@@ -37,8 +39,20 @@ sub GetObjectList {
 
 	my $SQL = "SELECT id  FROM inventory";
 
-	
-	if($Param{Limit}){
+	if($Param{Key} && $Param{Value}){
+		if($Param{Key} eq 'purchase_time' || $Param{Key} eq 'create_time' || $Param{Key} eq 'change_time'){			
+			
+			$Param{Value} = substr($Param{Value}, 0, 10);
+			$SQL .= " WHERE DATE($Param{Key}) like '%$Param{Value}%'";		
+			
+		}
+		else{
+			
+			$SQL .= " WHERE $Param{Key} like '%$Param{Value}%'";					
+		}		
+	}
+		
+	if($Param{Limit} && !$Param{Key}){
 		$SQL .= " ORDER BY `id` DESC LIMIT $Param{Limit}";
 	}
 	
@@ -113,8 +127,7 @@ sub AddObject {
             return;
         }
     }
-# id type	model	manufacturer	serialnumber	purchase_time	comment	create_time	create_by	change_time	change_by	employee	room	phone	sap	ip	mac	socket	distribution_cabinet	key	segregation
-# ID Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet Key
+
     return if !$Self->{DBObject}->Do(
         SQL => 'INSERT INTO inventory (type, model, manufacturer, serialnumber, purchase_time, comment, '
             . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr)'
@@ -235,8 +248,6 @@ sub GetAddionalKeyList {
 	if($Param{Limit}){
 		$SQL .= " ORDER BY `key` DESC LIMIT $Param{Limit}";
 	}
-	
-	
 	
 	# sql
     return if !$Self->{DBObject}->Prepare(
