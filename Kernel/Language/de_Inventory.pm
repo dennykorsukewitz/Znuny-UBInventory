@@ -35,6 +35,17 @@ sub Data {
 	$Self->{Translation}->{'change time'} = 'Änderungsdatum';
 	$Self->{Translation}->{'change by'} = 'geändert durch';
 	$Self->{Translation}->{'Add Object'} = 'Objekt hinzufügen';
+	$Self->{Translation}->{'Type of the object.'} = 'Art des Objektes.';
+	$Self->{Translation}->{'Model is the Version of the Object.'} = 'Modell ist die Version des Objektes.';	
+	$Self->{Translation}->{'Company that manufactures a particular item.'} = 'Unternehmen, das einen bestimmten Artikel herstellt.';
+	$Self->{Translation}->{'String that is a unique identifier of an object.'} = ' Zeichenfolge, die eine eindeutige Identifizierung eines Objekts ermöglicht.';
+	$Self->{Translation}->{'Date of purchase'} = 'Kaufdatum';
+    $Self->{Translation}->{'PurchaseTime'} = 'Kaufdatum';
+    $Self->{Translation}->{''} = '';	
+	
+
+	
+	
     $Self->{Translation}->{'additional values'} = 'weitere Werte';
     $Self->{Translation}->{''} = '';
 

@@ -8,6 +8,7 @@
         <Setting>      
             <FrontendModuleReg>
                 <Group>admin</Group>
+                <Group>inventory</Group>
                 <Description>Inventory</Description>
                 <Title Translatable="1">Inventory</Title>
                 <NavBarName>Inventory</NavBarName>

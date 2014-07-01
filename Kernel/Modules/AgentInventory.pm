@@ -318,8 +318,8 @@ sub Run {
 #####################
 
 
-		
 		$Self->_Overview();
+		
 				    
         $Output .= $Self->{LayoutObject}->Output(
             TemplateFile => 'Inventory',
@@ -334,8 +334,9 @@ sub Run {
     # default view: _Overview - if no subaction is selected        #
     # ------------------------------------------------------------ #
     
-    
-    $Output .= $Self->_Overview();
+    my $Limit = $Self->{ParamObject}->GetParam( Param => 'Limit' );
+
+    $Output .= $Self->_Overview(Limit => $Limit);
     $Output .= $Self->{LayoutObject}->Output(
        TemplateFile => 'Inventory',
         Data         => \%Param,
@@ -368,12 +369,16 @@ sub _Overview {
     	
     	# get GetObjectList
 		%ObjectList = $Self->{InventoryObject}->GetObjectList( Key => $Param{Key}, Value => $Param{Value} );
-    	
+		$Param{ObjectCount} = keys %ObjectList;
+		if($Param{Key} eq 'change_by' || $Param{Key} eq 'create_by' ){
+			$Param{Value} = $Self->{UserObject}->UserName( UserID =>  $Param{Value} );			
+		}
+		
     }
     else{
     	
     	# get GetObjectList
-		%ObjectList = $Self->{InventoryObject}->GetObjectList( Limit => '30');
+		%ObjectList = $Self->{InventoryObject}->GetObjectList( Limit => $Param{Limit});
     	
     }    
     
@@ -395,7 +400,19 @@ sub _Overview {
             	ID => $ObjectID,
             },
         );
-	}     
+	}
+	if($Param{Action} eq 'Select'){
+    	
+    	# get GetObjectList
+		%ObjectList = $Self->{InventoryObject}->GetObjectList( Key => $Param{Key}, Value => $Param{Value} );
+    	$Self->{LayoutObject}->Block(
+    		Name => 'SelectInfo', 
+			Data => {            	
+		            	%Param,
+		            },
+		);
+    }     
+	
     return;
 }  	
 sub _Form {	
@@ -426,30 +443,30 @@ sub _Form {
 #       TEST        #
 #####################     
     
-    $Self->{LayoutObject}->Block(Name => 'Test',);
-    for my $Additional ( @{ $Self->{ConfigObject}->Get('Inventory')->{'Additional'}} )     
-    {
-    
-    	$Self->{LayoutObject}->Block(
-	        Name => 'TestField',
-	        Data => {
-	        	TEST => $Additional,
-	        },
-	    );  
-    }
-    
-    my %AddionalKeyList = $Self->{InventoryObject}->GetAddionalKeyList( );
-    for my $AddionalKeyListID ( sort { uc( $AddionalKeyList{$a} ) cmp uc( $AddionalKeyList{$b} ) } keys %AddionalKeyList ) {
-		
-
-		
-    	$Self->{LayoutObject}->Block(
-            Name => 'TestFieldAdd',
-            Data => {            	
-            	TESTADD => $AddionalKeyListID,            	
-            },
-        );
-	} 	  
+#    $Self->{LayoutObject}->Block(Name => 'Test',);
+#    for my $Additional ( @{ $Self->{ConfigObject}->Get('Inventory')->{'Additional'}} )     
+#    {
+#    
+#    	$Self->{LayoutObject}->Block(
+#	        Name => 'TestField',
+#	        Data => {
+#	        	TEST => $Additional,
+#	        },
+#	    );  
+#    }
+#    
+#    my %AddionalKeyList = $Self->{InventoryObject}->GetAddionalKeyList( );
+#    for my $AddionalKeyListID ( sort { uc( $AddionalKeyList{$a} ) cmp uc( $AddionalKeyList{$b} ) } keys %AddionalKeyList ) {
+#		
+#
+#		
+#    	$Self->{LayoutObject}->Block(
+#            Name => 'TestFieldAdd',
+#            Data => {            	
+#            	TESTADD => $AddionalKeyListID,            	
+#            },
+#        );
+#	} 	  
 ##################### 
 #       TEST        #
 #####################   

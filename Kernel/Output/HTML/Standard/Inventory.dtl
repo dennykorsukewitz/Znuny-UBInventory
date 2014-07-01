@@ -35,15 +35,18 @@
 #    ActionList     #
 #####################
 <!-- dtl:block:ActionList -->       
-        <div class="WidgetSimple">
+		<div class="WidgetSimple">
             <div class="Header">
-                <h2>$Text{"Actions"}</h2>
+                <h2>$Text{"Select Info"}</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
                 	<li>
-				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview" class="CallForAction Fullsize Center"><span>$Text{"Overview"}</span></a>
-                    </li>                    
+				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview;Limit=30;" class="CallForAction Fullsize Center"><span>$Text{"Overview"}</span></a>
+                    </li>
+                    <li>
+				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview;" class="CallForAction Fullsize Center"><span>$Text{"All"}</span></a>
+                    </li>                       
 					<li>
 				 		<a class="CallForAction Fullsize Center Plus" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
                             <span>$Text{"Add Object"}</span>
@@ -54,10 +57,43 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>       
 <!-- dtl:block:ActionList -->
 #####################
 #    ActionList     #
+#####################
+#####################
+#    SelectInfo     #
+#####################
+<!-- dtl:block:SelectInfo -->
+		<div class="WidgetSimple">
+			<div class="Header">
+         		<h2>$Text{"Select Information"}</h2>
+            </div>
+            <div class="Content">
+        	    <fieldset class="TableLike FixedLabelSmall Narrow">
+					<label>$Text{"selected key"}:</label>
+           			<p class="Value" title="$Text{"$QData{"Key"}"}">$Text{"$QData{"Key"}"}</p>
+                	<div class="Clear"></div>
+                	
+                	<label>$Text{"selected value"}:</label>
+                 	<p class="Value" title="$Data{"Value"}">$Data{"Value"}</p>
+            		<div class="Clear"></div>
+
+                  	<label>$Text{"count"}:</label>
+                 	<p class="Value" title="$Data{"ObjectCount"}">$Data{"ObjectCount"}</p>
+            		<div class="Clear"></div>
+
+
+
+             	</fieldset>                  
+         	 </div>
+      	 </div>
+       
+        
+<!-- dtl:block:SelectInfo -->
+#####################
+#    SelectInfo     #
 #####################
 #####################
 #       Hints       #
@@ -69,7 +105,7 @@
             </div>
             <div class="Content ">
                 <p class="FieldExplanation">
-                    $Text{"Create notifications for your agents and get an overview of all seen notifications."}
+                    $Text{"Inventory management."}
                 </p>   
         	</div>
         </div>            
@@ -90,7 +126,7 @@
 
                     <dt><code>$Text{"Model"}</code></dt>
                     <dd>
-                        $Text{"Model is the  of the Object."} 
+                        $Text{"Model is the Version of the Object."} 
                         <br>
                         ($Text{"e. g."}
                         <code>$Text{"PC 2307/Printer 0815"}</code>).
@@ -98,23 +134,23 @@
                     
                     <dt><code>$Text{"Manufacturer"}</code></dt>
                     <dd>
-                        $Text{"The message is the actual information for the agents."} <br>
+                        $Text{"Company that manufactures a particular item."} <br>
                         ($Text{"e. g."}
-                        <code>$Text{"Dear Agents, OTRS will be updated at $Date{"2014-07-23 12:34:56"}."}</code>).
+                        <code>$Text{"Dell"}</code>).
                     </dd>
 
                     <dt><code>$Text{"Serialnumber"}</code></dt>
                     <dd>
-                        $Text{"The default value of the validity is invalid. If you want to activate the notification, turn it into vaild."} <br>
+                        $Text{"String that is a unique identifier of an object."} <br>
                         ($Text{"e. g."} 
-						<code>$Text{"invalid"}</code>).
+						<code>$Text{"12345-45678-23070"}</code>).
                     </dd>
                     
                     <dt><code>$Text{"PurchaseTime"}</code></dt>
                     <dd>
-                        $Text{"The default value of the validity is invalid. If you want to activate the notification, turn it into vaild."} <br>
+                        $Text{"Date of purchase"}. <br>
                         ($Text{"e. g."} 
-						<code>$Text{"invalid"}</code>).
+						<code>$Text{"23.07.1988"}</code>).
                     </dd>
                     
                     <dt><code>$Text{"Comment"}</code></dt>
