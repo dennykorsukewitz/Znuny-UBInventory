@@ -50,10 +50,31 @@ sub Run {
     $Output .= $Self->{LayoutObject}->NavigationBar();    
     # ------------------------------------------------------------ #
     # UpdateSettings: update Overview Settings
-    # ------------------------------------------------------------ #
-
+    # ------------------------------------------------------------ #	
+#	if ( $Self->{Subaction} eq 'UpdateSettings' ) {
+#		
+#		my ( %GetParam, %Errors );
+#		for my $Parameter (qw(Type Model Manufacturer Serialnumber PurchaseTime Comment CreateTime CreateBy ChangeTime ChangeBy Edit Delete)) {
+#	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
+#		}
+#		
+#		$Self->{LayoutObject}->Block(
+#	        Name => 'TestField',
+#	        Data => {
+#	        	TEST => $Additional,
+#	        },
+#	    );  
+#		
+#		$Output .= $Self->_Overview( Action => 'Select',  Key => $GetParam{Key} , Value => $GetParam{Value} );
+#	    $Output .= $Self->{LayoutObject}->Output(
+#	       TemplateFile => 'Inventory',
+#	        Data         => \%Param,
+#	    );
+#	    $Output .= $Self->{LayoutObject}->Footer();
+#	    return $Output;
+#	} 	
 	# ------------------------------------------------------------ #
-    # Add: to add a Notification
+    # Select: 
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'Select' ) {
     	
@@ -73,11 +94,29 @@ sub Run {
 	    return $Output;
 	} 
 	# ------------------------------------------------------------ #
+    # Search:  
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'Search' ) {		
+		
+		# get all parameter from the form       
+		my ( %GetParam, %Errors );
+		for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Room SAP)) {
+	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
+		}
+	
+
+		$Output .= $Self->_Overview(Action => 'Search', %GetParam, );
+	    $Output .= $Self->{LayoutObject}->Output(
+	       TemplateFile => 'Inventory',
+	        Data         => \%Param,
+	    );
+	    $Output .= $Self->{LayoutObject}->Footer();
+	    return $Output;
+	} 
+	# ------------------------------------------------------------ #
     # Add: to add a Notification
     # ------------------------------------------------------------ #
-    elsif ( $Self->{Subaction} eq 'Add' ) {
-		
-		
+    elsif ( $Self->{Subaction} eq 'Add' ) {		
 		
 		$Output .= $Self->_Form(
 			Action	=>	'Add',
@@ -96,20 +135,36 @@ sub Run {
     	 	
 		# get all parameter from the form       
 		my ( %GetParam, %Errors );
-		for my $Parameter (qw(Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet KeyNr)) {
+		for my $Parameter (qw(Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet
+							 KeyNr PurchaseTimeYear PurchaseTimeMonth PurchaseTimeDay 
+							 SegregationYear SegregationMonth SegregationDay SegregationStatus )) {
 	       	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
 		} 
+		
 		$GetParam{PurchaseTime} =  $Self->{TimeObject}->Date2SystemTime(
-	        Year   => $GetParam{Year},
-	        Month  => $GetParam{Month},
-	        Day    => $GetParam{Day},
-	        Hour   => $GetParam{Hour} 	|| 0,
-	        Minute => $GetParam{Minute} || 0,
-	        Second => $GetParam{Second} || 0,
+	        Year   => $GetParam{PurchaseTimeYear},
+	        Month  => $GetParam{PurchaseTimeMonth},
+	        Day    => $GetParam{PurchaseTimeDay},
+	        Hour   => $GetParam{PurchaseTimeHour} 	|| 0,
+	        Minute => $GetParam{PurchaseTimeMinute} || 0,
+	        Second => $GetParam{PurchaseTimeSecond} || 0,
 	    );
 	    $GetParam{PurchaseTime} = $Self->{TimeObject}->SystemTime2TimeStamp(
 	        SystemTime => $GetParam{PurchaseTime},
-	    );	   
+	    );
+	    
+	    $GetParam{Segregation} =  $Self->{TimeObject}->Date2SystemTime(
+	        Year   => $GetParam{SegregationYear},
+	        Month  => $GetParam{SegregationMonth},
+	        Day    => $GetParam{SegregationDay},
+	        Hour   => $GetParam{SegregationHour} 	|| 0,
+	        Minute => $GetParam{SegregationMinute} || 0,
+	        Second => $GetParam{SegregationSecond} || 0,
+	    );
+	    $GetParam{Segregation} = $Self->{TimeObject}->SystemTime2TimeStamp(
+	        SystemTime => $GetParam{Segregation},
+	    );	
+	       
 
 		my $ObjectID = $Self->{InventoryObject}->AddObject(
 			%GetParam,
@@ -174,12 +229,19 @@ sub Run {
 		$ObjectData{PurchaseTime} = $Self->{TimeObject}->TimeStamp2SystemTime(
 	        String => $ObjectData{PurchaseTime},
 	    ); 
-	    ($ObjectData{Sec}, $ObjectData{Min}, $ObjectData{Hour}, $ObjectData{Day}, $ObjectData{Month}, $ObjectData{Year}, $ObjectData{WeekDay}) = $Self->{TimeObject}->SystemTime2Date(
+	    
+	    ($ObjectData{PurchaseTimeSec}, $ObjectData{PurchaseTimeMin}, $ObjectData{PurchaseTimeHour}, $ObjectData{PurchaseTimeDay}, $ObjectData{PurchaseTimeMonth}, $ObjectData{PurchaseTimeYear}, $ObjectData{PurchaseTimeWeekDay}) = $Self->{TimeObject}->SystemTime2Date(
 	        SystemTime => $ObjectData{PurchaseTime},
 	    );
 	    
-	    
-	    
+	    ### NEW ###
+	    $ObjectData{Segregation} = $Self->{TimeObject}->TimeStamp2SystemTime(
+	        String => $ObjectData{Segregation},
+	    ); 
+	    ($ObjectData{SegregationSec}, $ObjectData{SegregationMin}, $ObjectData{SegregationHour}, $ObjectData{SegregationDay}, $ObjectData{SegregationMonth}, $ObjectData{SegregationYear}, $ObjectData{SegregationWeekDay}) = $Self->{TimeObject}->SystemTime2Date(
+	        SystemTime => $ObjectData{Segregation},
+	    );
+	    ### NEW ###
 	    
 
 
@@ -202,20 +264,50 @@ sub Run {
 	
 		# get all parameter from the form       
 		my ( %GetParam, %Errors );
-		for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room Phone SAP IP MAC Socket DistributionCabinet KeyNr)) {
+		for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Year Month Day Comment Employee Room
+							 Phone SAP IP MAC Socket DistributionCabinet KeyNr PurchaseTimeYear PurchaseTimeMonth
+							 PurchaseTimeDay SegregationYear SegregationMonth SegregationDay SegregationStatus 
+						  ))
+		{
 	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
+		}
+			
+		
+		if ( $GetParam{SegregationStatus} eq 'off')
+		{
+			 $GetParam{Segregation} = 	'2001-01-01 00:00:00'	
 		}	
+		else
+		{
+			$GetParam{Segregation} =  $Self->{TimeObject}->Date2SystemTime(
+		        Year   => $GetParam{SegregationYear},
+		        Month  => $GetParam{SegregationMonth},
+		        Day    => $GetParam{SegregationDay},
+		        Hour   => 0,
+	       		Minute => 0,
+	       		Second => 0,
+		    );
+			
+		}	
+				
+		$GetParam{Segregation} = $Self->{TimeObject}->SystemTime2TimeStamp(
+	        SystemTime => $GetParam{Segregation},
+	    );
+	    
 		$GetParam{PurchaseTime} =  $Self->{TimeObject}->Date2SystemTime(
-	        Year   => $GetParam{Year},
-	        Month  => $GetParam{Month},
-	        Day    => $GetParam{Day},
-	        Hour   => $GetParam{Hour} 	|| 0,
-	        Minute => $GetParam{Minute} || 0,
-	        Second => $GetParam{Second} || 0,
-	    );
-	    $GetParam{PurchaseTime} = $Self->{TimeObject}->SystemTime2TimeStamp(
-	        SystemTime => $GetParam{PurchaseTime},
-	    );
+		        Year   => $GetParam{PurchaseTimeYear},
+		        Month  => $GetParam{PurchaseTimeMonth},
+		        Day    => $GetParam{PurchaseTimeDay},
+		        Hour   => 0,
+	       		Minute => 0,
+	       		Second => 0,
+		    );
+		    $GetParam{PurchaseTime} = $Self->{TimeObject}->SystemTime2TimeStamp(
+		        SystemTime => $GetParam{PurchaseTime},
+		    );	    
+	    
+	    
+	   
 	    
 		
 		# update Object 
@@ -239,8 +331,14 @@ sub Run {
 		            Info     => $Note,
            		) : '';
 
-            # get link view
-			$Self->_Overview();      		
+            ## get link view
+			#$Self->_Overview();  
+			
+			# get edit view
+			$Self->_Form(	
+				Action => 'Edit',				   
+		    	%GetParam,
+		    );    		
         }
         else
         {
@@ -334,8 +432,8 @@ sub Run {
     # default view: _Overview - if no subaction is selected        #
     # ------------------------------------------------------------ #
     
-    my $Limit = $Self->{ParamObject}->GetParam( Param => 'Limit' );
-
+    my $Limit = $Self->{ParamObject}->GetParam( Param => 'Limit' ) || '30';
+	
     $Output .= $Self->_Overview(Limit => $Limit);
     $Output .= $Self->{LayoutObject}->Output(
        TemplateFile => 'Inventory',
@@ -349,20 +447,35 @@ sub _Overview {
 	
     my ( $Self, %Param ) = @_;
     
+#    $Self->{UserObject}->SetPreferences(
+#        Key    => 'UserInventoryOverviewColumn-Typ',
+#        Value  => '1',
+#        UserID => $Self->{UserID},
+#    );
+#    
+#    my %Preferences = $Self->{UserObject}->GetPreferences(
+#        UserID => $Self->{UserID},
+#    );
+    
+    
     # blocks
     $Self->{LayoutObject}->Block( Name => 'FilterObject' );
+    $Self->{LayoutObject}->Block(
+	            Name => 'Search',
+	            Data => {            	
+	            	ID => $Param{ID} || 'UB-ID',
+					Type => $Param{Type} || 'Type',
+					Model => $Param{Model} || 'Model',
+					Manufacturer => $Param{Manufacturer} || 'Manufacturer',
+					Serialnumber => $Param{Serialnumber} || 'Serialnumber',
+					SAP => $Param{SAP}  || 'SAP',
+					Room => $Param{Room}  || 'Room',
+	            },
+	        );
 	$Self->{LayoutObject}->Block( Name => 'ActionList' );
-    $Self->{LayoutObject}->Block( Name => 'Hint' );
-    
+    $Self->{LayoutObject}->Block( Name => 'Hint' );    
     $Self->{LayoutObject}->Block( Name => 'Overview' );
     
-#    $Param->{Option} = $Self->{LayoutObject}->BuildSelection(
-#    	Data        => $Param->{Data},
-#		Name        => $Param->{Name},
-#		SelectedID  => $Param->{SelectedID},
-#		Translation => $Param->{Translation},
-#   	);
-
 	my %ObjectList;
     
     if($Param{Action} eq 'Select'){
@@ -373,7 +486,27 @@ sub _Overview {
 		if($Param{Key} eq 'change_by' || $Param{Key} eq 'create_by' ){
 			$Param{Value} = $Self->{UserObject}->UserName( UserID =>  $Param{Value} );			
 		}
-		
+	
+    }
+    elsif($Param{Action} eq 'Search'){
+    	
+    	
+    	
+    	
+    	# get GetObjectList  ID Type Model Manufacturer Serialnumber Room)
+		%ObjectList = $Self->{InventoryObject}->GetObjectList(	
+																ID => $Param{ID} || '%',
+																Type => $Param{Type} || '%',
+																Model => $Param{Model} || '%',
+																Manufacturer => $Param{Manufacturer} || '%',
+																Serialnumber => $Param{Serialnumber} || '%',
+																SAP => $Param{SAP}  || '%',
+																Room => $Param{Room}  || '%',
+																Limit => $Param{Limit} ,
+																Search => '1'
+															);
+		$Param{ObjectCount} = keys %ObjectList;
+    
     }
     else{
     	
@@ -388,19 +521,30 @@ sub _Overview {
 		my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => $ObjectID );	
 		$ObjectData{ChangeByID} = $ObjectData{ChangeBy};
 		$ObjectData{CreateByID} = $ObjectData{CreateBy};
-		
-					
+							
 		$ObjectData{ChangeBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{ChangeBy} );
 		$ObjectData{CreateBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{CreateBy} );
+		
+		if ( $ObjectData{SegregationStatus}  eq "off" ) 
+	    {
+	        $ObjectData{Segregation} = '';
+	    }
+	    
+	    
 		
     	$Self->{LayoutObject}->Block(
             Name => 'ObjectList',
             Data => {            	
             	%ObjectData,
-            	ID => $ObjectID,
+            	ID => $ObjectData{ID},				
             },
         );
 	}
+	
+	
+		
+   
+	
 	if($Param{Action} eq 'Select'){
     	
     	# get GetObjectList
@@ -421,21 +565,37 @@ sub _Form {
 	# blocks
     $Self->{LayoutObject}->Block( Name => 'ActionList' );
     $Self->{LayoutObject}->Block( Name => 'FormHint' ); 
-        
-        
+    
+    if ( $Param{SegregationStatus}  eq "on" ) 
+    {
+        $Param{SegregationOn} = 'checked="checked"';
+    }
+    else
+    {
+        $Param{SegregationOff} = 'checked="checked"';
+        $Param{SegregationYear}		= '2000';
+        $Param{SegregationMonth}	= '01';
+        $Param{SegregationDay}		= '01';
+    } 
+          
     $Param{PurchaseTime} = $Self->{LayoutObject}->BuildDateSelection(
-    	Year			=>	$Param{Year},
-    	Month			=>	$Param{Month},
-    	Day				=>	$Param{Day},
+    	Prefix 			=> 'PurchaseTime',
+    	PurchaseTimeYear			=>	$Param{PurchaseTimeYear}  ,
+    	PurchaseTimeMonth			=>	$Param{PurchaseTimeMonth} ,
+    	PurchaseTimeDay				=>	$Param{PurchaseTimeDay}  ,
     	Format          => 'DateInputFormat',    	
 	);
    	
    	$Param{Segregation} = $Self->{LayoutObject}->BuildDateSelection(
-    	Year			=>	$Param{Year},
-    	Month			=>	$Param{Month},
-    	Day				=>	$Param{Day},
-    	Format          => 'DateInputFormat',    	
+   		Prefix 					=> 'Segregation',
+    	SegregationYear			=>	$Param{SegregationYear}  ,
+    	SegregationMonth		=>	$Param{SegregationMonth} ,
+    	SegregationDay			=>	$Param{SegregationDay}   ,
+    	Format                  => 'DateInputFormat',    	
 	);
+	
+	   
+ 
    
    
         
@@ -444,14 +604,16 @@ sub _Form {
 #####################     
     
 #    $Self->{LayoutObject}->Block(Name => 'Test',);
-#    for my $Additional ( @{ $Self->{ConfigObject}->Get('Inventory')->{'Additional'}} )     
-#    {
+##    for my $Additional ( @{ $Self->{ConfigObject}->Get('Inventory')->{'Additional'}} )     
+##    {
 #    
 #    	$Self->{LayoutObject}->Block(
 #	        Name => 'TestField',
-#	        Data => {
-#	        	TEST => $Additional,
-#	        },
+#	        Data
+#	        
+##	        Data => {
+##	        	TEST => $Additional,
+##	        },
 #	    );  
 #    }
 #    

@@ -32,12 +32,77 @@
 #      Filter       #
 ##################### 
 #####################
+#      Search       #
+#####################   
+<!-- dtl:block:Search -->
+	<form action="$Env{"CGIHandle"}" method="post" name="search">
+        <div class="WidgetSimple">       
+        <input type="hidden" name="Action" value="$Env{"Action"}"/>
+		<input type="hidden" name="Subaction" value="Search"/>   
+		
+            <div class="Header">
+                <h2><label for="SearchObject">$Text{"Search for Object"}</label></h2>
+            </div>
+           	<div class="Content">              	      	
+                <input type="text" id="ID" class="W95pc" name="ID" value="$Text{"$QData{"ID"}"}" title="$Text{"UB-ID"}" onfocus="if (this.value=='$Text{"UB-ID"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"UB-ID"}';" />
+            </div>
+            <div class="Content">            	
+                <input type="text" id="Type" class="W95pc" name="Type" value="$Text{"$QData{"Type"}"}" title="$Text{"Typ"}" onfocus="if (this.value=='$Text{"Typ"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"Typ"}';" />
+            </div>
+            <div class="Content">            	
+                <input type="text" id="Model" class="W95pc" name="Model" value="$Text{"$QData{"Model"}"}" title="$Text{"Model"}" onfocus="if (this.value=='$Text{"Model"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"Model"}';" />
+            </div>
+            <div class="Content">            	
+                <input type="text" id="Manufacturer" class="W95pc" name="Manufacturer" value="$Text{"$QData{"Manufacturer"}"}" title="$Text{"Manufacturer"}" onfocus="if (this.value=='$Text{"Manufacturer"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"Manufacturer"}';" />
+            </div>
+            <div class="Content">            	
+                <input type="text" id="Serialnumber" class="W95pc" name="Serialnumber" value="$Text{"$QData{"Serialnumber"}"}" title="$Text{"Serialnumber"}" onfocus="if (this.value=='$Text{"Serialnumber"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"Serialnumber"}';" />
+            </div>
+            <div class="Content">            	
+                <input type="text" id="SAP" class="W95pc" name="SAP" value="$Text{"$QData{"SAP"}"}" title="$Text{"SAP"}" onfocus="if (this.value=='$Text{"SAP"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"SAP"}';" />
+            </div> 
+            <div class="Content">            	
+                <input type="text" id="Room" class="W95pc" name="Room" value="$Text{"$QData{"Room"}"}" title="$Text{"Room"}" onfocus="if (this.value=='$Text{"Room"}') this.value='';" onblur="if (this.value=='') this.value='$Text{"Room"}';" />
+            </div>            
+            <div class="Content">   
+				<ul class="ActionList">
+	                	<li>
+					    	<button type="submit" class="CallForAction  Fullsize  Center"  
+					    	onclick="if (getElementById('ID').value=='$Text{"UB-ID"}') getElementById('ID').value='';
+					    	if (getElementById('Type').value=='$Text{"Type"}') getElementById('Type').value='';
+					    	if (getElementById('Model').value=='$Text{"Model"}') getElementById('Model').value='';
+					    	if (getElementById('Manufacturer').value=='$Text{"Manufacturer"}') getElementById('Manufacturer').value='';
+					    	if (getElementById('Serialnumber').value=='$Text{"Serialnumber"}') getElementById('Serialnumber').value='';
+					    	if (getElementById('SAP').value=='$Text{"SAP"}') getElementById('SAP').value='';
+					    	if (getElementById('Room').value=='$Text{"Room"}') getElementById('Room').value='';
+					    	" ><span>$Text{"Search"}</span></button>  					
+	                    </li>
+	                    <li>
+				 			<button type="submit" value="$Text{"reset"}"  class="CallForAction  Fullsize  Center" 
+					    		onclick="getElementById('ID').value='UB-ID';
+					    		getElementById('Type').value='Type';
+					    		getElementById('Model').value='Model';
+					    		getElementById('Manufacturer').value='Manufacturer';
+					    		getElementById('Serialnumber').value='Serialnumber';
+					    		getElementById('SAP').value='SAP';
+					    		getElementById('Room').value='Room';								    		
+					    		"><span>$Text{"reset"}</span></button> 
+				   		</li>
+	            </ul>
+            </div>         
+        </div>    
+	</form>         
+<!-- dtl:block:Search -->       
+#####################
+#      Search       #
+##################### 
+#####################
 #    ActionList     #
 #####################
 <!-- dtl:block:ActionList -->       
 		<div class="WidgetSimple">
             <div class="Header">
-                <h2>$Text{"Select Info"}</h2>
+                <h2>$Text{"Actions"}</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
@@ -45,7 +110,7 @@
 				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview;Limit=30;" class="CallForAction Fullsize Center"><span>$Text{"Overview"}</span></a>
                     </li>
                     <li>
-				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview;" class="CallForAction Fullsize Center"><span>$Text{"All"}</span></a>
+				    	<a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Overview;Limit=9999;" class="CallForAction Fullsize Center"><span>$Text{"All"}</span></a>
                     </li>                       
 					<li>
 				 		<a class="CallForAction Fullsize Center Plus" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Add">
@@ -223,6 +288,15 @@
 	            	<h2>$Text{"TEST AREA"}</h2>
 	           	</div>
 	            <div class="Content">
+	            
+	            <p class="Value" >$Text{"$Data{"ID"}"}</p>
+	            <p class="Value" >$Text{"$Data{"Type"}"}</p>
+	            <p class="Value" >$Text{"$Data{"Model"}"}</p>
+	            <p class="Value" >$Text{"$Data{"Manufacturer"}"}</p>
+	            <p class="Value" >$Text{"$Data{"Serialnumber"}"}</p>
+	            <p class="Value" >$Text{"$Data{"Room"}"}</p>
+	           
+	            
 	            	<fieldset class="TableLike FixedLabelSmall Narrow">
 	<!-- dtl:block:TestField -->                    
 	           		<label>$Text{"DATA}:</label>
@@ -290,20 +364,116 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Toggle'), $('#Overview-Setting')
 		                <form action="$Env{"CGIHandle"}" method="post" enctype="multipart/form-data" name="Overview-Setting-Form" id="Inventory$QData{"NameForm"}_setting_form" class="WidgetSettingsForm">
 		                    <input type="hidden" name="Action" value="$Env{"Action"}"/>
 		                    <input type="hidden" name="Subaction" value="UpdateSettings"/>	
-		                    <input type="hidden" name="Name" value="OverviewSettings"/>	                    
+		                    <input type="hidden" name="Name" value="OverviewSettings"/>	     
+		                                   
 		                    <fieldset class="TableLike FixedLabelSmall DontPrint">
-		                   		<label for="$QData{"NamePref"}">$Text{"$Data{"Desc"}"}:</label>
-		                        <div class="Field DontPrint">
-		                            $Data{"Option"}
-		                        </div>
-		                        <div class="Clear"></div>
-		                   
-		                   
-			                   	<div class="Buttons">
+#		                   		<label for="$QData{"NamePref"}">		                   		
+#		                   			$Text{"$Data{"Desc"}"}:
+#		                   		</label>
+#		                        <div class="Field DontPrint">
+#		                            $Data{"Option"}
+# 								</div>								
+								<ul>
+								<label>$Text{"Shown Columns"}</label>
+									<li>
+										<span title="">
+											<input type="checkbox" name="Type" id="Type" value="Type" checked="checked"/>
+											<label for="Settings-Type">$Text{"Type"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Model" id="Model" value="Model" checked="checked"/>
+											<label for="Settings-Model"> $Text{"Model"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Manufacturer" id="Manufacturer" value="Manufacturer" checked="checked"/>
+											<label for="Settings-Manufacturer">$Text{"Manufacturer"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Serialnumber" id="Serialnumber" value="Serialnumber" checked="checked"/>
+											<label for="Settings-Serialnumber">$Text{"Serialnumber"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="PurchaseTime" id="PurchaseTime" value="PurchaseTime" checked="checked"/>
+											<label for="Settings-PurchaseTime"> $Text{"Purchase Time"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Comment" id="Comment" value="Comment" checked="checked"/>
+											<label for="Settings-Comment">$Text{"Comment"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="CreateTime" id="CreateTime" value="CreateTime" checked="checked"/>
+											<label for="Settings-CreateTime"> $Text{"create time"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="CreateBy" id="CreateBy" value="CreateBy" checked="checked"/>
+											<label for="Settings-CreateBy">$Text{"created by"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="ChangeTime" id="ChangeTime" value="ChangeTime" checked="checked"/>
+											<label for="Settings-ChangeTime"> $Text{"change time"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="ChangeBy" id="ChangeBy" value="ChangeBy" checked="checked"/>
+											<label for="Settings-ChangeBy">$Text{"change by"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Edit" id="Edit" value="Edit" checked="checked"/>
+											<label for="Settings-Edit"> $Text{"Edit"}</label>
+										</span>
+									</li>                      
+	 								<li>
+										<span title="">
+											<input type="checkbox" name="Delete" id="Delete" value="Delete" checked="checked"/>
+											<label for="Settings-Delete">$Text{"Delete"}</label>
+										</span>
+									</li>
+									
+									                   
+	 								<li>
+									<label class="DontPrint SpacingTop">$Text{"Shown Objects"}</label>
+									
+										<select id="UserDashboardPref0130-TicketOpen-Shown" name="UserDashboardPref0130-TicketOpen-Shown">
+											<option value="5" selected="selected">5</option>
+											<option value="10">10</option>
+											<option value="15">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+										</select>
+									</li>  
+								
+								
+								<div class="Buttons SpacingTop">
 		                            <button id="Overview-Submit" class="CallForAction DontPrint" type="submit" value="$Text{"Submit"}"><span>$Text{"Save Changes"}</span></button>
 		                            &nbsp;$Text{"or"}&nbsp;
 		                            <button id="Overview-Cancel" class="CallForAction DontPrint" type="submit" value="$Text{"Cancel"}"><span>$Text{"Cancel"}</span></button>
-		                        </div>
+		                        </div>								
+								</ul>
+		                       
+		                        <div class="Clear"></div>
+		                   
+		                   
+			                   	
+		                        
 <!--dtl:js_on_document_complete-->
 <script type="text/javascript">//<![CDATA[
 #Core.Agent.Dashboard.RegisterUpdatePreferences($('#Overview-Submit'), 'Overview',$('#Overview-Setting-Form'));
@@ -318,38 +488,50 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 			            <table class="DataTable" id="Object" >
 			            	<thead>
 			                	<tr>
+			                		<th>$Text{"Edit"}</th> 	
 			                        <th>$Text{"ID"}</th>
 			                        <th>$Text{"Type"}</th>
 			                        <th>$Text{"Model"}</th>	
 			                        <th>$Text{"Manufacturer"}</th>	
 			                        <th>$Text{"Serialnumber"}</th>	
 			                        <th>$Text{"Purchase Time"}</th>
+			                        <th>$Text{"Room"}</th>
+			                        <th>$Text{"SAP"}</th>
+			                        <th>$Text{"Segregation"}</th>
 			                        <th>$Text{"Comment"}</th>
-			                		<th>$Text{"create time"}</th>	
-			                		<th>$Text{"created by"}</th>
-			                		<th>$Text{"change time"}</th>
-			                		<th>$Text{"change by"}</th>				                		
-			                		<th>$Text{"Edit"}</th> 			             
+			                	<!-- #<th>$Text{"create time"}</th>	
+			                		#<th>$Text{"created by"}</th>
+			                		#<th>$Text{"change time"}</th>
+			                		#<th>$Text{"change by"}</th>
+			                	-->					                		
+			                				             
 			                    	<th>$Text{"Delete"}</th>
 			                	</tr>
 			             	</thead>
 				        	<tbody >
 <!-- dtl:block:ObjectList -->			
 				            	<tr>
+				            		<td>
+		                        		<a class="CallForAction Fullsize Center Edit" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Edit;ID=$LQData{"ID"}"><span>$Text{"Edit"}</span></a> 
+		                        	</td>
 				                	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Object;ID=$LQData{"ID"}">$QData{"ID"}</a></td>
 				                	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=type;Value=$LQData{"Type"}">$Text{"$QData{"Type","20"}"}</a></td>
 				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=model;Value=$LQData{"Model"}">$Text{"$QData{"Model","35"}"}</a></td> 
 				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=manufacturer;Value=$LQData{"Manufacturer"}">$Text{"$QData{"Manufacturer","20"}"}</a></td>
 				               	 	<td>$Text{"$QData{"Serialnumber","20"}"}</td>
 				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=purchase_time;Value=$QData{"PurchaseTime"}">$Date{"$QData{"PurchaseTime"}"}</a></td>
-				               	 	<td title="$QData{"Comment"}">$QData{"Comment","35"}</td>         			  
-				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_time;Value=$QData{"CreateTime"}">$Date{"$QData{"CreateTime"}"}</a></td>	
-				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_by;Value=$LQData{"CreateByID"}">$Text{"$QData{"CreateBy"}"}</a></td>
-				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_time;Value=$QData{"ChangeTime"}">$Date{"$QData{"ChangeTime"}"}</a></td>
-				          			<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_by;Value=$LQData{"ChangeByID"}">$Text{"$QData{"ChangeBy"}"}</a></td>
-				           			<td>
-		                        		<a class="CallForAction Fullsize Center Edit" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Edit;ID=$LQData{"ID"}"><span>$Text{"Edit"}</span></a> 
-		                        	</td>		                        	
+				               	 	
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=room;Value=$QData{"Room"}">$Text{"$QData{"Room"}"}</a></td>
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=sap;Value=$QData{"SAP"}">$Text{"$QData{"SAP"}"}</a></td>
+				               	 	<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=segregation;Value=$QData{"Segregation"}">$Date{"$QData{"Segregation"}"}</a></td>
+				               	 	 
+				               	 		
+				               	 	<td title="$QData{"Comment"}">$QData{"Comment","50"}</td>         			  
+				          	<!-- 	#<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_time;Value=$QData{"CreateTime"}">$Date{"$QData{"CreateTime"}"}</a></td>	
+				          			#<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=create_by;Value=$LQData{"CreateByID"}">$Text{"$QData{"CreateBy"}"}</a></td>
+				          			#<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_time;Value=$QData{"ChangeTime"}">$Date{"$QData{"ChangeTime"}"}</a></td>
+				          			#<td><a href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Select;Key=change_by;Value=$LQData{"ChangeByID"}">$Text{"$QData{"ChangeBy"}"}</a></td>
+				           	-->		                        	
 		                        	<td>
 		                        		<a class="CallForAction Fullsize Center Delete" href="$Env{"Baselink"}Action=$Env{"Action"};Subaction=Delete;ID=$LQData{"ID"}"><span>$Text{"Delete"}</span></a>
 		                        	</td>
@@ -446,11 +628,25 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                            <div id="NameError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
 		                            <div id="NameServerError" class="TooltipErrorMessage"><p>$Text{"This field is required."}</p></div>
 		                        </div>
-		                        <div class="Clear"></div>   
+		                        <div class="Clear"></div>  
+		                        
+		                        <label for="Segregation">$Text{"Segregation"}:</label>
+		                        <div class="Field">
+		                        	<div class="Field">
+		                                $Data{"Segregation"}&nbsp;&nbsp;&nbsp;&nbsp;
+		                                
+		                                <input type="radio" name="SegregationStatus" id="SegregationOn" value="on" $Data{"SegregationOn"} />
+		                                <label for="SegregationOn">$Text{"Yes"}</label>
+		                                <input type="radio" name="SegregationStatus" id="SegregationOff" value="off" $Data{"SegregationOff"} />
+		                                <label for="SegregationOff">$Text{"No"}</label>		                                
+		                            </div>		                             
+		                        </div>
+		                     		                        
+		                        <div class="Clear"></div> 
 		                        
 		                        <label for="Comment">$Text{"Comment"}:</label>
 		                        <div class="Field">
-		                            <input type="text" name="Comment" id="Comment" value="$QData{"Comment"}" class="W50pc" maxlength="50"/>
+		                            <textarea name="Comment" id="Comment"  class="W50pc"  rows="7" cols="42" maxlength="3800">$QData{"Comment"}</textarea>		                           
 		                        </div>
 		                        <div class="Clear"></div>
 

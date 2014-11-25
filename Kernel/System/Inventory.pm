@@ -51,6 +51,29 @@ sub GetObjectList {
 			$SQL .= " WHERE $Param{Key} like '%$Param{Value}%'";					
 		}		
 	}
+	
+	
+##################### 
+#       Search      #
+#####################   
+	if($Param{Search}){
+				 
+		$SQL .= " WHERE id like '%$Param{ID}%' 
+				AND type like '%$Param{Type}%' 
+				AND model like '%$Param{Model}%' 
+				AND manufacturer like '%$Param{Manufacturer}%'
+				AND serialnumber like '%$Param{Serialnumber}%'
+				AND sap like '%$Param{SAP}%'
+				AND room like '%$Param{Room}%'
+				 ";					
+	}
+	
+	
+##################### 
+#       Search      #
+#####################   
+
+
 		
 	if($Param{Limit} && !$Param{Key}){
 		$SQL .= " ORDER BY `id` DESC LIMIT $Param{Limit}";
@@ -107,7 +130,8 @@ sub GetObjectData {
             Socket 			=> $Row[17],
             DistributionCabinet => $Row[18],
             KeyNr				=> $Row[19],
-            Segregation		=> $Row[20],
+            Segregation			=> $Row[20],
+            SegregationStatus	=> $Row[21],
             
             
         );
@@ -130,14 +154,14 @@ sub AddObject {
 
     return if !$Self->{DBObject}->Do(
         SQL => 'INSERT INTO inventory (type, model, manufacturer, serialnumber, purchase_time, comment, '
-            . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr)'
-            . ' VALUES (?, ?, ?, ?, ?, ?,current_timestamp, ?, current_timestamp, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr, segregation)'
+            . ' VALUES (?, ?, ?, ?, ?, ?,current_timestamp, ?, current_timestamp, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)',
         Bind => [
             \$Param{Type}, \$Param{Model}, \$Param{Manufacturer}, \$Param{Serialnumber},
             \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, \$Param{UserID},
             \$Param{Employee}, \$Param{Room},  \$Param{Phone}, \$Param{SAP}, 
             \$Param{IP}, \$Param{MAC},  \$Param{Socket}, \$Param{DistributionCabinet}, 
-            \$Param{KeyNr}, 
+            \$Param{KeyNr}, \$Param{Segregation}, \$Param{SegregationStatus},
         ],
     );
     
@@ -210,13 +234,13 @@ sub UpdateObject {
     # sql
     my $UpdateObject = $Self->{DBObject}->Do(
         SQL => 'UPDATE inventory SET type = ?, model = ?, manufacturer = ?, serialnumber = ?, purchase_time = ?, comment = ?, '
-            . ' change_time = current_timestamp, change_by = ?, employee = ?, room = ?, phone = ?, sap = ?, ip = ?, mac = ?, socket = ?, distribution_cabinet = ?, keynr = ? WHERE id = ?',
+            . ' change_time = current_timestamp, change_by = ?, employee = ?, room = ?, phone = ?, sap = ?, ip = ?, mac = ?, socket = ?, distribution_cabinet = ?, keynr = ?, segregation = ?, segregationstatus = ?  WHERE id = ?',
         Bind => [
              \$Param{Type}, \$Param{Model}, \$Param{Manufacturer}, \$Param{Serialnumber},
              \$Param{PurchaseTime}, \$Param{Comment},  \$Param{UserID}, 
              \$Param{Employee}, \$Param{Room},  \$Param{Phone}, \$Param{SAP}, 
             \$Param{IP}, \$Param{MAC},  \$Param{Socket}, \$Param{DistributionCabinet}, 
-            \$Param{KeyNr}, \$Param{ObjectID},
+            \$Param{KeyNr}, \$Param{Segregation}, \$Param{SegregationStatus}, \$Param{ObjectID},
         ],
     );  	
  		 

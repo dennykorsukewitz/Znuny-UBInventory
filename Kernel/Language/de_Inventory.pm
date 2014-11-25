@@ -41,7 +41,19 @@ sub Data {
 	$Self->{Translation}->{'String that is a unique identifier of an object.'} = ' Zeichenfolge, die eine eindeutige Identifizierung eines Objekts ermöglicht.';
 	$Self->{Translation}->{'Date of purchase'} = 'Kaufdatum';
     $Self->{Translation}->{'PurchaseTime'} = 'Kaufdatum';
-    $Self->{Translation}->{''} = '';	
+    $Self->{Translation}->{'Segregation'} = 'Aussonderung';	
+    $Self->{Translation}->{'Search for Object'} = 'Suche nach Objekt';
+    $Self->{Translation}->{'Actions'} = 'Aktionen';
+    $Self->{Translation}->{'Select Information'} = 'Auswahlinformationen';
+    $Self->{Translation}->{'selected key'} = 'ausgewähltes Attribut';
+    $Self->{Translation}->{'selected value'} = 'ausgewählter Wert';
+    $Self->{Translation}->{'count'} = 'Anzahl';
+    $Self->{Translation}->{'reset'} = 'zurücksetzen';
+    $Self->{Translation}->{'Room'} = 'Raum';
+    $Self->{Translation}->{''} = '';
+    $Self->{Translation}->{''} = '';
+    
+    
 	
 
 	
