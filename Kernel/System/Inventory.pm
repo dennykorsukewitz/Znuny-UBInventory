@@ -154,7 +154,7 @@ sub AddObject {
 
     return if !$Self->{DBObject}->Do(
         SQL => 'INSERT INTO inventory (type, model, manufacturer, serialnumber, purchase_time, comment, '
-            . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr, segregation)'
+            . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr, segregation,segregationstatus)'
             . ' VALUES (?, ?, ?, ?, ?, ?,current_timestamp, ?, current_timestamp, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)',
         Bind => [
             \$Param{Type}, \$Param{Model}, \$Param{Manufacturer}, \$Param{Serialnumber},
@@ -260,30 +260,35 @@ sub UpdateObject {
 }
 
 
-sub GetAddionalKeyList {
-    my ( $Self, %Param ) = @_;
 
-	my $SQL = "SELECT DISTINCT additional_key  FROM inventory_additional";
 
-	if($Param{ObjectID}){
-		$SQL .= " WHERE object_id = $Param{ObjectID}";
-	}
-	
-	if($Param{Limit}){
-		$SQL .= " ORDER BY `key` DESC LIMIT $Param{Limit}";
-	}
-	
-	# sql
-    return if !$Self->{DBObject}->Prepare(
-        SQL  => $SQL,        
-    );
-    
-    my %AddionalKeyList;
-    while ( my @Row  = $Self->{DBObject}->FetchrowArray() ) {
-        $AddionalKeyList{ $Row[0] } = $Row[0];	            
-    }
-    return %AddionalKeyList;
-}
+
+
+#
+#sub GetAddionalKeyList {
+#    my ( $Self, %Param ) = @_;
+#
+#	my $SQL = "SELECT DISTINCT additional_key  FROM inventory_additional";
+#
+#	if($Param{ObjectID}){
+#		$SQL .= " WHERE object_id = $Param{ObjectID}";
+#	}
+#	
+#	if($Param{Limit}){
+#		$SQL .= " ORDER BY `key` DESC LIMIT $Param{Limit}";
+#	}
+#	
+#	# sql
+#    return if !$Self->{DBObject}->Prepare(
+#        SQL  => $SQL,        
+#    );
+#    
+#    my %AddionalKeyList;
+#    while ( my @Row  = $Self->{DBObject}->FetchrowArray() ) {
+#        $AddionalKeyList{ $Row[0] } = $Row[0];	            
+#    }
+#    return %AddionalKeyList;
+#}
 
 
 1;

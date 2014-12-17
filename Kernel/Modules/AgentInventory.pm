@@ -114,6 +114,52 @@ sub Run {
 	    return $Output;
 	} 
 	# ------------------------------------------------------------ #
+    # Search:  
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'EditSAP' ) {		
+		
+		# get all parameter from the form       
+		my ( %GetParam, %Errors );
+		for my $Parameter (qw(Value)) {
+	     	$GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';      
+		}
+		
+		my %ObjectID = $Self->{InventoryObject}->GetObjectList( Key => "sap", Value => $GetParam{Value} );
+ 
+		my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => %ObjectID );	
+		
+		$ObjectData{PurchaseTime} = $Self->{TimeObject}->TimeStamp2SystemTime(
+	        String => $ObjectData{PurchaseTime},
+	    ); 
+	    
+	    ($ObjectData{PurchaseTimeSec}, $ObjectData{PurchaseTimeMin}, $ObjectData{PurchaseTimeHour}, $ObjectData{PurchaseTimeDay}, $ObjectData{PurchaseTimeMonth}, $ObjectData{PurchaseTimeYear}, $ObjectData{PurchaseTimeWeekDay}) = $Self->{TimeObject}->SystemTime2Date(
+	        SystemTime => $ObjectData{PurchaseTime},
+	    );
+	    
+	    ### NEW ###
+	    $ObjectData{Segregation} = $Self->{TimeObject}->TimeStamp2SystemTime(
+	        String => $ObjectData{Segregation},
+	    ); 
+	    ($ObjectData{SegregationSec}, $ObjectData{SegregationMin}, $ObjectData{SegregationHour}, $ObjectData{SegregationDay}, $ObjectData{SegregationMonth}, $ObjectData{SegregationYear}, $ObjectData{SegregationWeekDay}) = $Self->{TimeObject}->SystemTime2Date(
+	        SystemTime => $ObjectData{Segregation},
+	    );
+	    ### NEW ###
+	    
+
+
+		$Output .= $Self->_Form(
+        	Action => 'Edit',
+            %ObjectData,         
+        );
+		
+        $Output .=  $Self->{LayoutObject}->Output(
+	        TemplateFile => 'Inventory',
+	        Data         => \%Param,
+	    );
+        $Output .= $Self->{LayoutObject}->Footer();
+        return $Output;
+	} 
+	# ------------------------------------------------------------ #
     # Add: to add a Notification
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Add' ) {		

@@ -19,9 +19,7 @@ sub Data {
 
 # UB
 	$Self->{Translation}->{'ID'} = 'UB-ID';
-	$Self->{Translation}->{''} = '';
-	$Self->{Translation}->{''} = '';
-    
+
     return 1;
 }
 1;
