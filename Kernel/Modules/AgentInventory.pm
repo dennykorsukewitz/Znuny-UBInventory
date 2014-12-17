@@ -701,7 +701,7 @@ sub _Form {
     }
     elsif ( $Param{Action} eq 'Edit' ) {		
         $Self->{LayoutObject}->Block( Name => 'HeaderEdit' );
-#        $Self->{LayoutObject}->Block( Name => 'AdditionalInformation', Data => \%Param, );
+       $Self->{LayoutObject}->Block( Name => 'AdditionalInformation', Data => \%Param, );
                 
     }    
     
