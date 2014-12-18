@@ -620,7 +620,7 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 								<label class="Mandatory" for="Purchase Time"><span class="Marker">*</span> [% Translate("Purchase Time") | html %]:</label>
 		                        <div class="Field">
 		                        	<div class="Field">
-		                        		[% Data.PurchaseTime | html %]		                             
+		                        		[% Data.PurchaseTime %]		                             
 		                            </div>
 		                            <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
 		                            <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
@@ -630,11 +630,11 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                        <label for="Segregation">[% Translate("Segregation") | html %]:</label>
 		                        <div class="Field">
 		                        	<div class="Field">
-		                                [% Data.Segregation | html %]&nbsp;&nbsp;&nbsp;&nbsp;
+		                                [% Data.Segregation %] &nbsp;&nbsp;&nbsp;&nbsp;
 		                                
-		                                <input type="radio" name="SegregationStatus" id="SegregationOn" value="on" [% Data.SegregationOn | html %] />
+		                                <input type="radio" name="SegregationStatus" id="SegregationOn" value="on" [% Data.SegregationOn %] />
 		                                <label for="SegregationOn">[% Translate("Yes") | html %]</label>
-		                                <input type="radio" name="SegregationStatus" id="SegregationOff" value="off" [% Data.SegregationOff | html %] />
+		                                <input type="radio" name="SegregationStatus" id="SegregationOff" value="off" [% Data.SegregationOff %] />
 		                                <label for="SegregationOff">[% Translate("No") | html %]</label>		                                
 		                            </div>		                             
 		                        </div>
@@ -643,7 +643,7 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 		                        
 		                        <label for="Comment">[% Translate("Comment") | html %]:</label>
 		                        <div class="Field">
-		                            <textarea name="Comment" id="Comment"  class="W50pc"  rows="7" cols="42" maxlength="3800">[% Data.Comment | html %]</textarea>		                           
+		                            <textarea name="Comment" id="Comment"  class="W50pc"  rows="7" cols="42" maxlength="3800">[% Data.Comment %]</textarea>		                           
 		                        </div>
 		                        <div class="Clear"></div>
 

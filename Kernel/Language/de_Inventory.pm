@@ -1,4 +1,4 @@
-# --
+﻿# --
 # Kernel/Language/de_Inventory.pm - german translation for Inventory frontend module
 # Copyright (C) (2014) (Denny Bresch) (dennybresch@gmail.com) (https://github.com/dennybresch)
 # --
@@ -12,9 +12,13 @@ package Kernel::Language::de_Inventory;
 
 use strict;
 use warnings;
+use utf8;
 
 sub Data {
     my $Self = shift;
+    
+    # possible charsets
+    $Self->{Charset} = ['utf-8', ];
 
 # Configuration
     $Self->{Translation}->{''} = '';
@@ -24,6 +28,8 @@ sub Data {
 	
 
 # Inventory
+	$Self->{Translation}->{'Add Object'} = 'Objekt hinzufügen';
+	$Self->{Translation}->{'Edit Object'} = 'Objekt bearbeiten';	
 	$Self->{Translation}->{'Filter for Object'} = 'Filter nach Objekt';
 	$Self->{Translation}->{'Type'} = 'Typ';
 	$Self->{Translation}->{'Model'} = 'Modell';
@@ -34,7 +40,7 @@ sub Data {
 	$Self->{Translation}->{'created by'} = 'erstellt durch';
 	$Self->{Translation}->{'change time'} = 'Änderungsdatum';
 	$Self->{Translation}->{'change by'} = 'geändert durch';
-	$Self->{Translation}->{'Add Object'} = 'Objekt hinzufügen';
+	
 	$Self->{Translation}->{'Type of the object.'} = 'Art des Objektes.';
 	$Self->{Translation}->{'Model is the Version of the Object.'} = 'Modell ist die Version des Objektes.';	
 	$Self->{Translation}->{'Company that manufactures a particular item.'} = 'Unternehmen, das einen bestimmten Artikel herstellt.';
@@ -50,10 +56,12 @@ sub Data {
     $Self->{Translation}->{'count'} = 'Anzahl';
     $Self->{Translation}->{'reset'} = 'zurücksetzen';
     $Self->{Translation}->{'Room'} = 'Raum';
-    $Self->{Translation}->{''} = '';
-    $Self->{Translation}->{''} = '';
-    
-    
+    $Self->{Translation}->{'Employee'} = 'Mitarbeiter';
+    $Self->{Translation}->{'ID'} = 'UB-ID';
+    $Self->{Translation}->{'Distribution Cabinet'} = 'Verteilerschrank';
+    $Self->{Translation}->{'KeyNr'} = 'SchlüsselNr.';
+    $Self->{Translation}->{'Socket'} = 'Netzwerkdose';
+    $Self->{Translation}->{'Use the comment field for some additional information.'} = 'Nutzen Sie das Kommentarfeld für weitere Informationen.';
 	
 
 	

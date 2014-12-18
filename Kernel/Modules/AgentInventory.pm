@@ -289,6 +289,11 @@ sub Run {
 	    );
 	    ### NEW ###
 	    
+	    
+	    $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
+		$ObjectData{CreateByID} = $ObjectData{CreateBy};							
+		$ObjectData{ChangeBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{ChangeBy} );
+		$ObjectData{CreateBy} = $Self->{UserObject}->UserName( UserID =>  $ObjectData{CreateBy} );
 
 
 		$Output .= $Self->_Form(
