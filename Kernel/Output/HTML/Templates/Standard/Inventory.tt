@@ -6,17 +6,17 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-
+<!-- nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage) -->
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst Inventory">
     <h1>[% Translate("Manage Inventory") | html %]</h1>
 
 #
-# SidebarColumnLeft #
+# SidebarColumnLeft
 #
     <div class="SidebarColumn">
 
 #
-#      Filter       #
+#      Filter
 #
 [% RenderBlockStart("FilterObject") %]
         <div class="WidgetSimple">
@@ -29,10 +29,10 @@
         </div>
 [% RenderBlockEnd("FilterObject") %]
 #
-#      Filter       #
+#      Filter
 #
 #
-#      Search       #
+#      Search
 #
 [% RenderBlockStart("Search") %]
     <form action="[% Env("CGIHandle") %]" method="post" name="search">
@@ -125,10 +125,10 @@
         </div>
 [% RenderBlockEnd("ActionList") %]
 #
-#    ActionList     #
+#    ActionList
 #
 #
-#    SelectInfo     #
+#    SelectInfo
 #
 [% RenderBlockStart("SelectInfo") %]
        <div class="WidgetSimple">
@@ -158,10 +158,10 @@
 
 [% RenderBlockEnd("SelectInfo") %]
 #
-#    SelectInfo     #
+#    SelectInfo
 #
 #
-#       Hints       #
+#       Hints
 #
 [% RenderBlockStart("Hint") %]
        <div class="WidgetSimple">
@@ -208,7 +208,7 @@
                     <dd>
                         [% Translate("String that is a unique identifier of an object.") | html %]<br>
                         ([% Translate("e. g.") | html %]
-                 <code>[% Translate(12345-45678-23070"") | html %]</code>).
+                 <code>[% Translate("12345-45678-23070") | html %]</code>).
                     </dd>
 
                     <dt><code>[% Translate("PurchaseTime") | html %]</code></dt>
@@ -229,10 +229,10 @@
        </div>
 [% RenderBlockEnd("FormHint") %]
 #
-#       Hints       #
+#       Hints
 #
 #
-# SidebarColumnLeft #
+# SidebarColumnLeft
 #
 #
 # SidebarColumnRight#
@@ -274,11 +274,11 @@
 # SidebarColumnRight#
 #
 #
-#      CONTENT      #
+#      CONTENT
 #
     <div class="ContentColumn">
 #
-#        TEST       #
+#        TEST
 #
 [% RenderBlockStart("Test") %]
     <div id="Row1" class="LayoutGrid ColumnsWithSpacing">
@@ -329,12 +329,12 @@
 
 [% RenderBlockEnd("Test") %]
 #
-#        TEST       #
+#        TEST
 #
 
 
 #
-#     Overview      #
+#     Overview
 #
 
 [% RenderBlockStart("Overview") %]
@@ -526,10 +526,10 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 
 
                               <td title="[% Data.Comment | html %]">[% Data.Comment | html %]</td>
-                      <!--     #<td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_time;Value=[% Data.CreateTime | uri %]">[% Data.CreateTime | Localize("Date") %]</a></td>
-                           #<td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_by;Value=[% Data.CreatedByID | uri %]">[% Data.CreatedByID | html  %]</a></td>
-                           #<td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_time;Value=[% Data.ChangeTime | uri %]">[% Data.ChangeTime | Localize("Date") %]</a></td>
-                           #<td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_by;Value=[% Data.ChangeByID | html %]">[% Data.ChangeByID | html  %]</a></td>
+                    <!--    <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_time;Value=[% Data.CreateTime | uri %]">[% Data.CreateTime | Localize("Date") %]</a></td>
+                        <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_by;Value=[% Data.CreatedByID | uri %]">[% Data.CreatedByID | html  %]</a></td>
+                        <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_time;Value=[% Data.ChangeTime | uri %]">[% Data.ChangeTime | Localize("Date") %]</a></td>
+                        <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_by;Value=[% Data.ChangeByID | html %]">[% Data.ChangeByID | html  %]</a></td>
                       -->
                                  <td>
                                   <a class="CallForAction Fullsize Center Delete" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | html  %]"><span>[% Translate("Delete") | html %]</span></a>
@@ -551,10 +551,10 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 
 [% RenderBlockEnd("Overview") %]
 #
-#     Overview      #
+#     Overview
 #
 #
-#       Form        #
+#       Form
 #
 [% RenderBlockStart("Form") %]
 
@@ -724,10 +724,10 @@ Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting')
 
 [% RenderBlockEnd("Form") %]
 #
-#       Form        #
+#       Form
 #
 #
-#      CONTENT      #
+#      CONTENT
 #
     </div>
     <div class="Clear"></div>

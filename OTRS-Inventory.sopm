@@ -2,18 +2,49 @@
 <otrs_package version="1.0">
     <Name>OTRS-Inventory</Name>
     <Version>1.0.0</Version>
-    <Framework>4.0.x</Framework>
+    <Framework>6.0.x</Framework>
+    <PackageRequired Version="6.0.37">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">OTRS-Inventory.</Description>
     <Description Lang="de">OTRS-Inventory.</Description>
     <Filelist>
-        <File Permission="644" Location="Kernel/Config/Files/OTRSInventory.xml"/>
-        <File Permission="644" Location="Kernel/Language/de_OTRSInventory.pm"/>
-        <File Permission="644" Location="Kernel/Modules/AgentInventory.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/Standard/Inventory.tt"/>
-        <File Permission="644" Location="Kernel/System/Inventory.pm"/>
-        <File Permission="644" Location="var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/OTRSInventory.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_OTRSInventory.pm"/>
+        <File Permission="660" Location="Kernel/Modules/AgentInventory.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/Inventory.tt"/>
+        <File Permission="660" Location="Kernel/System/Inventory.pm"/>
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css"/>
     </Filelist>
+    <DatabaseInstall>
+        <TableCreate Name="inventory">
+            <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+            <Column Name="type" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="model" Required="true" Size="255" Type="VARCHAR"/>
+            <Column Name="manufacturer" Required="true" Size="255" Type="VARCHAR"/>
+            <Column Name="serialnumber" Required="true" Size="255" Type="VARCHAR"/>
+            <Column Name="purchase_time" Required="true" Size="255" Type="VARCHAR"/>
+            <Column Name="comment" Required="true" Size="255" Type="VARCHAR"/>
+            <Column Name="create_time" Required="true" Type="DATE"/>
+            <Column Name="create_by" Required="true" Type="INTEGER"/>
+            <Column Name="change_time" Required="true" Type="DATE"/>
+            <Column Name="change_by" Required="true" Type="INTEGER"/>
+            <Column Name="employee" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="room" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="phone" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="sap" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="ip" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="mac" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="socket" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="distribution_cabinet" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="keynr" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="segregation" Required="false" Size="255" Type="VARCHAR"/>
+            <Column Name="segregationstatus" Required="false" Size="255" Type="VARCHAR"/>
+            <ForeignKey ForeignTable="users">
+                <Reference Local="create_by" Foreign="id"/>
+                <Reference Local="change_by" Foreign="id"/>
+            </ForeignKey>
+        </TableCreate>
+    </DatabaseInstall>
 </otrs_package>

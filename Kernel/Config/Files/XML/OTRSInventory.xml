@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Config">
+    <Setting Name="Frontend::Module###AgentInventory" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for  Inventory module.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                            <Item>inventory</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Inventory</Item>
+                    <Item Key="Title" Translatable="1">Inventory</Item>
+                    <Item Key="NavBarName">Inventory</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentInventory###003-OTRSInventory" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Inventory.css</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentInventory###003-OTRSInventory" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>admin</Item>
+                                <Item>inventory</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Manage Inventory Items via Web Interface.</Item>
+                        <Item Key="Name" Translatable="1">Inventory</Item>
+                        <Item Key="Link">Action=AgentInventory</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Inventory</Item>
+                        <Item Key="Type">Menu</Item>
+                        <Item Key="Block">ItemArea</Item>
+                        <Item Key="AccessKey">i</Item>
+                        <Item Key="Prio">8900</Item>
+                    </Hash>
+                </Item>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>admin</Item>
+                                <Item>inventory</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                                <Item>inventory</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Overview</Item>
+                        <Item Key="Name" Translatable="1">Overview</Item>
+                        <Item Key="Link">Action=AgentInventory;Subaction=Overview</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Inventory</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">100</Item>
+                    </Hash>
+                </Item>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>inventory</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">New</Item>
+                        <Item Key="Name" Translatable="1">New</Item>
+                        <Item Key="Link">Action=AgentInventory;Subaction=Add</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Inventory</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">200</Item>
+                    </Hash>
+                </Item>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                                <Item>inventory</Item>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">All</Item>
+                        <Item Key="Name" Translatable="1">All</Item>
+                        <Item Key="Link">Action=AgentInventory;Subaction=Overview;Limit=9999;</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Inventory</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey"></Item>
+                        <Item Key="Prio">300</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Inventory###Additional" Required="1" Valid="1" ConfigLevel="100">
+        <Description Translatable="1">Defines some addtionals.</Description>
+        <Navigation>Frontend::Agent::Inventory</Navigation>
+         <Value>
+            <Array>
+                <Item>employee</Item>
+                <Item>room</Item>
+                <Item>phone</Item>
+            </Array>
+        </Value>
+    </Setting>
+</otrs_config>

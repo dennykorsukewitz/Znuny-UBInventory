@@ -12,9 +12,11 @@ package Kernel::Modules::AgentInventory;
 use strict;
 use warnings;
 
-use Kernel::System::Inventory;
-use Kernel::System::Time;
-use Kernel::System::Notify;
+our @ObjectDependencies = (
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Inventory',
+    'Kernel::System::Web::Request',
+);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -23,32 +25,24 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    # check needed objects
-    for my $Needed (
-        qw(ParamObject DBObject TicketObject LayoutObject LogObject QueueObject ConfigObject EncodeObject MainObject TimeObject)
-        )
-    {
-        if ( !$Self->{$Needed} ) {
-            $Self->{LayoutObject}->FatalError( Message => "Got no $Needed in Inventory!" );
-        }
-    }
-
-    # create Objects
-    $Self->{InventoryObject} = Kernel::System::Inventory->new(%Param);
-    $Self->{TimeObject}      = Kernel::System::Time->new(%Param);
-    $Self->{NotifyObject}    = Kernel::System::Notify->new(%Param);
-
     return $Self;
 }
 
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
+    my $TimeObject      = $Kernel::OM->Get('Kernel::System::Time');
+    my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+
     # Note to notify.
     my $Note = '';
 
-    my $Output = $Self->{LayoutObject}->Header();
-    $Output .= $Self->{LayoutObject}->NavigationBar();
+    my $Output = $LayoutObject->Header();
+    $Output .= $LayoutObject->NavigationBar();
 
 # ------------------------------------------------------------ #
 # UpdateSettings: update Overview Settings
@@ -57,10 +51,10 @@ sub Run {
 #
 #       my ( %GetParam, %Errors );
 #       for my $Parameter (qw(Type Model Manufacturer Serialnumber PurchaseTime Comment CreateTime CreateBy ChangeTime ChangeBy Edit Delete)) {
-#         $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+#         $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
 #       }
 #
-#       $Self->{LayoutObject}->Block(
+#       $LayoutObject->Block(
 #           Name => 'TestField',
 #           Data => {
 #             TEST => $Additional,
@@ -68,11 +62,11 @@ sub Run {
 #       );
 #
 #       $Output .= $Self->_Overview( Action => 'Select',  Key => $GetParam{Key} , Value => $GetParam{Value} );
-#       $Output .= $Self->{LayoutObject}->Output(
+#       $Output .= $LayoutObject->Output(
 #          TemplateFile => 'Inventory',
 #           Data         => \%Param,
 #       );
-#       $Output .= $Self->{LayoutObject}->Footer();
+#       $Output .= $LayoutObject->Footer();
 #       return $Output;
 #   }
 # ------------------------------------------------------------ #
@@ -83,7 +77,7 @@ sub Run {
         # get all parameter from the form
         my ( %GetParam, %Errors );
         for my $Parameter (qw(Key Value)) {
-            $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
         $Output .= $Self->_Overview(
@@ -91,11 +85,11 @@ sub Run {
             Key    => $GetParam{Key},
             Value  => $GetParam{Value}
         );
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -107,18 +101,18 @@ sub Run {
         # get all parameter from the form
         my ( %GetParam, %Errors );
         for my $Parameter (qw(ID Type Model Manufacturer Serialnumber Room SAP)) {
-            $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
         $Output .= $Self->_Overview(
             Action => 'Search',
             %GetParam,
         );
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -130,17 +124,17 @@ sub Run {
         # get all parameter from the form
         my ( %GetParam, %Errors );
         for my $Parameter (qw(Value)) {
-            $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
-        my %ObjectID = $Self->{InventoryObject}->GetObjectList(
+        my %ObjectID = $InventoryObject->GetObjectList(
             Key   => "sap",
             Value => $GetParam{Value}
         );
 
-        my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => %ObjectID );
+        my %ObjectData = $InventoryObject->GetObjectData( ObjectID => %ObjectID );
 
-        $ObjectData{PurchaseTime} = $Self->{TimeObject}->TimeStamp2SystemTime(
+        $ObjectData{PurchaseTime} = $TimeObject->TimeStamp2SystemTime(
             String => $ObjectData{PurchaseTime},
         );
 
@@ -148,18 +142,18 @@ sub Run {
             $ObjectData{PurchaseTimeSec}, $ObjectData{PurchaseTimeMin},   $ObjectData{PurchaseTimeHour},
             $ObjectData{PurchaseTimeDay}, $ObjectData{PurchaseTimeMonth}, $ObjectData{PurchaseTimeYear},
             $ObjectData{PurchaseTimeWeekDay}
-        ) = $Self->{TimeObject}->SystemTime2Date(
+        ) = $TimeObject->SystemTime2Date(
             SystemTime => $ObjectData{PurchaseTime},
         );
 
-        $ObjectData{Segregation} = $Self->{TimeObject}->TimeStamp2SystemTime(
+        $ObjectData{Segregation} = $TimeObject->TimeStamp2SystemTime(
             String => $ObjectData{Segregation},
         );
         (
             $ObjectData{SegregationSec}, $ObjectData{SegregationMin},   $ObjectData{SegregationHour},
             $ObjectData{SegregationDay}, $ObjectData{SegregationMonth}, $ObjectData{SegregationYear},
             $ObjectData{SegregationWeekDay}
-        ) = $Self->{TimeObject}->SystemTime2Date(
+        ) = $TimeObject->SystemTime2Date(
             SystemTime => $ObjectData{Segregation},
         );
 
@@ -168,11 +162,11 @@ sub Run {
             %ObjectData,
         );
 
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -184,11 +178,11 @@ sub Run {
         $Output .= $Self->_Form(
             Action => 'Add',
         );
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -205,10 +199,10 @@ sub Run {
             SegregationYear SegregationMonth SegregationDay SegregationStatus )
             )
         {
-            $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
-        $GetParam{PurchaseTime} = $Self->{TimeObject}->Date2SystemTime(
+        $GetParam{PurchaseTime} = $TimeObject->Date2SystemTime(
             Year   => $GetParam{PurchaseTimeYear},
             Month  => $GetParam{PurchaseTimeMonth},
             Day    => $GetParam{PurchaseTimeDay},
@@ -216,11 +210,11 @@ sub Run {
             Minute => $GetParam{PurchaseTimeMinute} || 0,
             Second => $GetParam{PurchaseTimeSecond} || 0,
         );
-        $GetParam{PurchaseTime} = $Self->{TimeObject}->SystemTime2TimeStamp(
+        $GetParam{PurchaseTime} = $TimeObject->SystemTime2TimeStamp(
             SystemTime => $GetParam{PurchaseTime},
         );
 
-        $GetParam{Segregation} = $Self->{TimeObject}->Date2SystemTime(
+        $GetParam{Segregation} = $TimeObject->Date2SystemTime(
             Year   => $GetParam{SegregationYear},
             Month  => $GetParam{SegregationMonth},
             Day    => $GetParam{SegregationDay},
@@ -228,27 +222,27 @@ sub Run {
             Minute => $GetParam{SegregationMinute} || 0,
             Second => $GetParam{SegregationSecond} || 0,
         );
-        $GetParam{Segregation} = $Self->{TimeObject}->SystemTime2TimeStamp(
+        $GetParam{Segregation} = $TimeObject->SystemTime2TimeStamp(
             SystemTime => $GetParam{Segregation},
         );
 
-        my $ObjectID = $Self->{InventoryObject}->AddObject(
+        my $ObjectID = $InventoryObject->AddObject(
             %GetParam,
             UserID   => $Self->{UserID},
-            UserName => $Self->{UserObject}->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
         );
 
         if ($ObjectID) {
 
             # get LogEntry with type info
-            $Note = $Self->{LogObject}->GetLogEntry(
+            $Note = $LogObject->GetLogEntry(
                 Type => 'Info',
                 What => 'Message',
             );
 
             # set LogEntry as notify
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Info',
                 Info     => $Note,
                 )
@@ -261,12 +255,12 @@ sub Run {
         {
             # if something went wrong (NO $InfoID)
             $Note = "Error: Could not create this Object. Please edit your input. ";
-            $Note .= $Self->{LogObject}->GetLogEntry(
+            $Note .= $LogObject->GetLogEntry(
                 Type => 'Error',
                 What => 'Message',
             );
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Error',
                 Info     => $Note,
                 )
@@ -278,12 +272,12 @@ sub Run {
             );
         }
 
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
 
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -292,10 +286,10 @@ sub Run {
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Edit' ) {
 
-        my $ObjectID = $Self->{ParamObject}->GetParam( Param => 'ID' );
-        my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => $ObjectID );
+        my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
+        my %ObjectData = $InventoryObject->GetObjectData( ObjectID => $ObjectID );
 
-        $ObjectData{PurchaseTime} = $Self->{TimeObject}->TimeStamp2SystemTime(
+        $ObjectData{PurchaseTime} = $TimeObject->TimeStamp2SystemTime(
             String => $ObjectData{PurchaseTime},
         );
 
@@ -303,36 +297,36 @@ sub Run {
             $ObjectData{PurchaseTimeSec}, $ObjectData{PurchaseTimeMin},   $ObjectData{PurchaseTimeHour},
             $ObjectData{PurchaseTimeDay}, $ObjectData{PurchaseTimeMonth}, $ObjectData{PurchaseTimeYear},
             $ObjectData{PurchaseTimeWeekDay}
-        ) = $Self->{TimeObject}->SystemTime2Date(
+        ) = $TimeObject->SystemTime2Date(
             SystemTime => $ObjectData{PurchaseTime},
         );
 
-        $ObjectData{Segregation} = $Self->{TimeObject}->TimeStamp2SystemTime(
+        $ObjectData{Segregation} = $TimeObject->TimeStamp2SystemTime(
             String => $ObjectData{Segregation},
         );
         (
             $ObjectData{SegregationSec}, $ObjectData{SegregationMin},   $ObjectData{SegregationHour},
             $ObjectData{SegregationDay}, $ObjectData{SegregationMonth}, $ObjectData{SegregationYear},
             $ObjectData{SegregationWeekDay}
-        ) = $Self->{TimeObject}->SystemTime2Date(
+        ) = $TimeObject->SystemTime2Date(
             SystemTime => $ObjectData{Segregation},
         );
 
         $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
         $ObjectData{CreateByID} = $ObjectData{CreateBy};
-        $ObjectData{ChangeBy}   = $Self->{UserObject}->UserName( UserID => $ObjectData{ChangeBy} );
-        $ObjectData{CreateBy}   = $Self->{UserObject}->UserName( UserID => $ObjectData{CreateBy} );
+        $ObjectData{ChangeBy}   = $UserObject->UserName( UserID => $ObjectData{ChangeBy} );
+        $ObjectData{CreateBy}   = $UserObject->UserName( UserID => $ObjectData{CreateBy} );
 
         $Output .= $Self->_Form(
             Action => 'Edit',
             %ObjectData,
         );
 
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -350,7 +344,7 @@ sub Run {
             )
             )
         {
-            $GetParam{$Parameter} = $Self->{ParamObject}->GetParam( Param => $Parameter ) || '';
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
         if ( $GetParam{SegregationStatus} eq 'off' )
@@ -359,7 +353,7 @@ sub Run {
         }
         else
         {
-            $GetParam{Segregation} = $Self->{TimeObject}->Date2SystemTime(
+            $GetParam{Segregation} = $TimeObject->Date2SystemTime(
                 Year   => $GetParam{SegregationYear},
                 Month  => $GetParam{SegregationMonth},
                 Day    => $GetParam{SegregationDay},
@@ -370,11 +364,11 @@ sub Run {
 
         }
 
-        $GetParam{Segregation} = $Self->{TimeObject}->SystemTime2TimeStamp(
+        $GetParam{Segregation} = $TimeObject->SystemTime2TimeStamp(
             SystemTime => $GetParam{Segregation},
         );
 
-        $GetParam{PurchaseTime} = $Self->{TimeObject}->Date2SystemTime(
+        $GetParam{PurchaseTime} = $TimeObject->Date2SystemTime(
             Year   => $GetParam{PurchaseTimeYear},
             Month  => $GetParam{PurchaseTimeMonth},
             Day    => $GetParam{PurchaseTimeDay},
@@ -382,28 +376,28 @@ sub Run {
             Minute => 0,
             Second => 0,
         );
-        $GetParam{PurchaseTime} = $Self->{TimeObject}->SystemTime2TimeStamp(
+        $GetParam{PurchaseTime} = $TimeObject->SystemTime2TimeStamp(
             SystemTime => $GetParam{PurchaseTime},
         );
 
         # update Object
-        my $ObjectID = $Self->{InventoryObject}->UpdateObject(
+        my $ObjectID = $InventoryObject->UpdateObject(
             %GetParam,
             ObjectID => $GetParam{ID},
             UserID   => $Self->{UserID},
-            UserName => $Self->{UserObject}->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
         );
         if ($ObjectID) {
 
             # get LogEntry with type info
-            $Note = $Self->{LogObject}->GetLogEntry(
+            $Note = $LogObject->GetLogEntry(
                 Type => 'Info',
                 What => 'Message',
             );
 
             # set LogEntry as notify
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Info',
                 Info     => $Note,
                 )
@@ -422,12 +416,12 @@ sub Run {
         {
             # if something went wrong (NO $InfoID)
             $Note = "Error: Could not update this Object. Please edit your input. ";
-            $Note .= $Self->{LogObject}->GetLogEntry(
+            $Note .= $LogObject->GetLogEntry(
                 Type => 'Error',
                 What => 'Message',
             );
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Error',
                 Info     => $Note,
                 )
@@ -440,12 +434,12 @@ sub Run {
             );
         }
 
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
 
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -454,33 +448,33 @@ sub Run {
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'Delete' ) {
 
-        my $ObjectID = $Self->{ParamObject}->GetParam( Param => 'ID' );
+        my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
 
         # delete info into DB
-        my $DeleteObject = $Self->{InventoryObject}->DeleteObject(
+        my $DeleteObject = $InventoryObject->DeleteObject(
             ObjectID => $ObjectID,
-            UserName => $Self->{UserObject}->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
         );
 
         if ($ObjectID) {
-            $Note = $Self->{LogObject}->GetLogEntry(
+            $Note = $LogObject->GetLogEntry(
                 Type => 'Info',
                 What => 'Message',
             );
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Info',
                 Info     => $Note,
                 )
                 : '';
         }
         else {
-            $Note .= $Self->{LogObject}->GetLogEntry(
+            $Note .= $LogObject->GetLogEntry(
                 Type => 'Error',
                 What => 'Message',
             );
             $Output .= $Note
-                ? $Self->{LayoutObject}->Notify(
+                ? $LayoutObject->Notify(
                 Priority => 'Info',
                 Info     => $Note,
                 )
@@ -489,12 +483,12 @@ sub Run {
 
         $Self->_Overview();
 
-        $Output .= $Self->{LayoutObject}->Output(
+        $Output .= $LayoutObject->Output(
             TemplateFile => 'Inventory',
             Data         => \%Param,
         );
 
-        $Output .= $Self->{LayoutObject}->Footer();
+        $Output .= $LayoutObject->Footer();
         return $Output;
     }
 
@@ -502,24 +496,29 @@ sub Run {
     # default view: _Overview - if no subaction is selected        #
     # ------------------------------------------------------------ #
 
-    my $Limit = $Self->{ParamObject}->GetParam( Param => 'Limit' ) || '30';
+    my $Limit = $ParamObject->GetParam( Param => 'Limit' ) || '30';
 
     $Output .= $Self->_Overview( Limit => $Limit );
-    $Output .= $Self->{LayoutObject}->Output(
+    $Output .= $LayoutObject->Output(
         TemplateFile => 'Inventory',
         Data         => \%Param,
     );
-    $Output .= $Self->{LayoutObject}->Footer();
+    $Output .= $LayoutObject->Footer();
     return $Output;
 }
 
 sub _Overview {
-
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
+    my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+
+    $Param{Action} ||= '';
+
     # blocks
-    $Self->{LayoutObject}->Block( Name => 'FilterObject' );
-    $Self->{LayoutObject}->Block(
+    $LayoutObject->Block( Name => 'FilterObject' );
+    $LayoutObject->Block(
         Name => 'Search',
         Data => {
             ID           => $Param{ID}           || 'UB-ID',
@@ -531,29 +530,29 @@ sub _Overview {
             Room         => $Param{Room}         || 'Room',
         },
     );
-    $Self->{LayoutObject}->Block( Name => 'ActionList' );
-    $Self->{LayoutObject}->Block( Name => 'Hint' );
-    $Self->{LayoutObject}->Block( Name => 'Overview' );
+    $LayoutObject->Block( Name => 'ActionList' );
+    $LayoutObject->Block( Name => 'Hint' );
+    $LayoutObject->Block( Name => 'Overview' );
 
     my %ObjectList;
 
     if ( $Param{Action} eq 'Select' ) {
 
         # get GetObjectList
-        %ObjectList = $Self->{InventoryObject}->GetObjectList(
+        %ObjectList = $InventoryObject->GetObjectList(
             Key   => $Param{Key},
             Value => $Param{Value}
         );
         $Param{ObjectCount} = keys %ObjectList;
         if ( $Param{Key} eq 'change_by' || $Param{Key} eq 'create_by' ) {
-            $Param{Value} = $Self->{UserObject}->UserName( UserID => $Param{Value} );
+            $Param{Value} = $UserObject->UserName( UserID => $Param{Value} );
         }
 
     }
     elsif ( $Param{Action} eq 'Search' ) {
 
         # get GetObjectList  ID Type Model Manufacturer Serialnumber Room)
-        %ObjectList = $Self->{InventoryObject}->GetObjectList(
+        %ObjectList = $InventoryObject->GetObjectList(
             ID           => $Param{ID}           || '%',
             Type         => $Param{Type}         || '%',
             Model        => $Param{Model}        || '%',
@@ -570,26 +569,26 @@ sub _Overview {
     else {
 
         # get GetObjectList
-        %ObjectList = $Self->{InventoryObject}->GetObjectList( Limit => $Param{Limit} );
+        %ObjectList = $InventoryObject->GetObjectList( Limit => $Param{Limit} );
 
     }
 
     for my $ObjectID ( sort { uc( $ObjectList{$a} ) cmp uc( $ObjectList{$b} ) } keys %ObjectList ) {
 
         # get GetInventoryData
-        my %ObjectData = $Self->{InventoryObject}->GetObjectData( ObjectID => $ObjectID );
+        my %ObjectData = $InventoryObject->GetObjectData( ObjectID => $ObjectID );
         $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
         $ObjectData{CreateByID} = $ObjectData{CreateBy};
 
-        $ObjectData{ChangeBy} = $Self->{UserObject}->UserName( UserID => $ObjectData{ChangeBy} );
-        $ObjectData{CreateBy} = $Self->{UserObject}->UserName( UserID => $ObjectData{CreateBy} );
+        $ObjectData{ChangeBy} = $UserObject->UserName( UserID => $ObjectData{ChangeBy} );
+        $ObjectData{CreateBy} = $UserObject->UserName( UserID => $ObjectData{CreateBy} );
 
         if ( $ObjectData{SegregationStatus} eq "off" )
         {
             $ObjectData{Segregation} = '';
         }
 
-        $Self->{LayoutObject}->Block(
+        $LayoutObject->Block(
             Name => 'ObjectList',
             Data => {
                 %ObjectData,
@@ -600,12 +599,11 @@ sub _Overview {
 
     if ( $Param{Action} eq 'Select' ) {
 
-        # get GetObjectList
-        %ObjectList = $Self->{InventoryObject}->GetObjectList(
+        %ObjectList = $InventoryObject->GetObjectList(
             Key   => $Param{Key},
             Value => $Param{Value}
         );
-        $Self->{LayoutObject}->Block(
+        $LayoutObject->Block(
             Name => 'SelectInfo',
             Data => {
                 %Param,
@@ -613,17 +611,18 @@ sub _Overview {
         );
     }
 
-    return;
+    return ;
 }
 
 sub _Form {
     my ( $Self, %Param ) = @_;
 
-    # blocks
-    $Self->{LayoutObject}->Block( Name => 'ActionList' );
-    $Self->{LayoutObject}->Block( Name => 'FormHint' );
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    if ( $Param{SegregationStatus} eq "on" )
+    $LayoutObject->Block( Name => 'ActionList' );
+    $LayoutObject->Block( Name => 'FormHint' );
+
+    if ( $Param{SegregationStatus} && $Param{SegregationStatus} eq "on" )
     {
         $Param{SegregationOn} = 'checked="checked"';
     }
@@ -635,7 +634,7 @@ sub _Form {
         $Param{SegregationDay}   = '01';
     }
 
-    $Param{PurchaseTime} = $Self->{LayoutObject}->BuildDateSelection(
+    $Param{PurchaseTime} = $LayoutObject->BuildDateSelection(
         Prefix            => 'PurchaseTime',
         PurchaseTimeYear  => $Param{PurchaseTimeYear},
         PurchaseTimeMonth => $Param{PurchaseTimeMonth},
@@ -643,7 +642,7 @@ sub _Form {
         Format            => 'DateInputFormat',
     );
 
-    $Param{Segregation} = $Self->{LayoutObject}->BuildDateSelection(
+    $Param{Segregation} = $LayoutObject->BuildDateSelection(
         Prefix           => 'Segregation',
         SegregationYear  => $Param{SegregationYear},
         SegregationMonth => $Param{SegregationMonth},
@@ -652,13 +651,13 @@ sub _Form {
     );
 
     # content
-    $Self->{LayoutObject}->Block(
+    $LayoutObject->Block(
         Name => 'Form',
         Data => \%Param,
     );
 
     if ( $Param{ObjectID} ) {
-        $Self->{LayoutObject}->Block(
+        $LayoutObject->Block(
             Name => 'FormObjectID',
             Data => {
                 ObjectID => $Param{ObjectID},
@@ -668,19 +667,18 @@ sub _Form {
 
     # content header
     if ( $Param{Action} eq 'Add' ) {
-        $Self->{LayoutObject}->Block( Name => 'HeaderAdd' );
+        $LayoutObject->Block( Name => 'HeaderAdd' );
     }
     elsif ( $Param{Action} eq 'Edit' ) {
-        $Self->{LayoutObject}->Block( Name => 'HeaderEdit' );
-        $Self->{LayoutObject}->Block(
+        $LayoutObject->Block( Name => 'HeaderEdit' );
+        $LayoutObject->Block(
             Name => 'AdditionalInformation',
             Data => \%Param,
         );
 
     }
 
-    # return output
-    return;
+    return 1;
 }
 
 1;

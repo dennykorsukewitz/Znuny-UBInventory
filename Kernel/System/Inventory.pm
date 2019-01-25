@@ -12,7 +12,10 @@ package Kernel::System::Inventory;
 use strict;
 use warnings;
 
-use Kernel::System::Time;
+our @ObjectDependencies = (
+    'Kernel::System::DB',
+    'Kernel::System::Log',
+);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -21,20 +24,14 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-    # check needed objects
-    for my $Needed (qw( DBObject TicketObject LogObject QueueObject ConfigObject EncodeObject MainObject TimeObject)) {
-        if ( !$Self->{$Needed} ) {
-            $Self->{$Needed} = $Param{$Needed} || die "Got no $Needed!";
-        }
-    }
-
-    $Self->{TimeObject} = Kernel::System::Time->new(%Param);
 
     return $Self;
 }
 
 sub GetObjectList {
     my ( $Self, %Param ) = @_;
+
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
 
     my $SQL = "SELECT id  FROM inventory";
 
@@ -68,12 +65,12 @@ sub GetObjectList {
     }
 
     # sql
-    return if !$Self->{DBObject}->Prepare(
+    return if !$DBObject->Prepare(
         SQL => $SQL,
     );
 
     my %InventoryList;
-    while ( my @Row = $Self->{DBObject}->FetchrowArray() ) {
+    while ( my @Row = $DBObject->FetchrowArray() ) {
         $InventoryList{ $Row[0] } = $Row[0];
     }
     return %InventoryList;
@@ -82,9 +79,12 @@ sub GetObjectList {
 sub GetObjectData {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+
     # check needed stuff
     if ( !$Param{ObjectID} ) {
-        $Self->{LogObject}->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need ObjectID for GetInventoryData function.'
         );
@@ -92,14 +92,14 @@ sub GetObjectData {
     }
 
     # sql
-    return if !$Self->{DBObject}->Prepare(
+    return if !$DBObject->Prepare(
         SQL => 'SELECT * '
             . 'FROM inventory WHERE id = ?',
         Bind => [ \$Param{ObjectID} ],
     );
 
     my %InventoryData;
-    while ( my @Row = $Self->{DBObject}->FetchrowArray() ) {
+    while ( my @Row = $DBObject->FetchrowArray() ) {
         %InventoryData = (
             ID                  => $Param{ObjectID},
             Type                => $Row[1],
@@ -130,13 +130,15 @@ sub GetObjectData {
 }
 
 sub AddObject {
-
     my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
 
     # check needed stuff
     for my $Needed (qw(Type Model Manufacturer Serialnumber PurchaseTime UserID)) {
         if ( !$Param{$Needed} ) {
-            $Self->{LogObject}->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed for AddInfo function."
             );
@@ -144,7 +146,7 @@ sub AddObject {
         }
     }
 
-    return if !$Self->{DBObject}->Do(
+    return if !$DBObject->Do(
         SQL => 'INSERT INTO inventory (type, model, manufacturer, serialnumber, purchase_time, comment, '
             . ' create_time, create_by, change_time, change_by, employee, room, phone, sap, ip, mac, socket, distribution_cabinet, keynr, segregation,segregationstatus)'
             . ' VALUES (?, ?, ?, ?, ?, ?,current_timestamp, ?, current_timestamp, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)',
@@ -158,17 +160,17 @@ sub AddObject {
     );
 
     # get new info id
-    return if !$Self->{DBObject}->Prepare(
+    return if !$DBObject->Prepare(
         SQL  => 'SELECT id FROM inventory WHERE serialnumber = ?',
         Bind => [ \$Param{Serialnumber} ],
     );
     my $ObjectID;
-    while ( my @Row = $Self->{DBObject}->FetchrowArray() ) {
+    while ( my @Row = $DBObject->FetchrowArray() ) {
         $ObjectID = $Row[0];
     }
 
     # log
-    $Self->{LogObject}->Log(
+    $LogObject->Log(
         Priority => 'info',
         Message  => "Type '$Param{Type}' was created successfully by ($Param{UserName})!",
     );
@@ -179,10 +181,13 @@ sub AddObject {
 sub DeleteObject {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+
     # check needed stuff
     for my $Needed (qw(ObjectID)) {
         if ( !$Param{$Needed} ) {
-            $Self->{LogObject}->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed for DeleteObject function."
             );
@@ -191,7 +196,7 @@ sub DeleteObject {
     }
 
     # sql
-    my $DeletedObject = $Self->{DBObject}->Do(
+    my $DeletedObject = $DBObject->Do(
         SQL => 'DELETE FROM inventory'
             . ' WHERE id = ?',
         Bind => [
@@ -200,7 +205,7 @@ sub DeleteObject {
     );
 
     if ( !$DeletedObject ) {
-        $Self->{LogObject}->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Error: Info '$Param{ObjectID}' could not delete!",
         );
@@ -208,7 +213,7 @@ sub DeleteObject {
     }
     else {
 
-        $Self->{LogObject}->Log(
+        $LogObject->Log(
             Priority => 'info',
             Message  => "Info: Info '$Param{ObjectID}' was deleted successfully by ($Param{UserName})!",
         );
@@ -219,10 +224,13 @@ sub DeleteObject {
 sub UpdateObject {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+
     # check needed stuff
     for my $Needed (qw(ObjectID)) {
         if ( !$Param{$Needed} ) {
-            $Self->{LogObject}->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed for UpdateObject function."
             );
@@ -231,7 +239,7 @@ sub UpdateObject {
     }
 
     # sql
-    my $UpdateObject = $Self->{DBObject}->Do(
+    my $UpdateObject = $DBObject->Do(
         SQL =>
             'UPDATE inventory SET type = ?, model = ?, manufacturer = ?, serialnumber = ?, purchase_time = ?, comment = ?, '
             . ' change_time = current_timestamp, change_by = ?, employee = ?, room = ?, phone = ?, sap = ?, ip = ?, mac = ?, socket = ?, distribution_cabinet = ?, keynr = ?, segregation = ?, segregationstatus = ?  WHERE id = ?',
@@ -245,13 +253,13 @@ sub UpdateObject {
     );
 
     if ( !$UpdateObject ) {
-        $Self->{LogObject}->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => "Error: Info '$Param{ObjectID}' could not be updated!"
         );
         return;
     }
-    $Self->{LogObject}->Log(
+    $LogObject->Log(
         Priority => 'info',
         Message  => "ObjectID '$Param{ObjectID}' - '$Param{Type}' was updated successfully by ($Param{UserName})!",
     );
@@ -273,12 +281,12 @@ sub UpdateObject {
 #   }
 #
 #   # sql
-#    return if !$Self->{DBObject}->Prepare(
+#    return if !$DBObject->Prepare(
 #        SQL  => $SQL,
 #    );
 #
 #    my %AddionalKeyList;
-#    while ( my @Row  = $Self->{DBObject}->FetchrowArray() ) {
+#    while ( my @Row  = $DBObject->FetchrowArray() ) {
 #        $AddionalKeyList{ $Row[0] } = $Row[0];
 #    }
 #    return %AddionalKeyList;
