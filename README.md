@@ -7,10 +7,10 @@ Inventory - [...]
 
 - [...]
 - [...]
-- [...] 
+- [...]
 - [...]
 
- 
+
 ###File List
 
 	Kernel/Config/Files/Inventory.xml
@@ -49,4 +49,3 @@ Enjoy!
 
  Your Denny Bresch!
  [https://github.com/dennybresch]
- 
