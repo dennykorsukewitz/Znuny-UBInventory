@@ -1,23 +1,18 @@
 OTRS-Inventory
 ==============
 
-Inventory - [...]
-
 ###Feature List
 
-- [...]
-- [...]
-- [...]
+- just a small inventory.
 
 ###File List
 
-	Kernel/Config/Files/Inventory.xml
-	Kernel/Language/de_Inventory.pm
-	Kernel/Modules/Inventory.pm
-	Kernel/Modules/AgentInventory.pm
-	Kernel/Output/HTML/Standard/Inventory.dtl
-	Kernel/System/Inventory.pm
-
+ - Kernel/Config/Files/OTRSInventory.xml
+ - Kernel/Language/de_OTRSInventory.pm
+ - Kernel/Modules/AgentInventory.pm
+ - Kernel/Output/HTML/Standard/Inventory.tt
+ - Kernel/System/Inventory.pm
+ - var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css
 
 ###Installation
 
@@ -26,13 +21,12 @@ Download the package and install it via admin interface -> package manager .
 
 ###Prerequisites
 
-- OTRS 3.2 [???]
+- OTRS 4
 
-- OTRS 3.3 [???]
 
 ###Configuration
 
-Not needed. [???]
+`Inventory###Additional
 
 
 ###Screenshots
