@@ -3,11 +3,12 @@
      
    <ConfigItem Name="Frontend::Module###AgentInventory" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for  Inventory module.</Description>
-        <Group>Framework</Group>
+        <Group>Inventory</Group>
         <SubGroup>Frontend::Agent::ModuleRegistration</SubGroup>
         <Setting>      
             <FrontendModuleReg>
                 <Group>admin</Group>
+                <Group>inventory</Group>
                 <Description>Inventory</Description>
                 <Title Translatable="1">Inventory</Title>
                 <NavBarName>Inventory</NavBarName>
@@ -19,8 +20,45 @@
                     <Type>Menu</Type>
                     <Prio>8900</Prio>
                     <Block>ItemArea</Block>
+                    <AccessKey>i</AccessKey>
                 </NavBar>
-                <Loader>
+                <NavBar>
+                    <GroupRo>inventory</GroupRo>
+                    <Description Translatable="1">Overview</Description>
+                    <Name Translatable="1">Overview</Name>
+                    <Link>Action=AgentInventory;Subaction=Overview</Link>
+                    <LinkOption></LinkOption>
+                    <NavBar>Inventory</NavBar>
+                    <Prio>100</Prio>
+                    <Type></Type>
+                    <Block></Block>
+                    <AccessKey></AccessKey>
+                </NavBar>
+                <NavBar>
+                    <Group>inventory</Group>
+                    <Description Translatable="1">New</Description>
+                    <Name Translatable="1">New</Name>
+                    <Link>Action=AgentInventory;Subaction=Add</Link>
+                    <LinkOption></LinkOption>
+                    <NavBar>Inventory</NavBar>
+                    <Prio>200</Prio>
+                    <Type></Type>
+                    <Block></Block>
+                    <AccessKey></AccessKey>
+                </NavBar>
+                <NavBar>
+                    <Group>inventory</Group>
+                    <Description Translatable="1">All</Description>
+                    <Name Translatable="1">All</Name>
+                    <Link>Action=AgentInventory;Subaction=Overview;Limit=9999;</Link>
+                    <LinkOption></LinkOption>
+                    <NavBar>Inventory</NavBar>
+                    <Prio>300</Prio>
+                    <Type></Type>
+                    <Block></Block>
+                    <AccessKey></AccessKey>
+                </NavBar>                 
+                <Loader>                              
                     <CSS>Core.Inventory.css</CSS>
                 </Loader>
             </FrontendModuleReg>
@@ -28,7 +66,7 @@
     </ConfigItem> 
     <ConfigItem Name="Inventory###Additional" Required="1" Valid="1" ConfigLevel="100">
         <Description Translatable="1">Defines some addtionals.</Description>
-        <Group>Framework</Group>
+        <Group>Inventory</Group>
         <SubGroup>Frontend::Agent::Inventory</SubGroup>
          <Setting>
             <Array>
@@ -37,5 +75,5 @@
                 <Item>phone</Item>
             </Array>
         </Setting>
-    </ConfigItem>       	
+    </ConfigItem>    
 </otrs_config>
