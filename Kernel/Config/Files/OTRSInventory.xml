@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<otrs_config version="1.0" init="Application">    
-     
-   <ConfigItem Name="Frontend::Module###AgentInventory" Required="0" Valid="1">
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="1.0" init="Config">
+    <ConfigItem Name="Frontend::Module###AgentInventory" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for  Inventory module.</Description>
         <Group>Inventory</Group>
         <SubGroup>Frontend::Agent::ModuleRegistration</SubGroup>
-        <Setting>      
+        <Setting>
             <FrontendModuleReg>
                 <Group>admin</Group>
                 <Group>inventory</Group>
@@ -57,13 +56,13 @@
                     <Type></Type>
                     <Block></Block>
                     <AccessKey></AccessKey>
-                </NavBar>                 
-                <Loader>                              
+                </NavBar>
+                <Loader>
                     <CSS>Core.Inventory.css</CSS>
                 </Loader>
             </FrontendModuleReg>
         </Setting>
-    </ConfigItem> 
+    </ConfigItem>
     <ConfigItem Name="Inventory###Additional" Required="1" Valid="1" ConfigLevel="100">
         <Description Translatable="1">Defines some addtionals.</Description>
         <Group>Inventory</Group>
@@ -75,5 +74,5 @@
                 <Item>phone</Item>
             </Array>
         </Setting>
-    </ConfigItem>    
+    </ConfigItem>
 </otrs_config>
