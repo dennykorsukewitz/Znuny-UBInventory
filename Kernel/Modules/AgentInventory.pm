@@ -15,6 +15,9 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Inventory',
+    'Kernel::System::Log',
+    'Kernel::System::DateTime',
+    'Kernel::System::User',
     'Kernel::System::Web::Request',
 );
 
@@ -34,9 +37,9 @@ sub Run {
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
-    my $TimeObject      = $Kernel::OM->Get('Kernel::System::Time');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
     my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
 
     # Note to notify.
     my $Note = '';
@@ -202,7 +205,7 @@ sub Run {
             $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
         }
 
-        $GetParam{PurchaseTime} = $TimeObject->Date2SystemTime(
+        $GetParam{PurchaseTime} = $TimeObject->Set(
             Year   => $GetParam{PurchaseTimeYear},
             Month  => $GetParam{PurchaseTimeMonth},
             Day    => $GetParam{PurchaseTimeDay},
@@ -210,11 +213,9 @@ sub Run {
             Minute => $GetParam{PurchaseTimeMinute} || 0,
             Second => $GetParam{PurchaseTimeSecond} || 0,
         );
-        $GetParam{PurchaseTime} = $TimeObject->SystemTime2TimeStamp(
-            SystemTime => $GetParam{PurchaseTime},
-        );
+        $GetParam{PurchaseTime} = $TimeObject->ToString();
 
-        $GetParam{Segregation} = $TimeObject->Date2SystemTime(
+        $GetParam{Segregation} = $TimeObject->Set(
             Year   => $GetParam{SegregationYear},
             Month  => $GetParam{SegregationMonth},
             Day    => $GetParam{SegregationDay},
@@ -222,9 +223,7 @@ sub Run {
             Minute => $GetParam{SegregationMinute} || 0,
             Second => $GetParam{SegregationSecond} || 0,
         );
-        $GetParam{Segregation} = $TimeObject->SystemTime2TimeStamp(
-            SystemTime => $GetParam{Segregation},
-        );
+        $GetParam{Segregation} = $TimeObject->ToString();
 
         my $ObjectID = $InventoryObject->AddObject(
             %GetParam,
@@ -286,31 +285,24 @@ sub Run {
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Edit' ) {
 
+        my ($Set, $EditDateHash);
         my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
         my %ObjectData = $InventoryObject->GetObjectData( ObjectID => $ObjectID );
 
-        $ObjectData{PurchaseTime} = $TimeObject->TimeStamp2SystemTime(
-            String => $ObjectData{PurchaseTime},
-        );
+        # get dates for edit form
+        $Set = $TimeObject->Set( String => $ObjectData{PurchaseTime} );
+        $EditDateHash = $TimeObject->Get();
 
-        (
-            $ObjectData{PurchaseTimeSec}, $ObjectData{PurchaseTimeMin},   $ObjectData{PurchaseTimeHour},
-            $ObjectData{PurchaseTimeDay}, $ObjectData{PurchaseTimeMonth}, $ObjectData{PurchaseTimeYear},
-            $ObjectData{PurchaseTimeWeekDay}
-        ) = $TimeObject->SystemTime2Date(
-            SystemTime => $ObjectData{PurchaseTime},
-        );
+        $ObjectData{PurchaseTimeYear} = $EditDateHash->{Year};
+        $ObjectData{PurchaseTimeMonth} = $EditDateHash->{Month};
+        $ObjectData{PurchaseTimeDay} = $EditDateHash->{Day};
 
-        $ObjectData{Segregation} = $TimeObject->TimeStamp2SystemTime(
-            String => $ObjectData{Segregation},
-        );
-        (
-            $ObjectData{SegregationSec}, $ObjectData{SegregationMin},   $ObjectData{SegregationHour},
-            $ObjectData{SegregationDay}, $ObjectData{SegregationMonth}, $ObjectData{SegregationYear},
-            $ObjectData{SegregationWeekDay}
-        ) = $TimeObject->SystemTime2Date(
-            SystemTime => $ObjectData{Segregation},
-        );
+        $Set = $TimeObject->Set( String => $ObjectData{Segregation} );
+        $EditDateHash = $TimeObject->Get();
+
+        $ObjectData{SegregationYear} = $EditDateHash->{Year};
+        $ObjectData{SegregationMonth} = $EditDateHash->{Month};
+        $ObjectData{SegregationDay} = $EditDateHash->{Day};
 
         $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
         $ObjectData{CreateByID} = $ObjectData{CreateBy};
@@ -353,7 +345,7 @@ sub Run {
         }
         else
         {
-            $GetParam{Segregation} = $TimeObject->Date2SystemTime(
+            $GetParam{Segregation} = $TimeObject->Set(
                 Year   => $GetParam{SegregationYear},
                 Month  => $GetParam{SegregationMonth},
                 Day    => $GetParam{SegregationDay},
@@ -361,14 +353,11 @@ sub Run {
                 Minute => 0,
                 Second => 0,
             );
-
         }
 
-        $GetParam{Segregation} = $TimeObject->SystemTime2TimeStamp(
-            SystemTime => $GetParam{Segregation},
-        );
+        $GetParam{Segregation} = $TimeObject->ToString();
 
-        $GetParam{PurchaseTime} = $TimeObject->Date2SystemTime(
+        $GetParam{PurchaseTime} = $TimeObject->Set(
             Year   => $GetParam{PurchaseTimeYear},
             Month  => $GetParam{PurchaseTimeMonth},
             Day    => $GetParam{PurchaseTimeDay},
@@ -376,9 +365,7 @@ sub Run {
             Minute => 0,
             Second => 0,
         );
-        $GetParam{PurchaseTime} = $TimeObject->SystemTime2TimeStamp(
-            SystemTime => $GetParam{PurchaseTime},
-        );
+        $GetParam{PurchaseTime} = $TimeObject->ToString();
 
         # update Object
         my $ObjectID = $InventoryObject->UpdateObject(
@@ -513,6 +500,7 @@ sub _Overview {
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+    my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
 
     $Param{Action} ||= '';
 
@@ -611,7 +599,7 @@ sub _Overview {
         );
     }
 
-    return ;
+    return;
 }
 
 sub _Form {
@@ -622,14 +610,14 @@ sub _Form {
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'FormHint' );
 
-    if ( $Param{SegregationStatus} && $Param{SegregationStatus} eq "on" )
+    if ( $Param{SegregationStatus} eq "on" )
     {
         $Param{SegregationOn} = 'checked="checked"';
     }
     else
     {
         $Param{SegregationOff}   = 'checked="checked"';
-        $Param{SegregationYear}  = '2000';
+        $Param{SegregationYear}  = '2001';
         $Param{SegregationMonth} = '01';
         $Param{SegregationDay}   = '01';
     }
@@ -678,7 +666,7 @@ sub _Form {
 
     }
 
-    return 1;
+    return;
 }
 
 1;
