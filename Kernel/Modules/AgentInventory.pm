@@ -444,9 +444,10 @@ sub Run {
         my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
 
         # delete info into DB
+        my $UserName = $UserObject->UserName( UserID => $Self->{UserID} );
         my $DeleteObject = $InventoryObject->DeleteObject(
             ObjectID => $ObjectID,
-            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserName,
         );
 
         if ($ObjectID) {
