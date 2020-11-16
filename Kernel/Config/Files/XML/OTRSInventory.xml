@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="2.0" init="Config">
     <Setting Name="Frontend::Module###AgentInventory" Required="0" Valid="1">
-        <Description Translatable="1">Frontend module registration for  Inventory module.</Description>
+        <Description Translatable="1">Frontend module registration for Inventory module.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
             <Item ValueType="FrontendRegistration">
@@ -140,7 +140,7 @@
         </Value>
     </Setting>
     <Setting Name="Inventory###Additional" Required="1" Valid="1" ConfigLevel="100">
-        <Description Translatable="1">Defines some addtionals.</Description>
+        <Description Translatable="1">Defines some additionals.</Description>
         <Navigation>Frontend::Agent::Inventory</Navigation>
          <Value>
             <Array>

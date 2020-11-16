@@ -16,9 +16,6 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # possible charsets
-    $Self->{Charset} = ['utf-8' ];
-
     # Inventory
     $Self->{Translation}->{'Add Object'}        = 'Objekt hinzufügen';
     $Self->{Translation}->{'Edit Object'}       = 'Objekt bearbeiten';
@@ -36,7 +33,7 @@ sub Data {
     $Self->{Translation}->{'Type of the object.'}                                    = 'Art des Objektes.';
     $Self->{Translation}->{'Model is the Version of the Object.'}                    = 'Modell ist die Version des Objektes.';
     $Self->{Translation}->{'Company that manufactures a particular item.'}           = 'Unternehmen, das einen bestimmten Artikel herstellt.';
-    $Self->{Translation}->{'String that is a unique identifier of an object.'}       = ' Zeichenfolge, die eine eindeutige Identifizierung eines Objekts ermöglicht.';
+    $Self->{Translation}->{'String that is a unique identifier of an object.'}       = 'Zeichenfolge, die eine eindeutige Identifizierung eines Objekts ermöglicht.';
     $Self->{Translation}->{'Date of purchase'}                                       = 'Kaufdatum';
     $Self->{Translation}->{'PurchaseTime'}                                           = 'Kaufdatum';
     $Self->{Translation}->{'Segregation'}                                            = 'Aussonderung';

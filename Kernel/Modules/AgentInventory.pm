@@ -24,7 +24,6 @@ our @ObjectDependencies = (
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
