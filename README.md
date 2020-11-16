@@ -1,42 +1,27 @@
 OTRS-Inventory
 ==============
 
-### Feature List
+**Feature List**
 
 - just a small inventory.
 
-### File List
-
- - Kernel/Config/Files/OTRSInventory.xml
- - Kernel/Language/de_OTRSInventory.pm
- - Kernel/Modules/AgentInventory.pm
- - Kernel/Output/HTML/Standard/Inventory.tt
- - Kernel/System/Inventory.pm
- - var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css
-
-### Installation
-
-Download the package and install it via admin interface -> package manager .
-
-
-### Prerequisites
+**Prerequisites**
 
 - OTRS 6
 
+**Installation**
 
-### Configuration
+Download the package and install it via admin interface -> package manager.
 
-`Inventory###Additional
+**Configuration**
 
+[Check config.md](https://github.com/dennykorsukewitz/OTRS-Inventory/blob/master/doc/)
 
-### Screenshots
+**Download**
 
+For download see [OTRS-Inventory](https://github.com/dennykorsukewitz/OTRS-Inventory/tags)
 
-### Download
-
-For download see [https://github.com/breschie/OTRS-Inventory)
 
 Enjoy!
 
- Your Denny Bresch!
- [https://github.com/dennybresch]
+Your [Denny Korsukéwitz](https://github.com/dennykorsukewitz)!

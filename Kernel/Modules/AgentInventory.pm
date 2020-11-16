@@ -1,5 +1,5 @@
 # --
-# Copyright (C) (2014) (Denny Bresch) (dennybresch@gmail.com) (https://github.com/dennybresch)
+# Copyright (C) (2014) (Denny Korsukéwitz) (https://github.com/dennykorsukewitz)
 # Copyright (C) 2012-2019 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see

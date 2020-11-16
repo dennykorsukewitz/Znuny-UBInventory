@@ -1,7 +1,7 @@
-/* 
+/*
 # --
 # var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css - CSS for Inventory frontend module
-# Copyright (C) (2014) (Denny Bresch) (dennybresch@gmail.com) (https://github.com/dennybresch)
+# Copyright (C) (2014) (Denny Korsukéwitz) (https://github.com/dennykorsukewitz)
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -35,7 +35,7 @@
 }
 .CallForAction.Link span
 {
-    padding-left: 24px; 
+    padding-left: 24px;
     background-position: 5px 5px;
 }
 .CallForAction.Link:active span
@@ -50,7 +50,7 @@
 
 .CallForAction.Edit span
 {
-    padding-left: 23px; 
+    padding-left: 23px;
     background-position: 2px 2px;
 }
 
@@ -102,11 +102,11 @@
 .LayoutGrid .ColumnsWithSpacing > li > *{
 
 	padding-right: 0px;
-	
+
 }
 .LayoutGrid > li {
     float: left;
-	width: 100%;	
+	width: 100%;
 }
 
 .Inventory .Size1of2 {
