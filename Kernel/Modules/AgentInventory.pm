@@ -225,10 +225,11 @@ sub Run {
         );
         $GetParam{Segregation} = $TimeObject->ToString();
 
+        my $UserName = $UserObject->UserName( UserID => $Self->{UserID} );
         my $ObjectID = $InventoryObject->AddObject(
             %GetParam,
             UserID   => $Self->{UserID},
-            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserName,
         );
 
         if ($ObjectID) {
@@ -306,8 +307,12 @@ sub Run {
 
         $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
         $ObjectData{CreateByID} = $ObjectData{CreateBy};
-        $ObjectData{ChangeBy}   = $UserObject->UserName( UserID => $ObjectData{ChangeBy} );
-        $ObjectData{CreateBy}   = $UserObject->UserName( UserID => $ObjectData{CreateBy} );
+
+        my $ChangeByName = $UserObject->UserName( UserID => $ObjectData{ChangeBy} );
+        my $CreateByName = $UserObject->UserName( UserID => $ObjectData{CreateBy} );
+
+        $ObjectData{ChangeBy} = $ChangeByName;
+        $ObjectData{CreateBy} = $CreateByName;
 
         $Output .= $Self->_Form(
             Action => 'Edit',
@@ -368,11 +373,12 @@ sub Run {
         $GetParam{PurchaseTime} = $TimeObject->ToString();
 
         # update Object
+        my $UserName = $UserObject->UserName( UserID => $Self->{UserID} );
         my $ObjectID = $InventoryObject->UpdateObject(
             %GetParam,
             ObjectID => $GetParam{ID},
             UserID   => $Self->{UserID},
-            UserName => $UserObject->UserName( UserID => $Self->{UserID} ),
+            UserName => $UserName,
         );
         if ($ObjectID) {
 
