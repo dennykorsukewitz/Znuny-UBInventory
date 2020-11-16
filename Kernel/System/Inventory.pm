@@ -1,6 +1,6 @@
 # --
 # Copyright (C) (2014) (Denny Korsukéwitz) (https://github.com/dennykorsukewitz)
-# Copyright (C) 2012-2019 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -24,14 +24,13 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
-
     return $Self;
 }
 
 sub GetObjectList {
     my ( $Self, %Param ) = @_;
 
-    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my $SQL = "SELECT id  FROM inventory";
 
