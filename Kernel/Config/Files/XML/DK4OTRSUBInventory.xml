@@ -3,7 +3,7 @@
     <Setting Name="UBInventory###Additional" Required="1" Valid="1" ConfigLevel="100">
         <Description Translatable="1">Defines some additionals.</Description>
         <Navigation>Frontend::Agent::UBInventory</Navigation>
-         <Value>
+        <Value>
             <Array>
                 <Item>employee</Item>
                 <Item>room</Item>

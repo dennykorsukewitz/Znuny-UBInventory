@@ -34,13 +34,13 @@
 .CallForAction.Link span {
     background: url(../img/direction_header.png) no-repeat scroll;
 }
-.CallForAction.Link span
-{
+
+.CallForAction.Link span {
     padding-left: 24px;
     background-position: 5px 5px;
 }
-.CallForAction.Link:active span
-{
+
+.CallForAction.Link:active span {
     background-position: 4px 4px;
 }
 
@@ -49,14 +49,12 @@
     background: url(../img/icons/edit.png) no-repeat scroll;
 }
 
-.CallForAction.Edit span
-{
+.CallForAction.Edit span {
     padding-left: 23px;
     background-position: 2px 2px;
 }
 
-.CallForAction.Edit:active span
-{
+.CallForAction.Edit:active span {
     background-position: 2px 3px;
 }
 
@@ -64,127 +62,133 @@
     background: url(../img/icons/cross.png) no-repeat scroll;
 }
 
-.CallForAction.Delete span
-{
+.CallForAction.Delete span {
     padding-left: 23px;
     background-position: 2px 2px;
 }
 
-.CallForAction.Delete:active span
-{
+.CallForAction.Delete:active span {
     background-position: 2px 3px;
 }
 
 
-.LayoutGrid > .Size1of5 {
+.LayoutGrid>.Size1of5 {
     width: 20%;
 }
 
-.LayoutGrid > .Size2of5 {
+.LayoutGrid>.Size2of5 {
     width: 40%;
 }
 
-.LayoutGrid > .Size3of5 {
+.LayoutGrid>.Size3of5 {
     width: 60%;
 }
 
-.LayoutGrid > .Size4of5 {
+.LayoutGrid>.Size4of5 {
     width: 80%;
 }
 
 
 
-@media screen,projection,tv,handheld {
+@media screen,
+projection,
+tv,
+handheld {
 
-/**
+    /**
  * @subsubsection     General
  */
 
-.LayoutGrid .ColumnsWithSpacing > li > *{
+    .LayoutGrid .ColumnsWithSpacing>li>* {
 
-	padding-right: 0px;
+        padding-right: 0px;
 
-}
-.LayoutGrid > li {
-    float: left;
-	width: 100%;
-}
+    }
 
-.Inventory .Size1of2 {
-    margin-bottom: 3px;
-    position: relative;
-}
+    .LayoutGrid>li {
+        float: left;
+        width: 100%;
+    }
 
-.Inventory .Size1of2 .AsBlock {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    text-indent: -9999px;
-    position: absolute;
-    background: url(../img/empty_background.png);
-}
+    .Inventory .Size1of2 {
+        margin-bottom: 3px;
+        position: relative;
+    }
 
-.RTL .Inventory .Size1of2 .AsBlock {
-    left: auto;
-    right: 0;
-}
+    .Inventory .Size1of2 .AsBlock {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        text-indent: -9999px;
+        position: absolute;
+        background: url(../img/empty_background.png);
+    }
 
-.Inventory .Size1of2 h4 {
-    margin: 0 2px 0 0;
-    padding: 5px 5px 4px;
-    color: #F92;
-    border: 1px solid transparent;
-    border-bottom: none;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
+    .RTL .Inventory .Size1of2 .AsBlock {
+        left: auto;
+        right: 0;
+    }
 
-.RTL .Inventory .Size1of2 h4 {
-    margin: 0 0 0 2px;
-}
+    .Inventory .Size1of2 h4 {
+        margin: 0 2px 0 0;
+        padding: 5px 5px 4px;
+        color: #F92;
+        border: 1px solid transparent;
+        border-bottom: none;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+    }
 
-.Inventory .Size1of2 p {
-    margin: 0 2px 0 0;
-    padding: 0 5px 5px;
-    line-height: 14px;
-    border: 1px solid transparent;
-    border-top: none;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
-}
+    .RTL .Inventory .Size1of2 h4 {
+        margin: 0 0 0 2px;
+    }
 
-.RTL .Inventory .Size1of2 p {
-    margin: 0 0 0 2px;
-}
+    .Inventory .Size1of2 p {
+        margin: 0 2px 0 0;
+        padding: 0 5px 5px;
+        line-height: 14px;
+        border: 1px solid transparent;
+        border-top: none;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+    }
 
-.Inventory .Size1of2:hover h4,
-.Inventory .Size1of2:hover p {
-    background: #FDFDFD;
-    border-color: #DDD;
-}
+    .RTL .Inventory .Size1of2 p {
+        margin: 0 0 0 2px;
+    }
 
-.Inventory .Size1of2:hover h4 {
-    color: #F72;
-}
+    .Inventory .Size1of2:hover h4,
+    .Inventory .Size1of2:hover p {
+        background: #FDFDFD;
+        border-color: #DDD;
+    }
 
-/**
+    .Inventory .Size1of2:hover h4 {
+        color: #F72;
+    }
+
+    /**
  * specific min-height for InventoryNavigationBar rows
  */
 
-#Row1 .WidgetSimple {
-    min-height: 218px;
+    #Row1 .WidgetSimple {
+        min-height: 218px;
+    }
+
+    #Row2 .WidgetSimple {
+        min-height: 304px;
+    }
+
 }
 
-#Row2 .WidgetSimple {
-    min-height: 304px;
+/* end @media */
+@media print {
+
+    .Inventory .Size1of2 h4 span {
+        display: none;
+    }
+
 }
 
-} /* end @media */
-@media print{
-
-.Inventory .Size1of2 h4 span {
-    display:none;
-}
-
-} /* end @media print*/
+/* end @media print*/

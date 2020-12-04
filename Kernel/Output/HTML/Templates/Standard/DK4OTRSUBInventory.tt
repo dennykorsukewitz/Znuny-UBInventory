@@ -9,14 +9,12 @@
 <!-- nofilter(TidyAll::Plugin::OTRS::TT::ScriptUsage) -->
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst Inventory">
     <h1>[% Translate("Manage Inventory") | html %]</h1>
-
 #
 # SidebarColumnLeft
 #
     <div class="SidebarColumn">
-
 #
-#      Filter
+# Filter
 #
 [% RenderBlockStart("FilterObject") %]
         <div class="WidgetSimple">
@@ -24,159 +22,138 @@
                 <h2><label for="FilterObject">[% Translate("Filter for Object") | html %]</label></h2>
             </div>
             <div class="Content">
-                <input type="text" id="FilterObject" class="W95pc" name="FilterObject" value="" title="[% Translate("Filter for Object") | html %]" />
+                <input type="text" id="FilterObject" class="W95pc" name="FilterObject" value="" title="[% Translate(" Filter for Object") | html %]" />
             </div>
         </div>
 [% RenderBlockEnd("FilterObject") %]
 #
-#      Filter
+# Filter
 #
 #
-#      Search
+# Search
 #
 [% RenderBlockStart("Search") %]
-    <form action="[% Env("CGIHandle") %]" method="post" name="search">
-        <div class="WidgetSimple">
-        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-       <input type="hidden" name="Subaction" value="Search"/>
-
-            <div class="Header">
-                <h2><label for="SearchObject">[% Translate("Search for Object") | html %]</label></h2>
-            </div>
-            <div class="Content">
-                <input type="text" id="ID" class="W95pc" name="ID" value="[% Translate(Data.ID) | html %]" title="[% Translate("UB-ID") | html %]" onfocus="if (this.value=='[% Translate("UB-ID") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("UB-ID") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="Type" class="W95pc" name="Type" value="[% Translate(Data.Type) | html %]" title="[% Translate("Type") | html %]" onfocus="if (this.value=='[% Translate("Type") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("Type") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="Model" class="W95pc" name="Model" value="[% Translate(Data.Model) | html %]" title="[% Translate("Model") | html %]" onfocus="if (this.value=='[% Translate("Model") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("Model") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="Manufacturer" class="W95pc" name="Manufacturer" value="[% Translate(Data.Manufacturer) | html %]" title="[% Translate("Manufacturer") | html %]" onfocus="if (this.value=='[% Translate("Manufacturer") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("Manufacturer") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="Serialnumber" class="W95pc" name="Serialnumber" value="[% Translate(Data.Serialnumber) | html %]" title="[% Translate("Serialnumber") | html %]" onfocus="if (this.value=='[% Translate("Serialnumber") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("Serialnumber") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="SAP" class="W95pc" name="SAP" value="[% Translate(Data.SAP) | html %]"  title="[% Translate("SAP") | html %]" onfocus="if (this.value=='[% Translate("SAP") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("SAP") | html %]';" />
-            </div>
-            <div class="Content">
-                <input type="text" id="Room" class="W95pc" name="Room" value="[% Translate(Data.Room) | html %]" title="[% Translate("Room") | html %]" onfocus="if (this.value=='[% Translate("Room") | html %]') this.value='';" onblur="if (this.value=='') this.value='[% Translate("Room") | html %]';" />
-            </div>
-            <div class="Content">
-          <ul class="ActionList">
-                       <li>
-                     <button type="submit" class="CallForAction  Fullsize  Center"
-                     onclick="if (getElementById('ID').value=='[% Translate("UB-ID") | html %]') getElementById('ID').value='';
-                     if (getElementById('Type').value=='[% Translate("Type") | html %]') getElementById('Type').value='';
-                     if (getElementById('Model').value=='[% Translate("Model") | html %]') getElementById('Model').value='';
-                     if (getElementById('Manufacturer').value=='[% Translate("Manufacturer") | html %]') getElementById('Manufacturer').value='';
-                     if (getElementById('Serialnumber').value=='[% Translate("Serialnumber") | html %]') getElementById('Serialnumber').value='';
-                     if (getElementById('SAP').value=='[% Translate("SAP") | html %]') getElementById('SAP').value='';
-                     if (getElementById('Room').value=='[% Translate("Room") | html %]') getElementById('Room').value='';
-                     " ><span>[% Translate("Search") | html %]</span></button>
+        <form action="[% Env(" CGIHandle") %]" method="post" name="search">
+            <div class="WidgetSimple">
+                <input type="hidden" name="Action" value="[% Env(" Action") %]" />
+                <input type="hidden" name="Subaction" value="Search" />
+                <div class="Header">
+                    <h2><label for="SearchObject">[% Translate("Search for Object") | html %]</label></h2>
+                </div>
+                <div class="Content">
+                    <input type="text" id="ID" class="W95pc" name="ID" value="[% Translate(Data.ID) | html %]" title="[% Translate(" UB-ID") | html %]" onfocus="if (this.value=='[% Translate(" UB-ID") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" UB-ID") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="Type" class="W95pc" name="Type" value="[% Translate(Data.Type) | html %]" title="[% Translate(" Type") | html %]" onfocus="if (this.value=='[% Translate(" Type") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" Type") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="Model" class="W95pc" name="Model" value="[% Translate(Data.Model) | html %]" title="[% Translate(" Model") | html %]" onfocus="if (this.value=='[% Translate(" Model") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" Model") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="Manufacturer" class="W95pc" name="Manufacturer" value="[% Translate(Data.Manufacturer) | html %]" title="[% Translate(" Manufacturer") | html %]" onfocus="if (this.value=='[% Translate(" Manufacturer") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" Manufacturer") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="Serialnumber" class="W95pc" name="Serialnumber" value="[% Translate(Data.Serialnumber) | html %]" title="[% Translate(" Serialnumber") | html %]" onfocus="if (this.value=='[% Translate(" Serialnumber") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" Serialnumber") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="SAP" class="W95pc" name="SAP" value="[% Translate(Data.SAP) | html %]" title="[% Translate(" SAP") | html %]" onfocus="if (this.value=='[% Translate(" SAP") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" SAP") | html %]';" />
+                </div>
+                <div class="Content">
+                    <input type="text" id="Room" class="W95pc" name="Room" value="[% Translate(Data.Room) | html %]" title="[% Translate(" Room") | html %]" onfocus="if (this.value=='[% Translate(" Room") | html %]') this.value='' ;" onblur="if (this.value=='') this.value='[% Translate(" Room") | html %]';" />
+                </div>
+                <div class="Content">
+                    <ul class="ActionList">
+                        <li>
+                            <button type="submit" class="CallForAction  Fullsize  Center" onclick="if (getElementById('ID').value=='[% Translate(" UB-ID") | html %]') getElementById('ID').value='' ; if (getElementById('Type').value=='[% Translate("Type") | html %]' ) getElementById('Type').value='' ; if (getElementById('Model').value=='[% Translate("Model") | html %]' ) getElementById('Model').value='' ; if (getElementById('Manufacturer').value=='[% Translate("Manufacturer") | html %]' ) getElementById('Manufacturer').value='' ; if (getElementById('Serialnumber').value=='[% Translate("Serialnumber") | html %]' ) getElementById('Serialnumber').value='' ; if (getElementById('SAP').value=='[% Translate("SAP") | html %]' ) getElementById('SAP').value='' ; if (getElementById('Room').value=='[% Translate("Room") | html %]' ) getElementById('Room').value='' ;">
+                                <span>[% Translate("Search") | html %]</span>
+                            </button>
                         </li>
                         <li>
-                 <button type="submit" value="[% Translate("reset") | html %]"  class="CallForAction  Fullsize  Center"
-                       onclick="getElementById('ID').value='UB-ID';
-                       getElementById('Type').value='Type';
-                       getElementById('Model').value='Model';
-                       getElementById('Manufacturer').value='Manufacturer';
-                       getElementById('Serialnumber').value='Serialnumber';
-                       getElementById('SAP').value='SAP';
-                       getElementById('Room').value='Room';
-                       "><span>[% Translate("Reset") | html %]</span></button>
-                  </li>
-                </ul>
+                            <button type="submit" value="[% Translate(" reset") | html %]" class="CallForAction  Fullsize  Center" onclick="getElementById('ID').value='UB-ID'; getElementById('Type').value='Type'; getElementById('Model').value='Model'; getElementById('Manufacturer').value='Manufacturer'; getElementById('Serialnumber').value='Serialnumber'; getElementById('SAP').value='SAP'; getElementById('Room').value='Room'; "><span>[% Translate("Reset") | html %]</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
 [% RenderBlockEnd("Search") %]
 #
-#      Search
+# Search
 #
 #
-#    ActionList
+# ActionList
 #
 [% RenderBlockStart("ActionList") %]
-       <div class="WidgetSimple">
+        <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>
             <div class="Content">
                 <ul class="ActionList">
                     <li>
-                  <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview;Limit=30;" class="CallForAction Fullsize Center"><span>[% Translate("Overview") | html %]</span></a>
+                        <a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Overview;Limit=30;" class="CallForAction Fullsize Center"><span>[% Translate("Overview") | html %]</span></a>
                     </li>
                     <li>
-                  <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Overview;Limit=9999;" class="CallForAction Fullsize Center"><span>[% Translate("All") | html %]</span></a>
+                        <a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Overview;Limit=9999;" class="CallForAction Fullsize Center"><span>[% Translate("All") | html %]</span></a>
                     </li>
-              <li>
-                <a class="CallForAction Fullsize Center Plus" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add">
+                    <li>
+                        <a class="CallForAction Fullsize Center Plus" href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Add">
                             <span>[% Translate("Add Object") | html %]</span>
                         </a>
-              </li>
+                    </li>
                     <li>
-                        <a href="[% Env("Baselink") %][% Env("LastStatsView") %]" class="CallForAction Fullsize Center"><span>[% Translate("Go to overview") | html %]</span></a>
+                        <a href="[% Env(" Baselink") %][% Env("LastStatsView") %]" class="CallForAction Fullsize Center"><span>[% Translate("Go to overview") | html %]</span></a>
                     </li>
                 </ul>
             </div>
         </div>
 [% RenderBlockEnd("ActionList") %]
 #
-#    ActionList
+# ActionList
 #
 #
-#    SelectInfo
+# SelectInfo
 #
 [% RenderBlockStart("SelectInfo") %]
-       <div class="WidgetSimple">
-         <div class="Header">
-              <h2>[% Translate("Select Information") | html %]</h2>
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Select Information") | html %]</h2>
             </div>
             <div class="Content">
                 <fieldset class="TableLike FixedLabelSmall Narrow">
-              <label>[% Translate("selected key") | html %]:</label>
-                   <p class="Value" title="[% Translate(Data.Key) | html %]">[% Translate(Data.Key) | html %]</p>
+                    <label>[% Translate("selected key") | html %]:</label>
+                    <p class="Value" title="[% Translate(Data.Key) | html %]">[% Translate(Data.Key) | html %]</p>
                     <div class="Clear"></div>
-
                     <label>[% Translate("selected value") | html %]:</label>
                     <p class="Value" title="[% Translate(Data.Value) | html %]">[% Translate(Data.Value) | html %]</p>
-                   <div class="Clear"></div>
-
+                    <div class="Clear"></div>
                     <label>[% Translate("count") | html %]:</label>
                     <p class="Value" title="[% Translate(Data.ObjectCount) | html %]">[% Translate(Data.ObjectCount) | html %]</p>
-                   <div class="Clear"></div>
-
-
-
+                    <div class="Clear"></div>
                 </fieldset>
-             </div>
-         </div>
-
-
+            </div>
+        </div>
 [% RenderBlockEnd("SelectInfo") %]
 #
-#    SelectInfo
+# SelectInfo
 #
 #
-#       Hints
+# Hints
 #
 [% RenderBlockStart("Hint") %]
-       <div class="WidgetSimple">
+        <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Hint") | html %]</h2>
             </div>
             <div class="Content ">
                 <p class="FieldExplanation">
-                   [% Translate("Inventory management.") | html %]
+                    [% Translate("Inventory management.") | html %]
                 </p>
             </div>
         </div>
 [% RenderBlockEnd("Hint") %]
 [% RenderBlockStart("FormHint") %]
-       <div class="WidgetSimple">
+        <div class="WidgetSimple">
             <div class="Header">
                 <h2> [% Translate("Hint - Add / Edit") | html %]</h2>
             </div>
@@ -188,7 +165,6 @@
                         ([% Translate("e. g.") | html %]
                         <code>[% Translate("PC/Monitor/Printer") | html %]</code>).
                     </dd>
-
                     <dt><code>[% Translate("Model") | html %]</code></dt>
                     <dd>
                         [% Translate("Model is the Version of the Object.") | html %]
@@ -196,28 +172,24 @@
                         ([% Translate("e. g.") | html %]
                         <code>[% Translate("PC 2307/Printer 0815") | html %]</code>).
                     </dd>
-
                     <dt><code>[% Translate("Manufacturer") | html %]</code></dt>
                     <dd>
                         [% Translate("Company that manufactures a particular item.") | html %]<br>
                         ([% Translate("e. g.") | html %]
                         <code>[% Translate("Dell") | html %]</code>).
                     </dd>
-
                     <dt><code>[% Translate("Serialnumber") | html %]</code></dt>
                     <dd>
                         [% Translate("String that is a unique identifier of an object.") | html %]<br>
                         ([% Translate("e. g.") | html %]
-                 <code>[% Translate("12345-45678-23070") | html %]</code>).
+                        <code>[% Translate("12345-45678-23070") | html %]</code>).
                     </dd>
-
                     <dt><code>[% Translate("PurchaseTime") | html %]</code></dt>
                     <dd>
                         [% Translate("Date of purchase") | html %]. <br>
                         ([% Translate("e. g.") | html %]
-                 <code>[% Translate("23.07.1988") | html %]</code>).
+                        <code>[% Translate("23.07.1988") | html %]</code>).
                     </dd>
-
                     <dt><code>[% Translate("Comment") | html %]</code></dt>
                     <dd>
                         [% Translate("Use the comment field for some additional information.") | html %]<br>
@@ -226,10 +198,10 @@
                     </dd>
                 </dl>
             </div>
-       </div>
+        </div>
 [% RenderBlockEnd("FormHint") %]
 #
-#       Hints
+# Hints
 #
 #
 # SidebarColumnLeft
@@ -240,28 +212,24 @@
     </div>
     <div class="LayoutFixedSidebar SidebarLast">
 [% RenderBlockStart("AdditionalInformation") %]
-       <div class="SidebarColumn">
+        <div class="SidebarColumn">
             <div class="WidgetSimple">
                 <div class="Header">
                     <h2>[% Translate("Additional Information") | html %]</h2>
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike FixedLabelSmall Narrow">
-
                         <label>[% Translate("change by") | html %]:</label>
                         <p class="Value" title="[% Translate(Data.ChangeBy) | html %]">[% Translate(Data.ChangeBy) | html %]</p>
                         <div class="Clear"></div>
-
                         <label>[% Translate("change time") | html %]:</label>
-                        <p class="Value" title="[% Data.change_time | Localize("TimeShort") %]">[% Data.ChangeTime | Localize("TimeShort") %]</p>
+                        <p class="Value" title="[% Data.change_time | Localize(" TimeShort") %]">[% Data.ChangeTime | Localize("TimeShort") %]</p>
                         <div class="Clear"></div>
-
                         <label>[% Translate("created by") | html %]:</label>
                         <p class="Value" title="[% Translate(Data.create_by) | html %]">[% Translate(Data.CreateBy) | html %]</p>
                         <div class="Clear"></div>
-
                         <label>[% Translate("create time") | html %]:</label>
-                        <p class="Value" title="[% Data.create_time | Localize("TimeShort") %]">[% Data.CreateTime | Localize("TimeShort") %]</p>
+                        <p class="Value" title="[% Data.create_time | Localize(" TimeShort") %]">[% Data.CreateTime | Localize("TimeShort") %]</p>
                         <div class="Clear"></div>
                     </fieldset>
                 </div>
@@ -269,466 +237,440 @@
         </div>
 [% RenderBlockEnd("AdditionalInformation") %]
     </div>
-
 #
 # SidebarColumnRight#
 #
 #
-#      CONTENT
+# CONTENT
 #
     <div class="ContentColumn">
 #
-#        TEST
+# TEST
 #
 [% RenderBlockStart("Test") %]
-    <div id="Row1" class="LayoutGrid ColumnsWithSpacing">
-       <div class="Size1of2">
-         <div class="WidgetSimple">
-               <div class="Header">
-                   <h2>[% Translate("Test Area") | html %]</h2>
-                   </div>
-                <div class="Content">
-
-                <p class="Value" [% Translate(Data.ID) | html %]</p>
-                <p class="Value" >[% Translate(Data.Type) | html %]</p>
-                <p class="Value" >[% Translate(Data.Model) | html %]</p>
-                <p class="Value" >[% Translate(Data.Manufacturer) | html %]</p>
-                <p class="Value" >[% Translate(Data.Serialnumber) | html %]</p>
-                <p class="Value" >[% Translate(Data.Room) | html %]</p>
-
-
-                   <fieldset class="TableLike FixedLabelSmall Narrow">
-    <!-- dtl:block:TestField -->
-                      <label>[% Translate("Data") | html %]:</label>
-                      <p class="Value" >[% Translate(Data.TEST) | html %]</p>
-                    <div class="Clear"></div>
-    <!-- dtl:block:TestField -->
-
-                  </fieldset>
-               </div>
+        <div id="Row1" class="LayoutGrid ColumnsWithSpacing">
+            <div class="Size1of2">
+                <div class="WidgetSimple">
+                    <div class="Header">
+                        <h2>[% Translate("Test Area") | html %]</h2>
+                    </div>
+                    <div class="Content">
+                        <p class="Value" [% Translate(Data.ID) | html %]</p> <p class="Value">[% Translate(Data.Type) | html %]</p>
+                        <p class="Value">[% Translate(Data.Model) | html %]</p>
+                        <p class="Value">[% Translate(Data.Manufacturer) | html %]</p>
+                        <p class="Value">[% Translate(Data.Serialnumber) | html %]</p>
+                        <p class="Value">[% Translate(Data.Room) | html %]</p>
+                        <fieldset class="TableLike FixedLabelSmall Narrow">
+                            <label>[% Translate("Data") | html %]:</label>
+                            <p class="Value">[% Translate(Data.TEST) | html %]</p>
+                            <div class="Clear"></div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="Size1of2">
+                <div class="WidgetSimple">
+                    <div class="Header">
+                        <h2>[% Translate("TEST AREA") | html %]</h2>
+                    </div>
+                    <div class="Content">
+                        <fieldset class="TableLike FixedLabelSmall Narrow">
+                            <label>[% Translate("Data") | html %]:</label>
+                            <p class="Value">[% Translate(Data.TESTADD) | html %]</p>
+                            <div class="Clear"></div>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="Size1of2">
-         <div class="WidgetSimple">
-               <div class="Header">
-                   <h2>[% Translate("TEST AREA") | html %]</h2>
-                   </div>
-                <div class="Content">
-                   <fieldset class="TableLike FixedLabelSmall Narrow">
-    <!-- dtl:block:TestFieldAdd -->
-                      <label>[% Translate("Data") | html %]:</label>
-                      <p class="Value" >[% Translate(Data.TESTADD) | html %]</p>
-                    <div class="Clear"></div>
-    <!-- dtl:block:TestFieldAdd -->
-
-                  </fieldset>
-               </div>
-            </div>
-        </div>
-     </div>
-
 [% RenderBlockEnd("Test") %]
 #
-#        TEST
+# TEST
 #
-
-
 #
-#     Overview
+# Overview
 #
-
 [% RenderBlockStart("Overview") %]
-       <div class="WidgetSimple">
-          <div class="Header">
-
-
-
-              <div class="ActionMenu">
-                       <div class="WidgetAction Settings">
-                           <a href="#" id="Overview-Toggle" title="[% Translate("Settings") | html %]">
-                               <i class="fa fa-gear"></i>
-                           </a>
-                       </div>
-[% WRAPPER JSOnDocumentComplete %]
-<script type="text/javascript">//<![CDATA[
+        <div class="WidgetSimple">
+            <div class="Header">
+                <div class="ActionMenu">
+                    <div class="WidgetAction Settings">
+<a href="#" id="Overview-Toggle" title="[% Translate(" Settings") | html %]">
+                            <i class="fa fa-gear"></i>
+                        </a>
+                    </div>
+                    [% WRAPPER JSOnDocumentComplete %]
+                    <script type="text/javascript">
+                    //<![CDATA[
 Core.UI.RegisterToggleTwoContainer($('#Overview-Toggle'), $('#Overview-Setting'), $('#Overview'));
-//]]></script>
-[% END %]
-                        <div class="Clear"></div>
-                   </div>
-              <h2>[% Translate("Inventory") | html %]</h2>
-          </div>
-          <div class="Content">
-              <div id="Overview-Setting" class="Hidden">
-                       <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="Overview-Setting-Form" id="Inventory[% Data.NameForm | html %]_setting_form" class="WidgetSettingsForm">
-                           <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                           <input type="hidden" name="Subaction" value="UpdateSettings"/>
-                           <input type="hidden" name="Name" value="OverviewSettings"/>
+                    //]]>
 
-                           <fieldset class="TableLike FixedLabelSmall DontPrint">
-#                           <label for="[% Data.NamePref | html %]">
-#                               [% Translate("Desc") | html %]:
-#                           </label>
-#                             <div class="Field DontPrint">
-#                                 [% Data.Option | html %]
-#                     </div>
-                    <ul>
-                    <label>[% Translate("Shown Columns") | html %]</label>
-                        <li>
-                           <span title="">
-                             <input type="checkbox" name="Type" id="Type" value="Type" checked="checked"/>
-                             <label for="Settings-Type">[% Translate("Type") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Model" id="Model" value="Model" checked="checked"/>
-                             <label for="Settings-Model"> [% Translate("Model") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Manufacturer" id="Manufacturer" value="Manufacturer" checked="checked"/>
-                             <label for="Settings-Manufacturer">[% Translate("Manufacturer") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Serialnumber" id="Serialnumber" value="Serialnumber" checked="checked"/>
-                             <label for="Settings-Serialnumber">[% Translate("Serialnumber") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="PurchaseTime" id="PurchaseTime" value="PurchaseTime" checked="checked"/>
-                             <label for="Settings-PurchaseTime"> [% Translate("Purchase Time") | html %]}</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Comment" id="Comment" value="Comment" checked="checked"/>
-                             <label for="Settings-Comment">[% Translate("Comment") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="CreateTime" id="CreateTime" value="CreateTime" checked="checked"/>
-                             <label for="Settings-CreateTime"> [% Translate("create time") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="CreateBy" id="CreateBy" value="CreateBy" checked="checked"/>
-                             <label for="Settings-CreateBy">[% Translate("created by") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="ChangeTime" id="ChangeTime" value="ChangeTime" checked="checked"/>
-                             <label for="Settings-ChangeTime"> [% Translate("change time") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="ChangeBy" id="ChangeBy" value="ChangeBy" checked="checked"/>
-                             <label for="Settings-ChangeBy">[% Translate("change by") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Edit" id="Edit" value="Edit" checked="checked"/>
-                             <label for="Settings-Edit"> [% Translate("Edit") | html %]</label>
-                           </span>
-                        </li>
-                         <li>
-                           <span title="">
-                             <input type="checkbox" name="Delete" id="Delete" value="Delete" checked="checked"/>
-                             <label for="Settings-Delete">[% Translate("Delete") | html %]</label>
-                           </span>
-                        </li>
-
-
-                         <li>
-                        <label class="DontPrint SpacingTop">[% Translate("Shown Objects") | html %]</label>
-
-                           <select id="UserDashboardPref0130-TicketOpen-Shown" name="UserDashboardPref0130-TicketOpen-Shown">
-                             <option value="5" selected="selected">5</option>
-                             <option value="10">10</option>
-                             <option value="15">15</option>
-                             <option value="20">20</option>
-                             <option value="25">25</option>
-                           </select>
-                        </li>
-
-
-                    <div class="Buttons SpacingTop">
-                                   <button id="Overview-Submit" class="CallForAction DontPrint" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Save Changes") | html %]</span></button>
-                                   &nbsp;[% Translate("or") | html %]&nbsp;
-                                   <button id="Overview-Cancel" class="CallForAction DontPrint" type="submit" value="[% Translate("Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
-                               </div>
-                    </ul>
-
-                               <div class="Clear"></div>
-
-
-
-
-[% WRAPPER JSOnDocumentComplete %]
-<script type="text/javascript">//<![CDATA[
-#Core.Agent.Dashboard.RegisterUpdatePreferences($('#Overview-Submit'), 'Overview',$('#Overview-Setting-Form'));
+                    </script>
+                    [% END %]
+                    <div class="Clear"></div>
+                </div>
+                <h2>[% Translate("Inventory") | html %]</h2>
+            </div>
+            <div class="Content">
+                <div id="Overview-Setting" class="Hidden">
+                    <form action="[% Env(" CGIHandle") %]" method="post" enctype="multipart/form-data" name="Overview-Setting-Form" id="Inventory[% Data.NameForm | html %]_setting_form" class="WidgetSettingsForm">
+                        <input type="hidden" name="Action" value="[% Env(" Action") %]" />
+                        <input type="hidden" name="Subaction" value="UpdateSettings" />
+                        <input type="hidden" name="Name" value="OverviewSettings" />
+                        <fieldset class="TableLike FixedLabelSmall DontPrint">
+# <label for="[% Data.NamePref | html %]">
+# [% Translate("Desc") | html %]:
+# </label>
+# <div class="Field DontPrint">
+# [% Data.Option | html %]
+# </div>
+                            <ul>
+                                <label>[% Translate("Shown Columns") | html %]</label>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Type" id="Type" value="Type" checked="checked" />
+                                        <label for="Settings-Type">[% Translate("Type") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Model" id="Model" value="Model" checked="checked" />
+                                        <label for="Settings-Model"> [% Translate("Model") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Manufacturer" id="Manufacturer" value="Manufacturer" checked="checked" />
+                                        <label for="Settings-Manufacturer">[% Translate("Manufacturer") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Serialnumber" id="Serialnumber" value="Serialnumber" checked="checked" />
+                                        <label for="Settings-Serialnumber">[% Translate("Serialnumber") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="PurchaseTime" id="PurchaseTime" value="PurchaseTime" checked="checked" />
+                                        <label for="Settings-PurchaseTime"> [% Translate("Purchase Time") | html %]}</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Comment" id="Comment" value="Comment" checked="checked" />
+                                        <label for="Settings-Comment">[% Translate("Comment") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="CreateTime" id="CreateTime" value="CreateTime" checked="checked" />
+                                        <label for="Settings-CreateTime"> [% Translate("create time") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="CreateBy" id="CreateBy" value="CreateBy" checked="checked" />
+                                        <label for="Settings-CreateBy">[% Translate("created by") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="ChangeTime" id="ChangeTime" value="ChangeTime" checked="checked" />
+                                        <label for="Settings-ChangeTime"> [% Translate("change time") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="ChangeBy" id="ChangeBy" value="ChangeBy" checked="checked" />
+                                        <label for="Settings-ChangeBy">[% Translate("change by") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Edit" id="Edit" value="Edit" checked="checked" />
+                                        <label for="Settings-Edit"> [% Translate("Edit") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span title="">
+                                        <input type="checkbox" name="Delete" id="Delete" value="Delete" checked="checked" />
+                                        <label for="Settings-Delete">[% Translate("Delete") | html %]</label>
+                                    </span>
+                                </li>
+                                <li>
+                                    <label class="DontPrint SpacingTop">[% Translate("Shown Objects") | html %]</label>
+                                    <select id="UserDashboardPref0130-TicketOpen-Shown" name="UserDashboardPref0130-TicketOpen-Shown">
+                                        <option value="5" selected="selected">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                    </select>
+                                </li>
+                                <div class="Buttons SpacingTop">
+                                    <button id="Overview-Submit" class="CallForAction DontPrint" type="submit" value="[% Translate(" Submit") | html %]"><span>[% Translate("Save Changes") | html %]</span></button>
+                                    &nbsp;[% Translate("or") | html %]&nbsp;
+                                    <button id="Overview-Cancel" class="CallForAction DontPrint" type="submit" value="[% Translate(" Cancel") | html %]"><span>[% Translate("Cancel") | html %]</span></button>
+                                </div>
+                            </ul>
+                            <div class="Clear"></div>
+                            [% WRAPPER JSOnDocumentComplete %]
+                            <script type="text/javascript">
+                            //<![CDATA[
+#
+Core.Agent.Dashboard.RegisterUpdatePreferences($('#Overview-Submit'), 'Overview', $('#Overview-Setting-Form'));
 Core.UI.RegisterToggleTwoContainer($('#Overview-Cancel'), $('#Overview-Setting'), $('#Overview'));
-//]]></script>
-[% END %]
-                           </fieldset>
-                      </form>
+                            //]]>
 
-                   </div>
-              <div id="Overview">
-                     <table class="DataTable" id="Object" >
-                      <thead>
-                          <tr>
-                              <th>[% Translate("Edit") | html %]</th>
-                                 <th>[% Translate("ID") | html %]</th>
-                                 <th>[% Translate("Type") | html %]</th>
-                                 <th>[% Translate("Model") | html %]</th>
-                                 <th>[% Translate("Manufacturer") | html %]</th>
-                                 <th>[% Translate("Serialnumber") | html %]</th>
-                                 <th>[% Translate("Purchase Time") | html %]</th>
-                                 <th>[% Translate("Room") | html %]</th>
-                                 <th>[% Translate("SAP") | html %]</th>
-                                 <th>[% Translate("Segregation") | html %]</th>
-                                 <th>[% Translate("Comment") | html %]</th>
-                         <!-- <th>[% Translate("create time") | html %]</th>
+                            </script>
+                            [% END %]
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="Overview">
+                    <table class="DataTable" id="Object">
+                        <thead>
+                            <tr>
+                                <th>[% Translate("Edit") | html %]</th>
+                                <th>[% Translate("ID") | html %]</th>
+                                <th>[% Translate("Type") | html %]</th>
+                                <th>[% Translate("Model") | html %]</th>
+                                <th>[% Translate("Manufacturer") | html %]</th>
+                                <th>[% Translate("Serialnumber") | html %]</th>
+                                <th>[% Translate("Purchase Time") | html %]</th>
+                                <th>[% Translate("Room") | html %]</th>
+                                <th>[% Translate("SAP") | html %]</th>
+                                <th>[% Translate("Segregation") | html %]</th>
+                                <th>[% Translate("Comment") | html %]</th>
+                                <!-- <th>[% Translate("create time") | html %]</th>
                               <th>[% Translate("created by") | html %]</th>
                               <th>[% Translate("change time") | html %]</th>
                               <th>[% Translate("change by") | html %]</th>
                          -->
-
-                              <th>[% Translate("Delete") | html %]</th>
-                          </tr>
-                          </thead>
-                      <tbody >
+                                <th>[% Translate("Delete") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 [% RenderBlockStart("ObjectList") %]
-                          <tr>
-                             <td>
-                                  <a class="CallForAction Fullsize Center Edit" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Edit;ID=[% Data.ID | uri %]"><span>[% Translate("Edit") | html %]</span></a>
-                                 </td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Object;ID=[% Data.ID | uri %]">[% Data.ID | html %]</a></td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=type;Value=[% Data.Type | html %]">[% Data.Type | html %]</a></td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=model;Value=[% Data.Model | uri %]">[% Data.Model | html %]</a></td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=manufacturer;Value=[% Data.Manufacturer | uri %]">[% Data.Manufacturer | html %]</a></td>
-                              <td>[% Data.Serialnumber | html %]</td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=purchase_time;Value=[% Data.PurchaseTime | Localize("Date") %]">[% Data.PurchaseTime | Localize("Date") %]</a></td>
-
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=room;Value=[% Data.Room | html %]">[% Data.Room | html %]</a></td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=sap;Value=[% Data.SAP | html %]">[% Data.SAP | html %]</a></td>
-                              <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=segregation;Value=[% Data.Segragation | Localize("Date") %]">[% Data.Segragation | Localize("Date") %]</a></td>
-
-
-                              <td title="[% Data.Comment | html %]">[% Data.Comment | html %]</td>
-                    <!--    <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_time;Value=[% Data.CreateTime | uri %]">[% Data.CreateTime | Localize("Date") %]</a></td>
+                            <tr>
+                                <td>
+                                    <a class="CallForAction Fullsize Center Edit" href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Edit;ID=[% Data.ID | uri %]"><span>[% Translate("Edit") | html %]</span></a>
+                                </td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Object;ID=[% Data.ID | uri %]">[% Data.ID | html %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=type;Value=[% Data.Type | html %]">[% Data.Type | html %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=model;Value=[% Data.Model | uri %]">[% Data.Model | html %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=manufacturer;Value=[% Data.Manufacturer | uri %]">[% Data.Manufacturer | html %]</a></td>
+                                <td>[% Data.Serialnumber | html %]</td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=purchase_time;Value=[% Data.PurchaseTime | Localize("Date") %]">[% Data.PurchaseTime | Localize("Date") %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=room;Value=[% Data.Room | html %]">[% Data.Room | html %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=sap;Value=[% Data.SAP | html %]">[% Data.SAP | html %]</a></td>
+                                <td><a href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=segregation;Value=[% Data.Segragation | Localize("Date") %]">[% Data.Segragation | Localize("Date") %]</a></td>
+                                <td title="[% Data.Comment | html %]">[% Data.Comment | html %]</td>
+                                <!--    <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_time;Value=[% Data.CreateTime | uri %]">[% Data.CreateTime | Localize("Date") %]</a></td>
                         <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=create_by;Value=[% Data.CreatedByID | uri %]">[% Data.CreatedByID | html  %]</a></td>
                         <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_time;Value=[% Data.ChangeTime | uri %]">[% Data.ChangeTime | Localize("Date") %]</a></td>
                         <td><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Select;Key=change_by;Value=[% Data.ChangeByID | html %]">[% Data.ChangeByID | html  %]</a></td>
                       -->
-                                 <td>
-                                  <a class="CallForAction Fullsize Center Delete" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | html  %]"><span>[% Translate("Delete") | html %]</span></a>
-                                 </td>
-                       </tr>
+                                <td>
+                                    <a class="CallForAction Fullsize Center Delete" href="[% Env(" Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | html %]"><span>[% Translate("Delete") | html %]</span></a>
+                                </td>
+                            </tr>
 [% RenderBlockEnd("ObjectList") %]
-                   </tbody>
-                  </table>
-              </div>
-          </div>
-         </div>
-       </div>
-[% WRAPPER JSOnDocumentComplete %]
-    <script type="text/javascript">//<![CDATA[
-        Core.UI.Table.InitTableFilter($('#FilterObject'), $('#Object'));
-    //]]></script>
-[% END %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    [% WRAPPER JSOnDocumentComplete %]
+    <script type="text/javascript">
+    //<![CDATA[
+Core.UI.Table.InitTableFilter($('#FilterObject'), $('#Object'));
+    //]]>
 
-
+    </script>
+    [% END %]
 [% RenderBlockEnd("Overview") %]
 #
-#     Overview
+# Overview
 #
 #
-#       Form
+# Form
 #
 [% RenderBlockStart("Form") %]
-
-         <div class="WidgetSimple">
-                   <div class="Header">
-       [% RenderBlockStart("HeaderAdd") %]
-                       <h2>[% Translate("Add Object") | html %]</h2>
-       [% RenderBlockEnd("HeaderAdd") %]
-       [% RenderBlockStart("HeaderEdit") %]
-                       <h2>[% Translate("Edit Object") | html %]</h2>
-       [% RenderBlockEnd("HeaderEdit") %]
-                   </div>
-                   <form action="[% Env("CGIHandle") %]" method="post" name="compose" class="Validate">
-                   <ul class="Content LayoutGrid ColumnsWithSpacing">
-                       <li class="Size1of2 SpacingTop">
-
-                           <input type="hidden" name="Action" value="[% Env("Action") %]"/>
-                           <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
-                           <input type="hidden" name="Subaction" value="[% Data.Action | html %]Action"/>
-                           <fieldset class="TableLike">
-       [% RenderBlockStart("FormObjectID") %]
-                    <label class="Mandatory" for="ObjectID"><span class="Marker">*</span> [% Translate("ID") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="ObjectID" id="ObjectID" value="c[% Data.ObjectID | html %]" class="W50pc Validate_Required [% Data.ObjectIDInvalid | html %]" maxlength="100"/>
-                                   <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-       [% RenderBlockEnd("FormObjectID") %]
-
-                    <label class="Mandatory" for="Type"><span class="Marker">*</span> [% Translate("Type") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Type" id="Type" value="[% Data.Type | html %]" class="W50pc Validate_Required [% Data.TypeInvalid | html %]" maxlength="100"/>
-                                   <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="Mandatory" for="Model"><span class="Marker">*</span>[% Translate("Model") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Model" id="Model" value="[% Data.Model | html %]" class="W50pc Validate_Required [% Data.ModelInvalid | html %]" maxlength="50"/>
-                                   <div id="InfoTitleError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="InfoTitleError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-
-                    <label class="Mandatory" for="Manufacturer"><span class="Marker">*</span> [% Translate("Manufacturer") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Manufacturer" id="Manufacturer" value="[% Data.Manufacturer | html %]" class="W50pc Validate_Required [% Data.ManufacturerInvalid | html %]" maxlength="100"/>
-                                   <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="Mandatory" for="Serialnumber"><span class="Marker">*</span>[% Translate("Serialnumber") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Serialnumber" id="Serialnumber" value="[% Data.Serialnumber | html %]" class="W50pc Validate_Required [% Data.SerialnumberInvlaid | html %]" maxlength="50"/>
-                                   <div id="InfoTitleError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="InfoTitleError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-
-                    <label class="Mandatory" for="Purchase Time"><span class="Marker">*</span> [% Translate("Purchase Time") | html %]:</label>
-                               <div class="Field">
-                                 <div class="Field">
-                                  [% Data.PurchaseTime %]
-                                   </div>
-                                   <div id="NameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                                   <div id="NameServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label for="Segregation">[% Translate("Segregation") | html %]:</label>
-                               <div class="Field">
-                                 <div class="Field">
-                                       [% Data.Segregation %] &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                       <input type="radio" name="SegregationStatus" id="SegregationOn" value="on" [% Data.SegregationOn %] />
-                                       <label for="SegregationOn">[% Translate("Yes") | html %]</label>
-                                       <input type="radio" name="SegregationStatus" id="SegregationOff" value="off" [% Data.SegregationOff %] />
-                                       <label for="SegregationOff">[% Translate("No") | html %]</label>
-                                   </div>
-                               </div>
-
-                               <div class="Clear"></div>
-
-                               <label for="Comment">[% Translate("Comment") | html %]:</label>
-                               <div class="Field">
-                                   <textarea name="Comment" id="Comment"  class="W50pc"  rows="7" cols="42" maxlength="3800">[% Data.Comment %]</textarea>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <div class="Field SpacingTop">
-                                   <button class="Primary CallForAction" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
-                                   [% Translate("or") | html %]
-                                   <a href="[% Env("Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
-                               </div>
-
-                               <div class="Clear SpacingTop"></div>
-                           </fieldset>
-                             </li>
-                           <li class="Size1of2 SpacingTop">
-                           <fieldset class="TableLike">
-                               <label class="" for="employee">[% Translate("Employee") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Employee" id="Employee" value="[% Data.Employee | html %]" class="W50pc  [% Data.EmployeeInvalid | html %]" maxlength="100"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="room">[% Translate("Room") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Room" id="Room" value="[% Data.Room | html %]" class="W50pc  [% Data.RoomInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="phone">[% Translate("Phone") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Phone" id="Phone" value="[% Data.Phone | html %]" class="W50pc  [% Data.PhoneInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="SAP">[% Translate("SAP") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="SAP" id="SAP" value="[% Data.SAP | html %]" class="W50pc  [% Data.sapInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="IP">[% Translate("IP") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="IP" id="IP" value="[% Data.IP | html %]" class="W50pc  [% Data.ipInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="MAC">[% Translate("MAC") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="MAC" id="MAC" value="[% Data.MAC | html %]" class="W50pc  [% Data.macInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="Socket">[% Translate("Socket") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="Socket" id="Socket" value="[% Data.Socket | html %]" class="W50pc  [% Data.SocketInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="DistributionCabinet">[% Translate("Distribution Cabinet") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="DistributionCabinet" id="DistributionCabinet" value="[% Data.DistributionCabinet | html %]" class="W50pc  [% Data.DistributionCabinetInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                               <label class="" for="KeyNr">[% Translate("KeyNr") | html %]:</label>
-                               <div class="Field">
-                                   <input type="text" name="KeyNr" id="Key" value="[% Data.keyNr | html %]" class="W50pc  [% Data.KeyNrInvalid | html %]" maxlength="50"/>
-                               </div>
-                               <div class="Clear"></div>
-
-                           </fieldset>
-
-                       </li>
-                     <li class="Clear"></li>
-                   </ul>
-                   </form>
-          </div>
-         </div>
-       </div>
-
+    <div class="WidgetSimple">
+        <div class="Header">
+[% RenderBlockStart("HeaderAdd") %]
+            <h2>[% Translate("Add Object") | html %]</h2>
+[% RenderBlockEnd("HeaderAdd") %]
+[% RenderBlockStart("HeaderEdit") %]
+            <h2>[% Translate("Edit Object") | html %]</h2>
+[% RenderBlockEnd("HeaderEdit") %]
+        </div>
+        <form action="[% Env(" CGIHandle") %]" method="post" name="compose" class="Validate">
+            <ul class="Content LayoutGrid ColumnsWithSpacing">
+                <li class="Size1of2 SpacingTop">
+                    <input type="hidden" name="Action" value="[% Env(" Action") %]" />
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]" />
+                    <input type="hidden" name="Subaction" value="[% Data.Action | html %]Action" />
+                    <fieldset class="TableLike">
+[% RenderBlockStart("FormObjectID") %]
+                        <label class="Mandatory" for="ObjectID"><span class="Marker">*</span> [% Translate("ID") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="ObjectID" id="ObjectID" value="c[% Data.ObjectID | html %]" class="W50pc Validate_Required [% Data.ObjectIDInvalid | html %]" maxlength="100" />
+                            <div id="NameError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="NameServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+[% RenderBlockEnd("FormObjectID") %]
+                        <label class="Mandatory" for="Type"><span class="Marker">*</span> [% Translate("Type") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Type" id="Type" value="[% Data.Type | html %]" class="W50pc Validate_Required [% Data.TypeInvalid | html %]" maxlength="100" />
+                            <div id="NameError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="NameServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="Mandatory" for="Model"><span class="Marker">*</span>[% Translate("Model") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Model" id="Model" value="[% Data.Model | html %]" class="W50pc Validate_Required [% Data.ModelInvalid | html %]" maxlength="50" />
+                            <div id="InfoTitleError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="InfoTitleError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="Mandatory" for="Manufacturer"><span class="Marker">*</span> [% Translate("Manufacturer") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Manufacturer" id="Manufacturer" value="[% Data.Manufacturer | html %]" class="W50pc Validate_Required [% Data.ManufacturerInvalid | html %]" maxlength="100" />
+                            <div id="NameError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="NameServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="Mandatory" for="Serialnumber"><span class="Marker">*</span>[% Translate("Serialnumber") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Serialnumber" id="Serialnumber" value="[% Data.Serialnumber | html %]" class="W50pc Validate_Required [% Data.SerialnumberInvlaid | html %]" maxlength="50" />
+                            <div id="InfoTitleError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="InfoTitleError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="Mandatory" for="Purchase Time"><span class="Marker">*</span> [% Translate("Purchase Time") | html %]:</label>
+                        <div class="Field">
+                            <div class="Field">
+                                [% Data.PurchaseTime %]
+                            </div>
+                            <div id="NameError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="NameServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label for="Segregation">[% Translate("Segregation") | html %]:</label>
+                        <div class="Field">
+                            <div class="Field">
+                                [% Data.Segregation %] &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="SegregationStatus" id="SegregationOn" value="on" [% Data.SegregationOn %] />
+                                <label for="SegregationOn">[% Translate("Yes") | html %]</label>
+                                <input type="radio" name="SegregationStatus" id="SegregationOff" value="off" [% Data.SegregationOff %] />
+                                <label for="SegregationOff">[% Translate("No") | html %]</label>
+                            </div>
+                        </div>
+                        <div class="Clear"></div>
+                        <label for="Comment">[% Translate("Comment") | html %]:</label>
+                        <div class="Field">
+                            <textarea name="Comment" id="Comment" class="W50pc" rows="7" cols="42" maxlength="3800">[% Data.Comment %]</textarea>
+                        </div>
+                        <div class="Clear"></div>
+                        <div class="Field SpacingTop">
+                            <button class="Primary CallForAction" type="submit" value="[% Translate(" Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                            [% Translate("or") | html %]
+                            <a href="[% Env(" Baselink") %]Action=[% Env("Action") %]">[% Translate("Cancel") | html %]</a>
+                        </div>
+                        <div class="Clear SpacingTop"></div>
+                    </fieldset>
+                </li>
+                <li class="Size1of2 SpacingTop">
+                    <fieldset class="TableLike">
+                        <label class="" for="employee">[% Translate("Employee") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Employee" id="Employee" value="[% Data.Employee | html %]" class="W50pc  [% Data.EmployeeInvalid | html %]" maxlength="100" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="room">[% Translate("Room") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Room" id="Room" value="[% Data.Room | html %]" class="W50pc  [% Data.RoomInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="phone">[% Translate("Phone") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Phone" id="Phone" value="[% Data.Phone | html %]" class="W50pc  [% Data.PhoneInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="SAP">[% Translate("SAP") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="SAP" id="SAP" value="[% Data.SAP | html %]" class="W50pc  [% Data.sapInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="IP">[% Translate("IP") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="IP" id="IP" value="[% Data.IP | html %]" class="W50pc  [% Data.ipInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="MAC">[% Translate("MAC") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="MAC" id="MAC" value="[% Data.MAC | html %]" class="W50pc  [% Data.macInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="Socket">[% Translate("Socket") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="Socket" id="Socket" value="[% Data.Socket | html %]" class="W50pc  [% Data.SocketInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="DistributionCabinet">[% Translate("Distribution Cabinet") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="DistributionCabinet" id="DistributionCabinet" value="[% Data.DistributionCabinet | html %]" class="W50pc  [% Data.DistributionCabinetInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                        <label class="" for="KeyNr">[% Translate("KeyNr") | html %]:</label>
+                        <div class="Field">
+                            <input type="text" name="KeyNr" id="Key" value="[% Data.keyNr | html %]" class="W50pc  [% Data.KeyNrInvalid | html %]" maxlength="50" />
+                        </div>
+                        <div class="Clear"></div>
+                    </fieldset>
+                </li>
+                <li class="Clear"></li>
+            </ul>
+        </form>
+    </div>
+</div>
+</div>
 [% RenderBlockEnd("Form") %]
 #
-#       Form
+# Form
 #
 #
-#      CONTENT
+# CONTENT
 #
-    </div>
-    <div class="Clear"></div>
+</div>
+<div class="Clear"></div>
 </div>
