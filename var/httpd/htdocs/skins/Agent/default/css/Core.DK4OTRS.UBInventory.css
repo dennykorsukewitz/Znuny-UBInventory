@@ -30,21 +30,20 @@
   text-align: center;
 }
 
+.CallForAction.Edit span {
+  background: url(../img/icons/edit.png) no-repeat scroll;
+  padding-left: 23px;
+  background-position: 2px 2px;
+}
+
 .CallForAction.Link span {
   background: url(../img/direction_header.png) no-repeat scroll;
-/*}
-
-.CallForAction.Link span {*/
   padding-left: 24px;
   background-position: 5px 5px;
 }
 
-.CallForAction.Link:active span {
-  background-position: 4px 4px;
-}
-
-.CallForAction.Edit span {
-  background: url(../img/icons/edit.png) no-repeat scroll;
+.CallForAction.Delete span {
+  background: url(../img/icons/cross.png) no-repeat scroll;
   padding-left: 23px;
   background-position: 2px 2px;
 }
@@ -53,10 +52,8 @@
   background-position: 2px 3px;
 }
 
-.CallForAction.Delete span {
-  background: url(../img/icons/cross.png) no-repeat scroll;
-  padding-left: 23px;
-  background-position: 2px 2px;
+.CallForAction.Link:active span {
+  background-position: 4px 4px;
 }
 
 .CallForAction.Delete:active span {
@@ -80,7 +77,7 @@
 }
 
 @media screen, projection, tv, handheld {
-  .LayoutGrid .ColumnsWithSpacing > li > * {
+  .LayoutGrid .ColumnsWithSpacing > li {
     padding-right: 0px;
   }
 
@@ -147,7 +144,6 @@
     color: #f72;
   }
 
-
   #Row1 .WidgetSimple {
     min-height: 218px;
   }
@@ -155,11 +151,10 @@
   #Row2 .WidgetSimple {
     min-height: 304px;
   }
-
 }
 
 @media print {
-    .Inventory .Size1of2 h4 span {
-      display: none;
-    }
+  .Inventory .Size1of2 h4 span {
+    display: none;
+  }
 }
