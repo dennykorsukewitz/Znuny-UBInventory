@@ -4,7 +4,7 @@
     <Version>6.0.1</Version>
     <Framework>6.0.x</Framework>
     <Vendor>Denny Korsukéwitz</Vendor>
-    <URL>http://znuny.com/</URL>
+    <URL>https://github.com/dennykorsukewitz/DK4OTRS-UBInventory</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">This package allows easy editing of an inventory used by the FU UB..</Description>
     <Description Lang="de">Dieses Paket ermöglicht die einfache Bearbeitung eines von der UB FU verwendeten Inventars.</Description>
