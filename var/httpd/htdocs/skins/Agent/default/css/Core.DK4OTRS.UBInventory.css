@@ -32,9 +32,9 @@
 
 .CallForAction.Link span {
   background: url(../img/direction_header.png) no-repeat scroll;
-}
+/*}
 
-.CallForAction.Link span {
+.CallForAction.Link span {*/
   padding-left: 24px;
   background-position: 5px 5px;
 }
@@ -63,32 +63,28 @@
   background-position: 2px 3px;
 }
 
-.LayoutGrid>.Size1of5 {
+.LayoutGrid > .Size1of5 {
   width: 20%;
 }
 
-.LayoutGrid>.Size2of5 {
+.LayoutGrid > .Size2of5 {
   width: 40%;
 }
 
-.LayoutGrid>.Size3of5 {
+.LayoutGrid > .Size3of5 {
   width: 60%;
 }
 
-.LayoutGrid>.Size4of5 {
+.LayoutGrid > .Size4of5 {
   width: 80%;
 }
 
-@media screen,
-projection,
-tv,
-handheld {
-
-  .LayoutGrid .ColumnsWithSpacing>li>* {
+@media screen, projection, tv, handheld {
+  .LayoutGrid .ColumnsWithSpacing > li > * {
     padding-right: 0px;
   }
 
-  .LayoutGrid>li {
+  .LayoutGrid > li {
     float: left;
     width: 100%;
   }
@@ -162,13 +158,8 @@ handheld {
 
 }
 
-/* end @media */
 @media print {
-
     .Inventory .Size1of2 h4 span {
       display: none;
     }
-
 }
-
-/* end @media print*/
