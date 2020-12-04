@@ -77,13 +77,13 @@
 }
 
 @media screen, projection, tv, handheld {
-  .LayoutGrid .ColumnsWithSpacing > li {
-    padding-right: 0px;
-  }
-
   .LayoutGrid > li {
     float: left;
     width: 100%;
+  }
+
+  .LayoutGrid .ColumnsWithSpacing > li {
+    padding-right: 0;
   }
 
   .Inventory .Size1of2 {
