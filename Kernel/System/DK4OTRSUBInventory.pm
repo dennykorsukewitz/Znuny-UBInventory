@@ -48,13 +48,13 @@ sub GetObjectList {
     if ( $Param{Search} ) {
 
         $SQL .= " WHERE id like '%$Param{ID}%'
-          AND type like '%$Param{Type}%'
-          AND model like '%$Param{Model}%'
-          AND manufacturer like '%$Param{Manufacturer}%'
-          AND serialnumber like '%$Param{Serialnumber}%'
-          AND sap like '%$Param{SAP}%'
-          AND room like '%$Param{Room}%'
-           ";
+            AND type like '%$Param{Type}%'
+            AND model like '%$Param{Model}%'
+            AND manufacturer like '%$Param{Manufacturer}%'
+            AND serialnumber like '%$Param{Serialnumber}%'
+            AND sap like '%$Param{SAP}%'
+            AND room like '%$Param{Room}%'
+        ";
     }
 
     if ( $Param{Limit} && !$Param{Key} ) {
