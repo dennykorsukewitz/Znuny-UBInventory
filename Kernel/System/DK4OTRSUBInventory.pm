@@ -7,7 +7,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::Inventory;
+package Kernel::System::DK4OTRSUBInventory;
 
 use strict;
 use warnings;
@@ -263,31 +263,5 @@ sub UpdateObject {
     );
     return $Param{ObjectID};
 }
-
-#
-#sub GetAddionalKeyList {
-#    my ( $Self, %Param ) = @_;
-#
-#   my $SQL = "SELECT DISTINCT additional_key  FROM inventory_additional";
-#
-#   if($Param{ObjectID}){
-#     $SQL .= " WHERE object_id = $Param{ObjectID}";
-#   }
-#
-#   if($Param{Limit}){
-#     $SQL .= " ORDER BY `key` DESC LIMIT $Param{Limit}";
-#   }
-#
-#   # sql
-#    return if !$DBObject->Prepare(
-#        SQL  => $SQL,
-#    );
-#
-#    my %AddionalKeyList;
-#    while ( my @Row  = $DBObject->FetchrowArray() ) {
-#        $AddionalKeyList{ $Row[0] } = $Row[0];
-#    }
-#    return %AddionalKeyList;
-#}
 
 1;

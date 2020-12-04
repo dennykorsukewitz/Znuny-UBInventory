@@ -7,14 +7,14 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Modules::AgentInventory;
+package Kernel::Modules::AgentDK4OTRSUBInventory;
 
 use strict;
 use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::Inventory',
+    'Kernel::System::DK4OTRSUBInventory',
     'Kernel::System::Log',
     'Kernel::System::DateTime',
     'Kernel::System::User',
@@ -35,7 +35,7 @@ sub Run {
 
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::DK4OTRSUBInventory');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
     my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
     my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
@@ -65,7 +65,7 @@ sub Run {
 #
 #       $Output .= $Self->_Overview( Action => 'Select',  Key => $GetParam{Key} , Value => $GetParam{Value} );
 #       $Output .= $LayoutObject->Output(
-#          TemplateFile => 'Inventory',
+#          TemplateFile => 'DK4OTRSUBInventory',
 #           Data         => \%Param,
 #       );
 #       $Output .= $LayoutObject->Footer();
@@ -88,7 +88,7 @@ sub Run {
             Value  => $GetParam{Value}
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -111,7 +111,7 @@ sub Run {
             %GetParam,
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -165,7 +165,7 @@ sub Run {
         );
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -181,7 +181,7 @@ sub Run {
             Action => 'Add',
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -272,7 +272,7 @@ sub Run {
         }
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
 
@@ -285,24 +285,24 @@ sub Run {
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Edit' ) {
 
-        my ($Set, $EditDateHash);
-        my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
+        my ( $Set, $EditDateHash );
+        my $ObjectID   = $ParamObject->GetParam( Param => 'ID' );
         my %ObjectData = $InventoryObject->GetObjectData( ObjectID => $ObjectID );
 
         # get dates for edit form
-        $Set = $TimeObject->Set( String => $ObjectData{PurchaseTime} );
+        $Set          = $TimeObject->Set( String => $ObjectData{PurchaseTime} );
         $EditDateHash = $TimeObject->Get();
 
-        $ObjectData{PurchaseTimeYear} = $EditDateHash->{Year};
+        $ObjectData{PurchaseTimeYear}  = $EditDateHash->{Year};
         $ObjectData{PurchaseTimeMonth} = $EditDateHash->{Month};
-        $ObjectData{PurchaseTimeDay} = $EditDateHash->{Day};
+        $ObjectData{PurchaseTimeDay}   = $EditDateHash->{Day};
 
-        $Set = $TimeObject->Set( String => $ObjectData{Segregation} );
+        $Set          = $TimeObject->Set( String => $ObjectData{Segregation} );
         $EditDateHash = $TimeObject->Get();
 
-        $ObjectData{SegregationYear} = $EditDateHash->{Year};
+        $ObjectData{SegregationYear}  = $EditDateHash->{Year};
         $ObjectData{SegregationMonth} = $EditDateHash->{Month};
-        $ObjectData{SegregationDay} = $EditDateHash->{Day};
+        $ObjectData{SegregationDay}   = $EditDateHash->{Day};
 
         $ObjectData{ChangeByID} = $ObjectData{ChangeBy};
         $ObjectData{CreateByID} = $ObjectData{CreateBy};
@@ -319,7 +319,7 @@ sub Run {
         );
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -427,7 +427,7 @@ sub Run {
         }
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
 
@@ -443,7 +443,7 @@ sub Run {
         my $ObjectID = $ParamObject->GetParam( Param => 'ID' );
 
         # delete info into DB
-        my $UserName = $UserObject->UserName( UserID => $Self->{UserID} );
+        my $UserName     = $UserObject->UserName( UserID => $Self->{UserID} );
         my $DeleteObject = $InventoryObject->DeleteObject(
             ObjectID => $ObjectID,
             UserName => $UserName,
@@ -477,7 +477,7 @@ sub Run {
         $Self->_Overview();
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'Inventory',
+            TemplateFile => 'DK4OTRSUBInventory',
             Data         => \%Param,
         );
 
@@ -493,7 +493,7 @@ sub Run {
 
     $Output .= $Self->_Overview( Limit => $Limit );
     $Output .= $LayoutObject->Output(
-        TemplateFile => 'Inventory',
+        TemplateFile => 'DK4OTRSUBInventory',
         Data         => \%Param,
     );
     $Output .= $LayoutObject->Footer();
@@ -504,7 +504,7 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $InventoryObject = $Kernel::OM->Get('Kernel::System::Inventory');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::DK4OTRSUBInventory');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
     my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
 

@@ -1,8 +1,7 @@
 # Konfiguration
 
+## UBInventory###Additional
 
-## Inventory###Additional
+`UBInventory###Additional`
 
-`Inventory###Additional`
-
-Definiert einige zusätzliche.
+Definiert einige zusätzliche Attribute

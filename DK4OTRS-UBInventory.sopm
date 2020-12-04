@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
-    <Name>OTRS-Inventory</Name>
-    <Version>1.0.0</Version>
+    <Name>DK4OTRS-UBInventory</Name>
+    <Version>6.0.1</Version>
     <Framework>6.0.x</Framework>
-    <PackageRequired Version="6.0.37">Znuny4OTRS-Repo</PackageRequired>
-    <Vendor>Znuny GmbH</Vendor>
+    <Vendor>Denny Korsukéwitz</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
-    <Description Lang="en">OTRS-Inventory.</Description>
-    <Description Lang="de">OTRS-Inventory.</Description>
+    <Description Lang="en">This package allows easy editing of an inventory used by the FU UB..</Description>
+    <Description Lang="de">Dieses Paket ermöglicht die einfache Bearbeitung eines von der UB FU verwendeten Inventars.</Description>
     <Filelist>
-        <File Permission="660" Location="Kernel/Config/Files/XML/OTRSInventory.xml"/>
-        <File Permission="660" Location="Kernel/Language/de_OTRSInventory.pm"/>
-        <File Permission="660" Location="Kernel/Modules/AgentInventory.pm"/>
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/Inventory.tt"/>
-        <File Permission="660" Location="Kernel/System/Inventory.pm"/>
-        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.Inventory.css"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/DK4OTRSUBInventory.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_DK4OTRSUBInventory.pm"/>
+        <File Permission="660" Location="Kernel/Modules/AgentDK4OTRSUBInventory.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DK4OTRSUBInventory.tt"/>
+        <File Permission="660" Location="Kernel/System/DK4OTRSUBInventory.pm"/>
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.DK4OTRS.UBInventory.css"/>
     </Filelist>
     <DatabaseInstall>
         <TableCreate Name="inventory">
@@ -47,4 +46,5 @@
             </ForeignKey>
         </TableCreate>
     </DatabaseInstall>
+    <PackageMerge Name="OTRS-Inventory" TargetVersion="6.0.1"></PackageMerge>
 </otrs_package>
