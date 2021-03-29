@@ -504,7 +504,7 @@ Core.UI.Table.InitTableFilter($('#FilterObject'), $('#Object'));
             <h2>[% Translate("Add Object") | html %]</h2>
 [% RenderBlockEnd("HeaderAdd") %]
 [% RenderBlockStart("HeaderEdit") %]
-            <h2>[% Translate("Edit Object") | html %]</h2>
+            <h2>[% Translate("Edit Object") | html %]: ID [% Data.ID | html %]</h2>
 [% RenderBlockEnd("HeaderEdit") %]
         </div>
         <form action="[% Env(" CGIHandle") %]" method="post" name="compose" class="Validate">

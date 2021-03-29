@@ -663,7 +663,10 @@ sub _Form {
         $LayoutObject->Block( Name => 'HeaderAdd' );
     }
     elsif ( $Param{Action} eq 'Edit' ) {
-        $LayoutObject->Block( Name => 'HeaderEdit' );
+        $LayoutObject->Block(
+           Name => 'HeaderEdit',
+           Data => \%Param,
+        );
         $LayoutObject->Block(
             Name => 'AdditionalInformation',
             Data => \%Param,
