@@ -6,7 +6,7 @@ Diese Erweiterung ermöglicht eine einfache Inventur via Database-Storage.
 
 Folgende Tabellen werden dafür verwendet:
 
-- id
+- ID
 - type
 - model
 - manufacturer

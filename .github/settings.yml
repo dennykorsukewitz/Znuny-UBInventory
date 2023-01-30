@@ -6,7 +6,7 @@ repository:
   description: This package allows easy editing of an inventory used by the FU UB. Therefore it is not really interesting for all other OTRS users (!FU UB). For all other OTRS developers, however, this can be helpful as a reference.
 
   # A URL with more information about the repository
-  homepage: https://github.com/dennykorsukewitz/DK4OTRS-UBInventory
+  homepage: https://dennykorsukewitz.github.io/DK4OTRS-UBInventory/
 
   # A comma-separated list of topics to set on the repository
   topics: otrs, DK4OTRS-UBInventory, otrs-package, package
