@@ -9,7 +9,7 @@
 
 | Versions | Status |
 | ------ | ------ |
-| ![GitHub label version](https://img.shields.io/github/labels/dennykorsukewitz/DK4OTRS-UBInventory/OTRS%206) | [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/DK4OTRS-UBInventory/6.0.1/otrs6)](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/compare/6.0.1...otrs6) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages)  |
+| ![GitHub label version](https://img.shields.io/github/labels/dennykorsukewitz/DK4OTRS-UBInventory/OTRS%206) | [![GitHub commits since tagged version](https://img.shields.io/github/commits-since/dennykorsukewitz/DK4OTRS-UBInventory/6.0.1/rel-6_0)](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/compare/6.0.1...rel-6_0) ![GitHub Workflow Lint](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/actions/workflows/lint.yml/badge.svg?branch=dev&style=flat&label=Lint) ![GitHub Workflow Pages](https://github.com/dennykorsukewitz/DK4OTRS-UBInventory/actions/workflows/pages.yml/badge.svg?branch=dev&style=flat&label=GitHub%20Pages)  |
 
 ## Feature List
 
