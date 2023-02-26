@@ -2,8 +2,8 @@
 
 | Repository | GitHub |
 | ------ | ------ |
-| ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dennykorsukewitz/DK4OTRS-UBInventory) | ![GitHub open issues](https://img.shields.io/github/issues/dennykorsukewitz/DK4OTRS-UBInventory) |
-| ![GitHub license](https://img.shields.io/github/license/dennykorsukewitz/DK4OTRS-UBInventory) | ![GitHub closed issues](https://img.shields.io/github/issues-closed/dennykorsukewitz/DK4OTRS-UBInventory?color=#44CC44) |
+| ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dennykorsukewitz/DK4OTRS-UBInventory) | ![GitHub open issues](https://img.shields.io/github/issues/dennykorsukewitz/DK4OTRS-UBInventory) ![GitHub closed issues](https://img.shields.io/github/issues-closed/dennykorsukewitz/DK4OTRS-UBInventory?color=#44CC44) |
+| ![GitHub license](https://img.shields.io/github/license/dennykorsukewitz/DK4OTRS-UBInventory) | ![GitHub pull requests](https://img.shields.io/github/issues-pr/dennykorsukewitz/DK4OTRS-UBInventory?label=PR) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/dennykorsukewitz/DK4OTRS-UBInventory?color=g&label=PR) |
 | ![GitHub language count](https://img.shields.io/github/languages/count/dennykorsukewitz/DK4OTRS-UBInventory?style=flat&label=language)  | ![GitHub contributors](https://img.shields.io/github/contributors/dennykorsukewitz/DK4OTRS-UBInventory) |
 |  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dennykorsukewitz/DK4OTRS-UBInventory) | ![GitHub all releases](https://img.shields.io/github/downloads/dennykorsukewitz/DK4OTRS-UBInventory/total?style=flat) |
 
