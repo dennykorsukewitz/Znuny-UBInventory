@@ -3,7 +3,7 @@ repository:
   name: Znuny-UBInventory
 
   # A short description of the repository that will show up on GitHub
-  description: This package allows easy editing of an inventory used by the FU UB. Therefore it is not really interesting for all other OTRS users (!FU UB). For all other OTRS developers, however, this can be helpful as a reference.
+  description: This package allows easy editing of an inventory used by the FU UB. Therefore it is not really interesting for all other Znuny users (!FU UB). For all other Znuny developers, however, this can be helpful as a reference.
 
   # A URL with more information about the repository
   homepage: https://dennykorsukewitz.github.io/Znuny-UBInventory/
