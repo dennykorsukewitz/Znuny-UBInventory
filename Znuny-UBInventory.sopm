@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
-    <Name>DK4OTRS-UBInventory</Name>
+    <Name>Znuny-UBInventory</Name>
     <Version>6.0.1</Version>
     <Framework>6.0.x</Framework>
     <Vendor>Denny Korsukéwitz</Vendor>
-    <URL>https://github.com/dennykorsukewitz/DK4OTRS-UBInventory</URL>
+    <URL>https://github.com/dennykorsukewitz/Znuny-UBInventory</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">This package allows easy editing of an inventory used by the FU UB..</Description>
     <Description Lang="de">Dieses Paket ermöglicht die einfache Bearbeitung eines von der UB FU verwendeten Inventars.</Description>
     <Filelist>
-        <File Permission="660" Location="Kernel/Config/Files/XML/DK4OTRSUBInventory.xml"/>
-        <File Permission="660" Location="Kernel/Language/de_DK4OTRSUBInventory.pm"/>
-        <File Permission="660" Location="Kernel/Modules/AgentDK4OTRSUBInventory.pm"/>
-        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/DK4OTRSUBInventory.tt"/>
-        <File Permission="660" Location="Kernel/System/DK4OTRSUBInventory.pm"/>
-        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.DK4OTRS.UBInventory.css"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyUBInventory.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_ZnunyUBInventory.pm"/>
+        <File Permission="660" Location="Kernel/Modules/AgentZnunyUBInventory.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/ZnunyUBInventory.tt"/>
+        <File Permission="660" Location="Kernel/System/ZnunyUBInventory.pm"/>
+        <File Permission="660" Location="var/httpd/htdocs/skins/Agent/default/css/Core.Znuny.UBInventory.css"/>
     </Filelist>
     <DatabaseInstall>
         <TableCreate Name="inventory">
@@ -47,4 +47,5 @@
         </TableCreate>
     </DatabaseInstall>
     <PackageMerge Name="OTRS-Inventory" TargetVersion="6.0.1"></PackageMerge>
+    <PackageMerge Name="Znuny-UBInventory" TargetVersion="6.0.1"></PackageMerge>
 </otrs_package>

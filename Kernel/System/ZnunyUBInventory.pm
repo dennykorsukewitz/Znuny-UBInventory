@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::System::DK4OTRSUBInventory;
+package Kernel::System::ZnunyUBInventory;
 
 use strict;
 use warnings;

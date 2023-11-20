@@ -1,12 +1,12 @@
 repository:
   # The name of the repository. Changing this will rename the repository
-  name: DK4OTRS-UBInventory
+  name: Znuny-UBInventory
 
   # A short description of the repository that will show up on GitHub
   description: This package allows easy editing of an inventory used by the FU UB. Therefore it is not really interesting for all other OTRS users (!FU UB). For all other OTRS developers, however, this can be helpful as a reference.
 
   # A URL with more information about the repository
-  homepage: https://dennykorsukewitz.github.io/DK4OTRS-UBInventory/
+  homepage: https://dennykorsukewitz.github.io/Znuny-UBInventory/
 
   # A comma-separated list of topics to set on the repository
   topics: pages, otrs, znuny, package

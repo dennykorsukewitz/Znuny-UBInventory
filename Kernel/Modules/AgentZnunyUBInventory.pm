@@ -6,14 +6,14 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Modules::AgentDK4OTRSUBInventory;
+package Kernel::Modules::AgentZnunyUBInventory;
 
 use strict;
 use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::DK4OTRSUBInventory',
+    'Kernel::System::ZnunyUBInventory',
     'Kernel::System::Log',
     'Kernel::System::DateTime',
     'Kernel::System::User',
@@ -34,7 +34,7 @@ sub Run {
 
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $InventoryObject = $Kernel::OM->Get('Kernel::System::DK4OTRSUBInventory');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::ZnunyUBInventory');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
     my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
     my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
@@ -64,7 +64,7 @@ sub Run {
 #
 #       $Output .= $Self->_Overview( Action => 'Select',  Key => $GetParam{Key} , Value => $GetParam{Value} );
 #       $Output .= $LayoutObject->Output(
-#          TemplateFile => 'DK4OTRSUBInventory',
+#          TemplateFile => 'ZnunyUBInventory',
 #           Data         => \%Param,
 #       );
 #       $Output .= $LayoutObject->Footer();
@@ -87,7 +87,7 @@ sub Run {
             Value  => $GetParam{Value}
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -110,7 +110,7 @@ sub Run {
             %GetParam,
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -164,7 +164,7 @@ sub Run {
         );
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -180,7 +180,7 @@ sub Run {
             Action => 'Add',
         );
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -271,7 +271,7 @@ sub Run {
         }
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
 
@@ -318,7 +318,7 @@ sub Run {
         );
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
         $Output .= $LayoutObject->Footer();
@@ -426,7 +426,7 @@ sub Run {
         }
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
 
@@ -476,7 +476,7 @@ sub Run {
         $Self->_Overview();
 
         $Output .= $LayoutObject->Output(
-            TemplateFile => 'DK4OTRSUBInventory',
+            TemplateFile => 'ZnunyUBInventory',
             Data         => \%Param,
         );
 
@@ -492,7 +492,7 @@ sub Run {
 
     $Output .= $Self->_Overview( Limit => $Limit );
     $Output .= $LayoutObject->Output(
-        TemplateFile => 'DK4OTRSUBInventory',
+        TemplateFile => 'ZnunyUBInventory',
         Data         => \%Param,
     );
     $Output .= $LayoutObject->Footer();
@@ -503,7 +503,7 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $InventoryObject = $Kernel::OM->Get('Kernel::System::DK4OTRSUBInventory');
+    my $InventoryObject = $Kernel::OM->Get('Kernel::System::ZnunyUBInventory');
     my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
     my $TimeObject      = $Kernel::OM->Create('Kernel::System::DateTime');
 
